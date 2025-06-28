@@ -1,0 +1,601 @@
+2025-06-29 00:03:17.582 +05:30 [INF] User profile is available. Using 'C:\Users\sunny\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-06-29 00:03:17.745 +05:30 [WRN] The WebRootPath was not found: D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.API\wwwroot. Static files may be unavailable.
+2025-06-29 00:03:17.807 +05:30 [INF] Now listening on: http://localhost:5049
+2025-06-29 00:03:17.815 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-29 00:03:17.816 +05:30 [INF] Hosting environment: Development
+2025-06-29 00:03:17.818 +05:30 [INF] Content root path: D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.API
+2025-06-29 00:03:23.491 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5049/api/v1/Auth/register - application/json 249
+2025-06-29 00:03:23.566 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-29 00:03:23.618 +05:30 [INF] Executing endpoint 'AuditSystem.API.Controllers.AuthController.Register (AuditSystem.API)'
+2025-06-29 00:03:23.653 +05:30 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[AuditSystem.API.Controllers.AuthResponse]] Register(AuditSystem.API.Controllers.RegisterRequest) on controller AuditSystem.API.Controllers.AuthController (AuditSystem.API).
+2025-06-29 00:03:25.798 +05:30 [INF] Executed DbCommand (58ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u.user_id, u.created_at, u.email, u.first_name, u.is_active, u.last_name, u.organisation_id, u.password_hash, u.password_salt, u.phone, u.role, u.username
+FROM users AS u
+WHERE lower(u.username) = @__ToLower_0
+LIMIT 1
+2025-06-29 00:03:25.878 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM users AS u
+    WHERE lower(u.username) = @__ToLower_0)
+2025-06-29 00:03:25.900 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM users AS u
+    WHERE lower(u.email) = @__ToLower_0)
+2025-06-29 00:03:26.200 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?', @p4='?', @p5='?' (DbType = Guid), @p6='?', @p7='?', @p8='?', @p9='?', @p10='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO users (user_id, created_at, email, first_name, last_name, organisation_id, password_hash, password_salt, phone, role, username)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10)
+RETURNING is_active;
+2025-06-29 00:03:26.279 +05:30 [INF] Executing OkObjectResult, writing value of type 'AuditSystem.API.Controllers.AuthResponse'.
+2025-06-29 00:03:26.298 +05:30 [INF] Executed action AuditSystem.API.Controllers.AuthController.Register (AuditSystem.API) in 2635.4608ms
+2025-06-29 00:03:26.307 +05:30 [INF] Executed endpoint 'AuditSystem.API.Controllers.AuthController.Register (AuditSystem.API)'
+2025-06-29 00:03:26.315 +05:30 [INF] HTTP POST /api/v1/Auth/register responded 200 in 2741.4964 ms
+2025-06-29 00:03:26.335 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/api/v1/Templates - application/json null
+2025-06-29 00:03:26.340 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5049/api/v1/Auth/register - 200 null application/json; charset=utf-8 2850.7485ms
+2025-06-29 00:03:26.429 +05:30 [INF] Executing endpoint 'AuditSystem.API.Controllers.TemplatesController.GetTemplates (AuditSystem.API)'
+2025-06-29 00:03:26.438 +05:30 [INF] Route matched with {action = "GetTemplates", controller = "Templates"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[AuditSystem.Domain.Entities.Template]]] GetTemplates() on controller AuditSystem.API.Controllers.TemplatesController (AuditSystem.API).
+2025-06-29 00:03:26.515 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT t.template_id, t.category, t.created_at, t.created_by, t.description, t.is_published, t.name, t.questions, t.scoring_rules, t.valid_from, t.valid_to, t.version
+FROM template AS t
+2025-06-29 00:03:26.524 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[AuditSystem.Domain.Entities.Template, AuditSystem.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-29 00:03:26.584 +05:30 [INF] Executed action AuditSystem.API.Controllers.TemplatesController.GetTemplates (AuditSystem.API) in 142.5389ms
+2025-06-29 00:03:26.587 +05:30 [INF] Executed endpoint 'AuditSystem.API.Controllers.TemplatesController.GetTemplates (AuditSystem.API)'
+2025-06-29 00:03:26.590 +05:30 [INF] HTTP GET /api/v1/Templates responded 200 in 235.3503 ms
+2025-06-29 00:03:26.596 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/api/v1/Templates - 200 null application/json; charset=utf-8 260.0168ms
+2025-06-29 00:03:26.620 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5049/api/v1/Templates - application/json 599
+2025-06-29 00:03:26.640 +05:30 [INF] Executing endpoint 'AuditSystem.API.Controllers.TemplatesController.CreateTemplate (AuditSystem.API)'
+2025-06-29 00:03:26.652 +05:30 [INF] Route matched with {action = "CreateTemplate", controller = "Templates"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[AuditSystem.Domain.Entities.Template]] CreateTemplate(AuditSystem.Domain.Entities.Template) on controller AuditSystem.API.Controllers.TemplatesController (AuditSystem.API).
+2025-06-29 00:03:26.687 +05:30 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2025-06-29 00:03:26.723 +05:30 [INF] Executed action AuditSystem.API.Controllers.TemplatesController.CreateTemplate (AuditSystem.API) in 66.4587ms
+2025-06-29 00:03:26.730 +05:30 [INF] Executed endpoint 'AuditSystem.API.Controllers.TemplatesController.CreateTemplate (AuditSystem.API)'
+2025-06-29 00:03:26.733 +05:30 [INF] HTTP POST /api/v1/Templates responded 400 in 99.6532 ms
+2025-06-29 00:03:26.736 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5049/api/v1/Templates - 400 null application/problem+json; charset=utf-8 115.9639ms
+2025-06-29 00:05:11.417 +05:30 [INF] User profile is available. Using 'C:\Users\sunny\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-06-29 00:05:11.691 +05:30 [WRN] The WebRootPath was not found: D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.API\wwwroot. Static files may be unavailable.
+2025-06-29 00:05:11.753 +05:30 [INF] Now listening on: http://localhost:5049
+2025-06-29 00:05:11.759 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-29 00:05:11.765 +05:30 [INF] Hosting environment: Development
+2025-06-29 00:05:11.768 +05:30 [INF] Content root path: D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.API
+2025-06-29 00:05:12.059 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5049/api/v1/Auth/register - application/json 249
+2025-06-29 00:05:12.141 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-29 00:05:12.209 +05:30 [INF] Executing endpoint 'AuditSystem.API.Controllers.AuthController.Register (AuditSystem.API)'
+2025-06-29 00:05:12.255 +05:30 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[AuditSystem.API.Controllers.AuthResponse]] Register(AuditSystem.API.Controllers.RegisterRequest) on controller AuditSystem.API.Controllers.AuthController (AuditSystem.API).
+2025-06-29 00:05:14.753 +05:30 [INF] Executed DbCommand (64ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u.user_id, u.created_at, u.email, u.first_name, u.is_active, u.last_name, u.organisation_id, u.password_hash, u.password_salt, u.phone, u.role, u.username
+FROM users AS u
+WHERE lower(u.username) = @__ToLower_0
+LIMIT 1
+2025-06-29 00:05:14.819 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM users AS u
+    WHERE lower(u.username) = @__ToLower_0)
+2025-06-29 00:05:14.844 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM users AS u
+    WHERE lower(u.email) = @__ToLower_0)
+2025-06-29 00:05:15.055 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?', @p4='?', @p5='?' (DbType = Guid), @p6='?', @p7='?', @p8='?', @p9='?', @p10='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO users (user_id, created_at, email, first_name, last_name, organisation_id, password_hash, password_salt, phone, role, username)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10)
+RETURNING is_active;
+2025-06-29 00:05:15.137 +05:30 [INF] Executing OkObjectResult, writing value of type 'AuditSystem.API.Controllers.AuthResponse'.
+2025-06-29 00:05:15.158 +05:30 [INF] Executed action AuditSystem.API.Controllers.AuthController.Register (AuditSystem.API) in 2892.8388ms
+2025-06-29 00:05:15.167 +05:30 [INF] Executed endpoint 'AuditSystem.API.Controllers.AuthController.Register (AuditSystem.API)'
+2025-06-29 00:05:15.173 +05:30 [INF] HTTP POST /api/v1/Auth/register responded 200 in 3026.0185 ms
+2025-06-29 00:05:15.193 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5049/api/v1/Auth/register - 200 null application/json; charset=utf-8 3135.1636ms
+2025-06-29 00:05:15.209 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/api/v1/Templates - application/json null
+2025-06-29 00:05:15.289 +05:30 [INF] Executing endpoint 'AuditSystem.API.Controllers.TemplatesController.GetTemplates (AuditSystem.API)'
+2025-06-29 00:05:15.303 +05:30 [INF] Route matched with {action = "GetTemplates", controller = "Templates"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[AuditSystem.Domain.Entities.Template]]] GetTemplates() on controller AuditSystem.API.Controllers.TemplatesController (AuditSystem.API).
+2025-06-29 00:05:15.388 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT t.template_id, t.category, t.created_at, t.created_by, t.description, t.is_published, t.name, t.questions, t.scoring_rules, t.valid_from, t.valid_to, t.version
+FROM template AS t
+2025-06-29 00:05:15.402 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[AuditSystem.Domain.Entities.Template, AuditSystem.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-29 00:05:15.454 +05:30 [INF] Executed action AuditSystem.API.Controllers.TemplatesController.GetTemplates (AuditSystem.API) in 141.9372ms
+2025-06-29 00:05:15.459 +05:30 [INF] Executed endpoint 'AuditSystem.API.Controllers.TemplatesController.GetTemplates (AuditSystem.API)'
+2025-06-29 00:05:15.463 +05:30 [INF] HTTP GET /api/v1/Templates responded 200 in 240.5520 ms
+2025-06-29 00:05:15.471 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/api/v1/Templates - 200 null application/json; charset=utf-8 261.4608ms
+2025-06-29 00:05:15.497 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5049/api/v1/Templates - application/json 599
+2025-06-29 00:05:15.512 +05:30 [INF] Executing endpoint 'AuditSystem.API.Controllers.TemplatesController.CreateTemplate (AuditSystem.API)'
+2025-06-29 00:05:15.522 +05:30 [INF] Route matched with {action = "CreateTemplate", controller = "Templates"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[AuditSystem.Domain.Entities.Template]] CreateTemplate(AuditSystem.API.Models.CreateTemplateDto) on controller AuditSystem.API.Controllers.TemplatesController (AuditSystem.API).
+2025-06-29 00:05:15.755 +05:30 [ERR] Failed executing DbCommand (16ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?' (DbType = DateTime), @p3='?' (DbType = Guid), @p4='?', @p5='?', @p6='?' (DbType = Object), @p7='?' (DbType = Object), @p8='?' (DbType = DateTime), @p9='?' (DbType = DateTime), @p10='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO template (template_id, category, created_at, created_by, description, name, questions, scoring_rules, valid_from, valid_to, version)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10)
+RETURNING is_published;
+2025-06-29 00:05:15.787 +05:30 [ERR] An exception occurred in the database while saving changes for context type 'AuditSystem.Infrastructure.Data.AuditSystemDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> System.ArgumentException: Cannot write DateTime with Kind=Unspecified to PostgreSQL type 'timestamp with time zone', only UTC is supported. Note that it's not possible to mix DateTimes with different Kinds in an array, range, or multirange. (Parameter 'value')
+   at Npgsql.Internal.Converters.DateTimeConverterResolver`1.Get(DateTime value, Nullable`1 expectedPgTypeId, Boolean validateOnly)
+   at Npgsql.Internal.Converters.DateTimeConverterResolver.<>c.<CreateResolver>b__0_0(DateTimeConverterResolver`1 resolver, DateTime value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.Converters.DateTimeConverterResolver`1.Get(T value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgConverterResolver`1.GetAsObjectInternal(PgTypeInfo typeInfo, Object value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgResolverTypeInfo.GetResolutionAsObject(Object value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgTypeInfo.GetObjectResolution(Object value)
+   at Npgsql.NpgsqlParameter.ResolveConverter(PgTypeInfo typeInfo)
+   at Npgsql.NpgsqlParameter.ResolveTypeInfo(PgSerializerOptions options)
+   at Npgsql.NpgsqlParameterCollection.ProcessParameters(PgSerializerOptions options, Boolean validateValues, CommandType commandType)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> System.ArgumentException: Cannot write DateTime with Kind=Unspecified to PostgreSQL type 'timestamp with time zone', only UTC is supported. Note that it's not possible to mix DateTimes with different Kinds in an array, range, or multirange. (Parameter 'value')
+   at Npgsql.Internal.Converters.DateTimeConverterResolver`1.Get(DateTime value, Nullable`1 expectedPgTypeId, Boolean validateOnly)
+   at Npgsql.Internal.Converters.DateTimeConverterResolver.<>c.<CreateResolver>b__0_0(DateTimeConverterResolver`1 resolver, DateTime value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.Converters.DateTimeConverterResolver`1.Get(T value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgConverterResolver`1.GetAsObjectInternal(PgTypeInfo typeInfo, Object value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgResolverTypeInfo.GetResolutionAsObject(Object value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgTypeInfo.GetObjectResolution(Object value)
+   at Npgsql.NpgsqlParameter.ResolveConverter(PgTypeInfo typeInfo)
+   at Npgsql.NpgsqlParameter.ResolveTypeInfo(PgSerializerOptions options)
+   at Npgsql.NpgsqlParameterCollection.ProcessParameters(PgSerializerOptions options, Boolean validateValues, CommandType commandType)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+2025-06-29 00:05:15.821 +05:30 [INF] Executed action AuditSystem.API.Controllers.TemplatesController.CreateTemplate (AuditSystem.API) in 292.9301ms
+2025-06-29 00:05:15.825 +05:30 [INF] Executed endpoint 'AuditSystem.API.Controllers.TemplatesController.CreateTemplate (AuditSystem.API)'
+2025-06-29 00:05:15.830 +05:30 [ERR] HTTP POST /api/v1/Templates responded 500 in 325.3700 ms
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> System.ArgumentException: Cannot write DateTime with Kind=Unspecified to PostgreSQL type 'timestamp with time zone', only UTC is supported. Note that it's not possible to mix DateTimes with different Kinds in an array, range, or multirange. (Parameter 'value')
+   at Npgsql.Internal.Converters.DateTimeConverterResolver`1.Get(DateTime value, Nullable`1 expectedPgTypeId, Boolean validateOnly)
+   at Npgsql.Internal.Converters.DateTimeConverterResolver.<>c.<CreateResolver>b__0_0(DateTimeConverterResolver`1 resolver, DateTime value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.Converters.DateTimeConverterResolver`1.Get(T value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgConverterResolver`1.GetAsObjectInternal(PgTypeInfo typeInfo, Object value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgResolverTypeInfo.GetResolutionAsObject(Object value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgTypeInfo.GetObjectResolution(Object value)
+   at Npgsql.NpgsqlParameter.ResolveConverter(PgTypeInfo typeInfo)
+   at Npgsql.NpgsqlParameter.ResolveTypeInfo(PgSerializerOptions options)
+   at Npgsql.NpgsqlParameterCollection.ProcessParameters(PgSerializerOptions options, Boolean validateValues, CommandType commandType)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at AuditSystem.Infrastructure.Repositories.Repository`1.SaveChangesAsync() in D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.Infrastructure\Repositories\Repository.cs:line 63
+   at AuditSystem.Services.TemplateService.CreateTemplateAsync(Template template) in D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.Services\TemplateService.cs:line 56
+   at AuditSystem.API.Controllers.TemplatesController.CreateTemplate(CreateTemplateDto templateDto) in D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.API\Controllers\TemplatesController.cs:line 93
+   at lambda_method252(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2025-06-29 00:05:15.896 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> System.ArgumentException: Cannot write DateTime with Kind=Unspecified to PostgreSQL type 'timestamp with time zone', only UTC is supported. Note that it's not possible to mix DateTimes with different Kinds in an array, range, or multirange. (Parameter 'value')
+   at Npgsql.Internal.Converters.DateTimeConverterResolver`1.Get(DateTime value, Nullable`1 expectedPgTypeId, Boolean validateOnly)
+   at Npgsql.Internal.Converters.DateTimeConverterResolver.<>c.<CreateResolver>b__0_0(DateTimeConverterResolver`1 resolver, DateTime value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.Converters.DateTimeConverterResolver`1.Get(T value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgConverterResolver`1.GetAsObjectInternal(PgTypeInfo typeInfo, Object value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgResolverTypeInfo.GetResolutionAsObject(Object value, Nullable`1 expectedPgTypeId)
+   at Npgsql.Internal.PgTypeInfo.GetObjectResolution(Object value)
+   at Npgsql.NpgsqlParameter.ResolveConverter(PgTypeInfo typeInfo)
+   at Npgsql.NpgsqlParameter.ResolveTypeInfo(PgSerializerOptions options)
+   at Npgsql.NpgsqlParameterCollection.ProcessParameters(PgSerializerOptions options, Boolean validateValues, CommandType commandType)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at AuditSystem.Infrastructure.Repositories.Repository`1.SaveChangesAsync() in D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.Infrastructure\Repositories\Repository.cs:line 63
+   at AuditSystem.Services.TemplateService.CreateTemplateAsync(Template template) in D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.Services\TemplateService.cs:line 56
+   at AuditSystem.API.Controllers.TemplatesController.CreateTemplate(CreateTemplateDto templateDto) in D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.API\Controllers\TemplatesController.cs:line 93
+   at lambda_method252(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-06-29 00:05:16.001 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5049/api/v1/Templates - 500 null text/plain; charset=utf-8 503.9642ms
+2025-06-29 00:06:16.020 +05:30 [INF] User profile is available. Using 'C:\Users\sunny\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-06-29 00:06:16.177 +05:30 [WRN] The WebRootPath was not found: D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.API\wwwroot. Static files may be unavailable.
+2025-06-29 00:06:16.230 +05:30 [INF] Now listening on: http://localhost:5049
+2025-06-29 00:06:16.236 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-29 00:06:16.238 +05:30 [INF] Hosting environment: Development
+2025-06-29 00:06:16.241 +05:30 [INF] Content root path: D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.API
+2025-06-29 00:06:23.605 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5049/api/v1/Auth/register - application/json 249
+2025-06-29 00:06:23.675 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-29 00:06:23.725 +05:30 [INF] Executing endpoint 'AuditSystem.API.Controllers.AuthController.Register (AuditSystem.API)'
+2025-06-29 00:06:23.759 +05:30 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[AuditSystem.API.Controllers.AuthResponse]] Register(AuditSystem.API.Controllers.RegisterRequest) on controller AuditSystem.API.Controllers.AuthController (AuditSystem.API).
+2025-06-29 00:06:25.780 +05:30 [INF] Executed DbCommand (58ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u.user_id, u.created_at, u.email, u.first_name, u.is_active, u.last_name, u.organisation_id, u.password_hash, u.password_salt, u.phone, u.role, u.username
+FROM users AS u
+WHERE lower(u.username) = @__ToLower_0
+LIMIT 1
+2025-06-29 00:06:25.859 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM users AS u
+    WHERE lower(u.username) = @__ToLower_0)
+2025-06-29 00:06:25.887 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM users AS u
+    WHERE lower(u.email) = @__ToLower_0)
+2025-06-29 00:06:26.126 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?', @p4='?', @p5='?' (DbType = Guid), @p6='?', @p7='?', @p8='?', @p9='?', @p10='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO users (user_id, created_at, email, first_name, last_name, organisation_id, password_hash, password_salt, phone, role, username)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10)
+RETURNING is_active;
+2025-06-29 00:06:26.193 +05:30 [INF] Executing OkObjectResult, writing value of type 'AuditSystem.API.Controllers.AuthResponse'.
+2025-06-29 00:06:26.219 +05:30 [INF] Executed action AuditSystem.API.Controllers.AuthController.Register (AuditSystem.API) in 2446.1717ms
+2025-06-29 00:06:26.227 +05:30 [INF] Executed endpoint 'AuditSystem.API.Controllers.AuthController.Register (AuditSystem.API)'
+2025-06-29 00:06:26.237 +05:30 [INF] HTTP POST /api/v1/Auth/register responded 200 in 2553.8146 ms
+2025-06-29 00:06:26.252 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/api/v1/Templates - application/json null
+2025-06-29 00:06:26.255 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5049/api/v1/Auth/register - 200 null application/json; charset=utf-8 2652.0112ms
+2025-06-29 00:06:26.324 +05:30 [INF] Executing endpoint 'AuditSystem.API.Controllers.TemplatesController.GetTemplates (AuditSystem.API)'
+2025-06-29 00:06:26.336 +05:30 [INF] Route matched with {action = "GetTemplates", controller = "Templates"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[AuditSystem.Domain.Entities.Template]]] GetTemplates() on controller AuditSystem.API.Controllers.TemplatesController (AuditSystem.API).
+2025-06-29 00:06:26.402 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT t.template_id, t.category, t.created_at, t.created_by, t.description, t.is_published, t.name, t.questions, t.scoring_rules, t.valid_from, t.valid_to, t.version
+FROM template AS t
+2025-06-29 00:06:26.413 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[AuditSystem.Domain.Entities.Template, AuditSystem.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-29 00:06:26.455 +05:30 [INF] Executed action AuditSystem.API.Controllers.TemplatesController.GetTemplates (AuditSystem.API) in 114.0654ms
+2025-06-29 00:06:26.459 +05:30 [INF] Executed endpoint 'AuditSystem.API.Controllers.TemplatesController.GetTemplates (AuditSystem.API)'
+2025-06-29 00:06:26.461 +05:30 [INF] HTTP GET /api/v1/Templates responded 200 in 190.8694 ms
+2025-06-29 00:06:26.467 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/api/v1/Templates - 200 null application/json; charset=utf-8 214.5589ms
+2025-06-29 00:06:26.473 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5049/api/v1/Templates - application/json 599
+2025-06-29 00:06:26.488 +05:30 [INF] Executing endpoint 'AuditSystem.API.Controllers.TemplatesController.CreateTemplate (AuditSystem.API)'
+2025-06-29 00:06:26.496 +05:30 [INF] Route matched with {action = "CreateTemplate", controller = "Templates"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[AuditSystem.Domain.Entities.Template]] CreateTemplate(AuditSystem.API.Models.CreateTemplateDto) on controller AuditSystem.API.Controllers.TemplatesController (AuditSystem.API).
+2025-06-29 00:06:26.690 +05:30 [INF] Executed DbCommand (23ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?' (DbType = DateTime), @p3='?' (DbType = Guid), @p4='?', @p5='?', @p6='?' (DbType = Object), @p7='?' (DbType = Object), @p8='?' (DbType = DateTime), @p9='?' (DbType = DateTime), @p10='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO template (template_id, category, created_at, created_by, description, name, questions, scoring_rules, valid_from, valid_to, version)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10)
+RETURNING is_published;
+2025-06-29 00:06:26.721 +05:30 [INF] Executing CreatedAtActionResult, writing value of type 'AuditSystem.Domain.Entities.Template'.
+2025-06-29 00:06:26.808 +05:30 [INF] Executed action AuditSystem.API.Controllers.TemplatesController.CreateTemplate (AuditSystem.API) in 304.0919ms
+2025-06-29 00:06:26.813 +05:30 [INF] Executed endpoint 'AuditSystem.API.Controllers.TemplatesController.CreateTemplate (AuditSystem.API)'
+2025-06-29 00:06:26.816 +05:30 [INF] HTTP POST /api/v1/Templates responded 201 in 336.0596 ms
+2025-06-29 00:06:26.821 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5049/api/v1/Templates - 201 null application/json; charset=utf-8 347.9612ms
+2025-06-29 00:06:45.654 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5049/api/v1/Auth/register - application/json 249
+2025-06-29 00:06:45.661 +05:30 [INF] Executing endpoint 'AuditSystem.API.Controllers.AuthController.Register (AuditSystem.API)'
+2025-06-29 00:06:45.664 +05:30 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[AuditSystem.API.Controllers.AuthResponse]] Register(AuditSystem.API.Controllers.RegisterRequest) on controller AuditSystem.API.Controllers.AuthController (AuditSystem.API).
+2025-06-29 00:06:45.684 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u.user_id, u.created_at, u.email, u.first_name, u.is_active, u.last_name, u.organisation_id, u.password_hash, u.password_salt, u.phone, u.role, u.username
+FROM users AS u
+WHERE lower(u.username) = @__ToLower_0
+LIMIT 1
+2025-06-29 00:06:45.693 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM users AS u
+    WHERE lower(u.username) = @__ToLower_0)
+2025-06-29 00:06:45.705 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM users AS u
+    WHERE lower(u.email) = @__ToLower_0)
+2025-06-29 00:06:45.716 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?', @p4='?', @p5='?' (DbType = Guid), @p6='?', @p7='?', @p8='?', @p9='?', @p10='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO users (user_id, created_at, email, first_name, last_name, organisation_id, password_hash, password_salt, phone, role, username)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10)
+RETURNING is_active;
+2025-06-29 00:06:45.723 +05:30 [INF] Executing OkObjectResult, writing value of type 'AuditSystem.API.Controllers.AuthResponse'.
+2025-06-29 00:06:45.727 +05:30 [INF] Executed action AuditSystem.API.Controllers.AuthController.Register (AuditSystem.API) in 56.7805ms
+2025-06-29 00:06:45.732 +05:30 [INF] Executed endpoint 'AuditSystem.API.Controllers.AuthController.Register (AuditSystem.API)'
+2025-06-29 00:06:45.737 +05:30 [INF] HTTP POST /api/v1/Auth/register responded 200 in 76.4407 ms
+2025-06-29 00:06:45.742 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5049/api/v1/Auth/register - 200 null application/json; charset=utf-8 88.3813ms
+2025-06-29 00:06:45.752 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/api/v1/Templates - application/json null
+2025-06-29 00:06:45.767 +05:30 [INF] Executing endpoint 'AuditSystem.API.Controllers.TemplatesController.GetTemplates (AuditSystem.API)'
+2025-06-29 00:06:45.776 +05:30 [INF] Route matched with {action = "GetTemplates", controller = "Templates"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[AuditSystem.Domain.Entities.Template]]] GetTemplates() on controller AuditSystem.API.Controllers.TemplatesController (AuditSystem.API).
+2025-06-29 00:06:45.802 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT t.template_id, t.category, t.created_at, t.created_by, t.description, t.is_published, t.name, t.questions, t.scoring_rules, t.valid_from, t.valid_to, t.version
+FROM template AS t
+2025-06-29 00:06:45.839 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[AuditSystem.Domain.Entities.Template, AuditSystem.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-29 00:06:45.843 +05:30 [INF] Executed action AuditSystem.API.Controllers.TemplatesController.GetTemplates (AuditSystem.API) in 53.2049ms
+2025-06-29 00:06:45.853 +05:30 [INF] Executed endpoint 'AuditSystem.API.Controllers.TemplatesController.GetTemplates (AuditSystem.API)'
+2025-06-29 00:06:45.855 +05:30 [INF] HTTP GET /api/v1/Templates responded 200 in 94.8639 ms
+2025-06-29 00:06:45.860 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/api/v1/Templates - 200 null application/json; charset=utf-8 108.5054ms
+2025-06-29 00:06:45.871 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5049/api/v1/Templates - application/json 599
+2025-06-29 00:06:45.883 +05:30 [INF] Executing endpoint 'AuditSystem.API.Controllers.TemplatesController.CreateTemplate (AuditSystem.API)'
+2025-06-29 00:06:45.886 +05:30 [INF] Route matched with {action = "CreateTemplate", controller = "Templates"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[AuditSystem.Domain.Entities.Template]] CreateTemplate(AuditSystem.API.Models.CreateTemplateDto) on controller AuditSystem.API.Controllers.TemplatesController (AuditSystem.API).
+2025-06-29 00:06:45.900 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?' (DbType = DateTime), @p3='?' (DbType = Guid), @p4='?', @p5='?', @p6='?' (DbType = Object), @p7='?' (DbType = Object), @p8='?' (DbType = DateTime), @p9='?' (DbType = DateTime), @p10='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO template (template_id, category, created_at, created_by, description, name, questions, scoring_rules, valid_from, valid_to, version)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10)
+RETURNING is_published;
+2025-06-29 00:06:45.907 +05:30 [INF] Executing CreatedAtActionResult, writing value of type 'AuditSystem.Domain.Entities.Template'.
+2025-06-29 00:06:45.912 +05:30 [INF] Executed action AuditSystem.API.Controllers.TemplatesController.CreateTemplate (AuditSystem.API) in 19.8246ms
+2025-06-29 00:06:45.918 +05:30 [INF] Executed endpoint 'AuditSystem.API.Controllers.TemplatesController.CreateTemplate (AuditSystem.API)'
+2025-06-29 00:06:45.920 +05:30 [INF] HTTP POST /api/v1/Templates responded 201 in 38.8265 ms
+2025-06-29 00:06:45.925 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5049/api/v1/Templates - 201 null application/json; charset=utf-8 53.632ms
+2025-06-29 00:07:58.693 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/swagger/index.html - null null
+2025-06-29 00:07:58.766 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/swagger/index.html - 200 null text/html;charset=utf-8 72.8396ms
+2025-06-29 00:07:59.077 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/swagger/v1/swagger.json - null null
+2025-06-29 00:07:59.302 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 224.8199ms
+2025-06-29 00:10:34.350 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/swagger/v1/swagger.json - null null
+2025-06-29 00:10:34.393 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 42.6203ms
+2025-06-29 00:10:34.762 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/favicon.ico - null null
+2025-06-29 00:10:34.770 +05:30 [INF] HTTP GET /favicon.ico responded 404 in 0.3667 ms
+2025-06-29 00:10:34.775 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/favicon.ico - 404 0 null 12.6753ms
+2025-06-29 00:10:34.782 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5049/favicon.ico, Response status code: 404
+2025-06-29 00:43:06.129 +05:30 [INF] User profile is available. Using 'C:\Users\sunny\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-06-29 00:43:06.302 +05:30 [WRN] The WebRootPath was not found: D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.API\wwwroot. Static files may be unavailable.
+2025-06-29 00:43:06.355 +05:30 [INF] Now listening on: http://localhost:5049
+2025-06-29 00:43:06.362 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-29 00:43:06.365 +05:30 [INF] Hosting environment: Development
+2025-06-29 00:43:06.367 +05:30 [INF] Content root path: D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.API
+2025-06-29 00:43:11.857 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/swagger/index.html - null null
+2025-06-29 00:43:12.332 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/swagger/index.html - 200 null text/html;charset=utf-8 480.1354ms
+2025-06-29 00:43:13.922 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/swagger/v1/swagger.json - null null
+2025-06-29 00:43:14.437 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 518.3636ms
+2025-06-29 00:44:20.333 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5049/api/v1/Templates - null null
+2025-06-29 00:44:21.169 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-29 00:44:21.197 +05:30 [INF] CORS policy execution successful.
+2025-06-29 00:44:21.282 +05:30 [INF] HTTP OPTIONS /api/v1/Templates responded 204 in 89.6565 ms
+2025-06-29 00:44:21.303 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5049/api/v1/Templates - 204 null null 970.2054ms
+2025-06-29 00:44:21.469 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5049/api/v1/Templates - application/json 449
+2025-06-29 00:44:21.595 +05:30 [INF] CORS policy execution successful.
+2025-06-29 00:44:21.868 +05:30 [INF] Executing endpoint 'AuditSystem.API.Controllers.TemplatesController.CreateTemplate (AuditSystem.API)'
+2025-06-29 00:44:21.922 +05:30 [INF] Route matched with {action = "CreateTemplate", controller = "Templates"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[AuditSystem.Domain.Entities.Template]] CreateTemplate(AuditSystem.API.Models.CreateTemplateDto) on controller AuditSystem.API.Controllers.TemplatesController (AuditSystem.API).
+2025-06-29 00:44:22.126 +05:30 [INF] Executed action AuditSystem.API.Controllers.TemplatesController.CreateTemplate (AuditSystem.API) in 170.2747ms
+2025-06-29 00:44:22.131 +05:30 [INF] Executed endpoint 'AuditSystem.API.Controllers.TemplatesController.CreateTemplate (AuditSystem.API)'
+2025-06-29 00:44:22.134 +05:30 [ERR] HTTP POST /api/v1/Templates responded 500 in 539.2976 ms
+System.TypeLoadException: Method 'get_LockReleaseBehavior' in type 'Npgsql.EntityFrameworkCore.PostgreSQL.Migrations.Internal.NpgsqlHistoryRepository' from assembly 'Npgsql.EntityFrameworkCore.PostgreSQL, Version=8.0.0.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7' does not have an implementation.
+   at Microsoft.Extensions.DependencyInjection.NpgsqlServiceCollectionExtensions.AddEntityFrameworkNpgsql(IServiceCollection serviceCollection)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure.Internal.NpgsqlOptionsExtension.ApplyServices(IServiceCollection services)
+   at Microsoft.EntityFrameworkCore.Internal.ServiceProviderCache.ApplyServices(IDbContextOptions options, ServiceCollection services)
+   at Microsoft.EntityFrameworkCore.Internal.ServiceProviderCache.<GetOrAdd>g__BuildServiceProvider|4_1(IDbContextOptions _, ValueTuple`2 arguments)
+   at Microsoft.EntityFrameworkCore.Internal.ServiceProviderCache.<>c.<GetOrAdd>b__4_0(IDbContextOptions contextOptions, ValueTuple`2 tuples)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd[TArg](TKey key, Func`3 valueFactory, TArg factoryArgument)
+   at Microsoft.EntityFrameworkCore.Internal.ServiceProviderCache.GetOrAdd(IDbContextOptions options, Boolean providerRequired)
+   at Microsoft.EntityFrameworkCore.DbContext..ctor(DbContextOptions options)
+   at AuditSystem.Infrastructure.Data.AuditSystemDbContext..ctor(DbContextOptions`1 options) in D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.Infrastructure\Data\AuditSystemDbContext.cs:line 10
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass2_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at lambda_method10(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2025-06-29 00:44:22.207 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.TypeLoadException: Method 'get_LockReleaseBehavior' in type 'Npgsql.EntityFrameworkCore.PostgreSQL.Migrations.Internal.NpgsqlHistoryRepository' from assembly 'Npgsql.EntityFrameworkCore.PostgreSQL, Version=8.0.0.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7' does not have an implementation.
+   at Microsoft.Extensions.DependencyInjection.NpgsqlServiceCollectionExtensions.AddEntityFrameworkNpgsql(IServiceCollection serviceCollection)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure.Internal.NpgsqlOptionsExtension.ApplyServices(IServiceCollection services)
+   at Microsoft.EntityFrameworkCore.Internal.ServiceProviderCache.ApplyServices(IDbContextOptions options, ServiceCollection services)
+   at Microsoft.EntityFrameworkCore.Internal.ServiceProviderCache.<GetOrAdd>g__BuildServiceProvider|4_1(IDbContextOptions _, ValueTuple`2 arguments)
+   at Microsoft.EntityFrameworkCore.Internal.ServiceProviderCache.<>c.<GetOrAdd>b__4_0(IDbContextOptions contextOptions, ValueTuple`2 tuples)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd[TArg](TKey key, Func`3 valueFactory, TArg factoryArgument)
+   at Microsoft.EntityFrameworkCore.Internal.ServiceProviderCache.GetOrAdd(IDbContextOptions options, Boolean providerRequired)
+   at Microsoft.EntityFrameworkCore.DbContext..ctor(DbContextOptions options)
+   at AuditSystem.Infrastructure.Data.AuditSystemDbContext..ctor(DbContextOptions`1 options) in D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.Infrastructure\Data\AuditSystemDbContext.cs:line 10
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitCache(ServiceCallSite callSite, RuntimeResolverContext context, ServiceProviderEngineScope serviceProviderEngine, RuntimeResolverLock lockType)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitScopeCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.DynamicServiceProviderEngine.<>c__DisplayClass2_0.<RealizeService>b__0(ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at lambda_method10(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-06-29 00:44:22.264 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5049/api/v1/Templates - 500 null text/plain; charset=utf-8 795.2007ms
+2025-06-29 01:07:03.081 +05:30 [INF] User profile is available. Using 'C:\Users\sunny\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-06-29 01:07:03.299 +05:30 [WRN] The WebRootPath was not found: D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.API\wwwroot. Static files may be unavailable.
+2025-06-29 01:07:03.357 +05:30 [INF] Now listening on: http://localhost:5049
+2025-06-29 01:07:03.364 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-29 01:07:03.368 +05:30 [INF] Hosting environment: Development
+2025-06-29 01:07:03.372 +05:30 [INF] Content root path: D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.API
+2025-06-29 01:08:09.427 +05:30 [INF] Application is shutting down...
+2025-06-29 01:12:33.530 +05:30 [INF] User profile is available. Using 'C:\Users\sunny\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-06-29 01:12:33.713 +05:30 [WRN] The WebRootPath was not found: D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.API\wwwroot. Static files may be unavailable.
+2025-06-29 01:12:33.770 +05:30 [INF] Now listening on: http://localhost:5049
+2025-06-29 01:12:33.806 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-29 01:12:33.807 +05:30 [INF] Hosting environment: Development
+2025-06-29 01:12:33.810 +05:30 [INF] Content root path: D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.API
+2025-06-29 01:12:40.186 +05:30 [INF] Application is shutting down...
+2025-06-29 01:14:32.669 +05:30 [INF] User profile is available. Using 'C:\Users\sunny\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-06-29 01:14:32.837 +05:30 [WRN] The WebRootPath was not found: D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.API\wwwroot. Static files may be unavailable.
+2025-06-29 01:14:32.884 +05:30 [INF] Now listening on: http://localhost:5049
+2025-06-29 01:14:32.890 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-29 01:14:32.894 +05:30 [INF] Hosting environment: Development
+2025-06-29 01:14:32.896 +05:30 [INF] Content root path: D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.API
+2025-06-29 01:14:35.820 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/health - null null
+2025-06-29 01:14:35.891 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-29 01:14:35.936 +05:30 [INF] Executing endpoint 'HTTP: GET /health'
+2025-06-29 01:14:35.944 +05:30 [INF] Executed endpoint 'HTTP: GET /health'
+2025-06-29 01:14:35.959 +05:30 [INF] HTTP GET /health responded 200 in 52.1545 ms
+2025-06-29 01:14:35.983 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/health - 200 null text/plain; charset=utf-8 165.7857ms
+2025-06-29 01:14:55.986 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/swagger/index.html - null null
+2025-06-29 01:14:56.102 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/swagger/index.html - 200 null text/html;charset=utf-8 116.7675ms
+2025-06-29 01:15:16.421 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/api/v1 - null null
+2025-06-29 01:15:16.435 +05:30 [INF] HTTP GET /api/v1 responded 404 in 5.5380 ms
+2025-06-29 01:15:16.440 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/api/v1 - 404 0 null 19.4752ms
+2025-06-29 01:15:16.454 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5049/api/v1, Response status code: 404
+2025-06-29 01:15:34.053 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/swagger/v1/swagger.json - null null
+2025-06-29 01:15:34.358 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 305.1515ms
+2025-06-29 01:17:02.260 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5049/api/v1/Templates - null null
+2025-06-29 01:17:02.281 +05:30 [INF] CORS policy execution successful.
+2025-06-29 01:17:02.287 +05:30 [INF] HTTP OPTIONS /api/v1/Templates responded 204 in 8.4287 ms
+2025-06-29 01:17:02.297 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5049/api/v1/Templates - 204 null null 36.8536ms
+2025-06-29 01:17:02.316 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5049/api/v1/Templates - application/json 449
+2025-06-29 01:17:02.330 +05:30 [INF] CORS policy execution successful.
+2025-06-29 01:17:02.508 +05:30 [INF] Executing endpoint 'AuditSystem.API.Controllers.TemplatesController.CreateTemplate (AuditSystem.API)'
+2025-06-29 01:17:02.573 +05:30 [INF] Route matched with {action = "CreateTemplate", controller = "Templates"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[AuditSystem.API.Models.TemplateResponseDto]] CreateTemplate(AuditSystem.API.Models.CreateTemplateDto) on controller AuditSystem.API.Controllers.TemplatesController (AuditSystem.API).
+2025-06-29 01:17:04.704 +05:30 [INF] Executed DbCommand (123ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?', @p2='?' (DbType = DateTime), @p3='?' (DbType = Guid), @p4='?', @p5='?', @p6='?' (DbType = Object), @p7='?' (DbType = Object), @p8='?' (DbType = DateTime), @p9='?' (DbType = DateTime), @p10='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO template (template_id, category, created_at, created_by, description, name, questions, scoring_rules, valid_from, valid_to, version)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10)
+RETURNING is_published;
+2025-06-29 01:17:04.780 +05:30 [INF] Executing CreatedAtActionResult, writing value of type 'AuditSystem.API.Models.TemplateResponseDto'.
+2025-06-29 01:17:04.843 +05:30 [INF] Executed action AuditSystem.API.Controllers.TemplatesController.CreateTemplate (AuditSystem.API) in 2260.2875ms
+2025-06-29 01:17:04.847 +05:30 [INF] Executed endpoint 'AuditSystem.API.Controllers.TemplatesController.CreateTemplate (AuditSystem.API)'
+2025-06-29 01:17:04.853 +05:30 [INF] HTTP POST /api/v1/Templates responded 201 in 2523.5795 ms
+2025-06-29 01:17:04.872 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5049/api/v1/Templates - 201 null application/json; charset=utf-8 2555.5895ms
+2025-06-29 02:11:08.913 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5049/api/v1/Users/44b77613-4193-4138-81d9-841144458a79 - null null
+2025-06-29 02:11:08.921 +05:30 [INF] CORS policy execution successful.
+2025-06-29 02:11:08.930 +05:30 [INF] HTTP OPTIONS /api/v1/Users/44b77613-4193-4138-81d9-841144458a79 responded 204 in 8.4977 ms
+2025-06-29 02:11:08.935 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5049/api/v1/Users/44b77613-4193-4138-81d9-841144458a79 - 204 null null 22.9037ms
+2025-06-29 02:11:08.950 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/api/v1/Users/44b77613-4193-4138-81d9-841144458a79 - application/json null
+2025-06-29 02:11:08.965 +05:30 [INF] CORS policy execution successful.
+2025-06-29 02:11:08.981 +05:30 [INF] Executing endpoint 'AuditSystem.API.Controllers.UsersController.GetUser (AuditSystem.API)'
+2025-06-29 02:11:09.017 +05:30 [INF] Route matched with {action = "GetUser", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[AuditSystem.Domain.Entities.User]] GetUser(System.Guid) on controller AuditSystem.API.Controllers.UsersController (AuditSystem.API).
+2025-06-29 02:11:10.137 +05:30 [INF] Executed DbCommand (18ms) [Parameters=[@__p_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT u.user_id, u.created_at, u.email, u.first_name, u.is_active, u.last_name, u.organisation_id, u.password_hash, u.password_salt, u.phone, u.role, u.username
+FROM users AS u
+WHERE u.user_id = @__p_0
+LIMIT 1
+2025-06-29 02:11:10.348 +05:30 [INF] Executing OkObjectResult, writing value of type 'AuditSystem.Domain.Entities.User'.
+2025-06-29 02:11:10.406 +05:30 [INF] Executed action AuditSystem.API.Controllers.UsersController.GetUser (AuditSystem.API) in 1374.3026ms
+2025-06-29 02:11:10.421 +05:30 [INF] Executed endpoint 'AuditSystem.API.Controllers.UsersController.GetUser (AuditSystem.API)'
+2025-06-29 02:11:10.462 +05:30 [INF] HTTP GET /api/v1/Users/44b77613-4193-4138-81d9-841144458a79 responded 200 in 1496.5332 ms
+2025-06-29 02:11:10.467 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/api/v1/Users/44b77613-4193-4138-81d9-841144458a79 - 200 null application/json; charset=utf-8 1517.1217ms
+2025-06-29 02:11:13.696 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5049/api/v1/Templates - null null
+2025-06-29 02:11:13.697 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5049/api/v1/Templates - null null
+2025-06-29 02:11:13.700 +05:30 [INF] CORS policy execution successful.
+2025-06-29 02:11:13.705 +05:30 [INF] CORS policy execution successful.
+2025-06-29 02:11:13.706 +05:30 [INF] HTTP OPTIONS /api/v1/Templates responded 204 in 6.0683 ms
+2025-06-29 02:11:13.708 +05:30 [INF] HTTP OPTIONS /api/v1/Templates responded 204 in 3.7284 ms
+2025-06-29 02:11:13.712 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5049/api/v1/Templates - 204 null null 16.427ms
+2025-06-29 02:11:13.718 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5049/api/v1/Templates - 204 null null 20.6458ms
+2025-06-29 02:11:13.728 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/api/v1/Templates - application/json null
+2025-06-29 02:11:13.740 +05:30 [INF] CORS policy execution successful.
+2025-06-29 02:11:13.745 +05:30 [INF] Executing endpoint 'AuditSystem.API.Controllers.TemplatesController.GetTemplates (AuditSystem.API)'
+2025-06-29 02:11:13.753 +05:30 [INF] Route matched with {action = "GetTemplates", controller = "Templates"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[AuditSystem.API.Models.TemplateResponseDto]]] GetTemplates() on controller AuditSystem.API.Controllers.TemplatesController (AuditSystem.API).
+2025-06-29 02:11:13.817 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT t.template_id, t.category, t.created_at, t.created_by, t.description, t.is_published, t.name, t.questions, t.scoring_rules, t.valid_from, t.valid_to, t.version
+FROM template AS t
+2025-06-29 02:11:13.836 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[AuditSystem.API.Models.TemplateResponseDto, AuditSystem.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-29 02:11:13.841 +05:30 [INF] Executed action AuditSystem.API.Controllers.TemplatesController.GetTemplates (AuditSystem.API) in 83.8503ms
+2025-06-29 02:11:13.843 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/api/v1/Templates - application/json null
+2025-06-29 02:11:13.844 +05:30 [INF] Executed endpoint 'AuditSystem.API.Controllers.TemplatesController.GetTemplates (AuditSystem.API)'
+2025-06-29 02:11:13.847 +05:30 [INF] CORS policy execution successful.
+2025-06-29 02:11:13.848 +05:30 [INF] HTTP GET /api/v1/Templates responded 200 in 108.4775 ms
+2025-06-29 02:11:13.850 +05:30 [INF] Executing endpoint 'AuditSystem.API.Controllers.TemplatesController.GetTemplates (AuditSystem.API)'
+2025-06-29 02:11:13.853 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/api/v1/Templates - 200 null application/json; charset=utf-8 124.264ms
+2025-06-29 02:11:13.856 +05:30 [INF] Route matched with {action = "GetTemplates", controller = "Templates"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[AuditSystem.API.Models.TemplateResponseDto]]] GetTemplates() on controller AuditSystem.API.Controllers.TemplatesController (AuditSystem.API).
+2025-06-29 02:11:13.876 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT t.template_id, t.category, t.created_at, t.created_by, t.description, t.is_published, t.name, t.questions, t.scoring_rules, t.valid_from, t.valid_to, t.version
+FROM template AS t
+2025-06-29 02:11:13.885 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[AuditSystem.API.Models.TemplateResponseDto, AuditSystem.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-29 02:11:13.892 +05:30 [INF] Executed action AuditSystem.API.Controllers.TemplatesController.GetTemplates (AuditSystem.API) in 25.5472ms
+2025-06-29 02:11:13.901 +05:30 [INF] Executed endpoint 'AuditSystem.API.Controllers.TemplatesController.GetTemplates (AuditSystem.API)'
+2025-06-29 02:11:13.905 +05:30 [INF] HTTP GET /api/v1/Templates responded 200 in 58.0502 ms
+2025-06-29 02:11:13.913 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/api/v1/Templates - 200 null application/json; charset=utf-8 70.4279ms

@@ -1,0 +1,428 @@
+2025-06-28 16:44:57.497 +05:30 [INF] User profile is available. Using 'C:\Users\sunny\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-06-28 16:44:57.845 +05:30 [WRN] The WebRootPath was not found: D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.API\wwwroot. Static files may be unavailable.
+2025-06-28 16:44:58.001 +05:30 [INF] Now listening on: http://localhost:5049
+2025-06-28 16:44:58.006 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-28 16:44:58.008 +05:30 [INF] Hosting environment: Development
+2025-06-28 16:44:58.010 +05:30 [INF] Content root path: D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.API
+2025-06-28 16:45:05.546 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/ - null null
+2025-06-28 16:45:05.678 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-28 16:45:05.735 +05:30 [INF] HTTP GET / responded 404 in 49.7575 ms
+2025-06-28 16:45:05.780 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/ - 404 0 null 237.635ms
+2025-06-28 16:45:05.813 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5049/, Response status code: 404
+2025-06-28 16:45:12.580 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/health - null null
+2025-06-28 16:45:12.593 +05:30 [INF] HTTP GET /health responded 404 in 4.0361 ms
+2025-06-28 16:45:12.600 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/health - 404 0 null 20.3648ms
+2025-06-28 16:45:12.613 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5049/health, Response status code: 404
+2025-06-28 16:45:46.722 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/swagger/v1/swagger.json - null null
+2025-06-28 16:45:46.905 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 183.013ms
+2025-06-28 16:45:47.070 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/favicon.ico - null null
+2025-06-28 16:45:47.082 +05:30 [INF] HTTP GET /favicon.ico responded 404 in 5.7297 ms
+2025-06-28 16:45:47.086 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/favicon.ico - 404 0 null 16.8785ms
+2025-06-28 16:45:47.093 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5049/favicon.ico, Response status code: 404
+2025-06-28 16:48:05.734 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/api/v1/Auth/login - null null
+2025-06-28 16:48:05.748 +05:30 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2025-06-28 16:48:05.751 +05:30 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2025-06-28 16:48:05.754 +05:30 [INF] HTTP GET /api/v1/Auth/login responded 405 in 10.3796 ms
+2025-06-28 16:48:05.762 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/api/v1/Auth/login - 405 0 null 28.3929ms
+2025-06-28 16:53:38.851 +05:30 [INF] User profile is available. Using 'C:\Users\sunny\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-06-28 16:53:39.022 +05:30 [WRN] The WebRootPath was not found: D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.API\wwwroot. Static files may be unavailable.
+2025-06-28 16:53:39.071 +05:30 [INF] Now listening on: http://localhost:5049
+2025-06-28 16:53:39.079 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-28 16:53:39.082 +05:30 [INF] Hosting environment: Development
+2025-06-28 16:53:39.085 +05:30 [INF] Content root path: D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.API
+2025-06-28 16:53:56.259 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/ - null null
+2025-06-28 16:53:56.343 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-28 16:53:56.393 +05:30 [INF] HTTP GET / responded 404 in 44.3426 ms
+2025-06-28 16:53:56.420 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/ - 404 0 null 163.579ms
+2025-06-28 16:53:56.445 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5049/, Response status code: 404
+2025-06-28 16:54:00.903 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/swagger - null null
+2025-06-28 16:54:00.915 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/swagger - 301 0 null 12.0667ms
+2025-06-28 16:54:00.937 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/swagger/index.html - null null
+2025-06-28 16:54:01.078 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/swagger/index.html - 200 null text/html;charset=utf-8 141.2552ms
+2025-06-28 16:54:01.141 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/swagger/swagger-ui.css - null null
+2025-06-28 16:54:01.148 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/swagger/index.css - null null
+2025-06-28 16:54:01.156 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/swagger/swagger-ui-bundle.js - null null
+2025-06-28 16:54:01.156 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/swagger/swagger-ui-standalone-preset.js - null null
+2025-06-28 16:54:01.158 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/swagger/index.js - null null
+2025-06-28 16:54:01.185 +05:30 [INF] Sending file. Request path: '/index.css'. Physical path: 'N/A'
+2025-06-28 16:54:01.207 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/swagger/index.js - 200 null application/javascript;charset=utf-8 48.5689ms
+2025-06-28 16:54:01.207 +05:30 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2025-06-28 16:54:01.209 +05:30 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2025-06-28 16:54:01.212 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/swagger/index.css - 200 202 text/css 64.1469ms
+2025-06-28 16:54:01.249 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/swagger/swagger-ui.css - 200 154949 text/css 108.0492ms
+2025-06-28 16:54:01.252 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/swagger/swagger-ui-standalone-preset.js - 200 229223 text/javascript 95.8735ms
+2025-06-28 16:54:01.265 +05:30 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2025-06-28 16:54:01.291 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/swagger/swagger-ui-bundle.js - 200 1485241 text/javascript 135.4338ms
+2025-06-28 16:54:01.745 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/swagger/v1/swagger.json - null null
+2025-06-28 16:54:01.799 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/swagger/favicon-32x32.png - null null
+2025-06-28 16:54:01.807 +05:30 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2025-06-28 16:54:01.811 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/swagger/favicon-32x32.png - 200 628 image/png 12.4412ms
+2025-06-28 16:54:01.959 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 213.4391ms
+2025-06-28 19:09:16.456 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5049/api/v1/Users - application/json 221
+2025-06-28 19:09:16.466 +05:30 [INF] CORS policy execution successful.
+2025-06-28 19:09:16.520 +05:30 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (admin)
+2025-06-28 19:09:16.539 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-06-28 19:09:16.543 +05:30 [INF] HTTP POST /api/v1/Users responded 401 in 77.7680 ms
+2025-06-28 19:09:16.551 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5049/api/v1/Users - 401 0 null 94.3769ms
+2025-06-28 19:11:43.650 +05:30 [INF] Request starting HTTP/1.1 PUT http://localhost:5049/api/v1/Users/3fa85f64-5717-4562-b3fc-2c963f66afa6 - application/json 198
+2025-06-28 19:11:43.661 +05:30 [INF] CORS policy execution successful.
+2025-06-28 19:11:43.669 +05:30 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (admin|manager)
+2025-06-28 19:11:43.676 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-06-28 19:11:43.679 +05:30 [INF] HTTP PUT /api/v1/Users/3fa85f64-5717-4562-b3fc-2c963f66afa6 responded 401 in 18.4349 ms
+2025-06-28 19:11:43.688 +05:30 [INF] Request finished HTTP/1.1 PUT http://localhost:5049/api/v1/Users/3fa85f64-5717-4562-b3fc-2c963f66afa6 - 401 0 null 37.5705ms
+2025-06-28 19:15:16.135 +05:30 [INF] Application is shutting down...
+2025-06-28 19:17:45.349 +05:30 [INF] User profile is available. Using 'C:\Users\sunny\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-06-28 19:17:45.549 +05:30 [WRN] The WebRootPath was not found: D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.API\wwwroot. Static files may be unavailable.
+2025-06-28 19:17:45.592 +05:30 [INF] Now listening on: http://localhost:5049
+2025-06-28 19:17:45.597 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-28 19:17:45.601 +05:30 [INF] Hosting environment: Development
+2025-06-28 19:17:45.603 +05:30 [INF] Content root path: D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.API
+2025-06-28 19:17:55.586 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/swagger/v1/swagger.json - null null
+2025-06-28 19:17:55.779 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 193.2078ms
+2025-06-28 19:18:46.716 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5049/api/v1/Auth/register - application/json 157
+2025-06-28 19:18:46.733 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-28 19:18:46.739 +05:30 [INF] CORS policy execution successful.
+2025-06-28 19:18:46.792 +05:30 [INF] Executing endpoint 'AuditSystem.API.Controllers.AuthController.Register (AuditSystem.API)'
+2025-06-28 19:18:46.829 +05:30 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[AuditSystem.API.Controllers.AuthResponse]] Register(AuditSystem.API.Controllers.RegisterRequest) on controller AuditSystem.API.Controllers.AuthController (AuditSystem.API).
+2025-06-28 19:18:48.783 +05:30 [INF] Executed DbCommand (62ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u.user_id, u.created_at, u.email, u.first_name, u.is_active, u.last_name, u.organisation_id, u.password_hash, u.password_salt, u.phone, u.role, u.username
+FROM users AS u
+WHERE lower(u.username) = @__ToLower_0
+LIMIT 1
+2025-06-28 19:18:48.864 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM users AS u
+    WHERE lower(u.username) = @__ToLower_0)
+2025-06-28 19:18:48.886 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM users AS u
+    WHERE lower(u.email) = @__ToLower_0)
+2025-06-28 19:18:48.891 +05:30 [ERR] Error during registration for user: username
+System.InvalidOperationException: Email 'johndoe@example.com' is already registered
+   at AuditSystem.Services.UserService.CreateUserAsync(User user, String password) in D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.Services\UserService.cs:line 49
+   at AuditSystem.API.Controllers.AuthController.Register(RegisterRequest request) in D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.API\Controllers\AuthController.cs:line 56
+2025-06-28 19:18:48.936 +05:30 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-28 19:18:48.958 +05:30 [INF] Executed action AuditSystem.API.Controllers.AuthController.Register (AuditSystem.API) in 2118.1271ms
+2025-06-28 19:18:48.963 +05:30 [INF] Executed endpoint 'AuditSystem.API.Controllers.AuthController.Register (AuditSystem.API)'
+2025-06-28 19:18:48.970 +05:30 [ERR] HTTP POST /api/v1/Auth/register responded 500 in 2231.9753 ms
+2025-06-28 19:18:48.984 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5049/api/v1/Auth/register - 500 null application/json; charset=utf-8 2267.7909ms
+2025-06-28 19:26:54.426 +05:30 [INF] User profile is available. Using 'C:\Users\sunny\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-06-28 19:26:55.049 +05:30 [WRN] The WebRootPath was not found: D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.API\wwwroot. Static files may be unavailable.
+2025-06-28 19:26:55.210 +05:30 [INF] Now listening on: http://localhost:5049
+2025-06-28 19:26:55.233 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-28 19:26:55.237 +05:30 [INF] Hosting environment: Development
+2025-06-28 19:26:55.239 +05:30 [INF] Content root path: D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.API
+2025-06-28 19:33:29.701 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5049/api/v1/Auth/register - null null
+2025-06-28 19:33:29.874 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-28 19:33:29.886 +05:30 [INF] CORS policy execution successful.
+2025-06-28 19:33:29.913 +05:30 [INF] HTTP OPTIONS /api/v1/Auth/register responded 204 in 25.7625 ms
+2025-06-28 19:33:29.975 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5049/api/v1/Auth/register - 204 null null 278.638ms
+2025-06-28 19:33:30.015 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5049/api/v1/Auth/register - application/json 194
+2025-06-28 19:33:30.040 +05:30 [INF] CORS policy execution successful.
+2025-06-28 19:33:30.198 +05:30 [INF] Executing endpoint 'AuditSystem.API.Controllers.AuthController.Register (AuditSystem.API)'
+2025-06-28 19:33:30.281 +05:30 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[AuditSystem.API.Controllers.AuthResponse]] Register(AuditSystem.API.Controllers.RegisterRequest) on controller AuditSystem.API.Controllers.AuthController (AuditSystem.API).
+2025-06-28 19:33:37.229 +05:30 [INF] Executed DbCommand (193ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u.user_id, u.created_at, u.email, u.first_name, u.is_active, u.last_name, u.organisation_id, u.password_hash, u.password_salt, u.phone, u.role, u.username
+FROM users AS u
+WHERE lower(u.username) = @__ToLower_0
+LIMIT 1
+2025-06-28 19:33:37.489 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM users AS u
+    WHERE lower(u.username) = @__ToLower_0)
+2025-06-28 19:33:37.545 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM users AS u
+    WHERE lower(u.email) = @__ToLower_0)
+2025-06-28 19:33:38.257 +05:30 [ERR] Failed executing DbCommand (39ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?', @p4='?', @p5='?' (DbType = Guid), @p6='?', @p7='?', @p8='?', @p9='?', @p10='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO users (user_id, created_at, email, first_name, last_name, organisation_id, password_hash, password_salt, phone, role, username)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10)
+RETURNING is_active;
+2025-06-28 19:33:38.373 +05:30 [ERR] An exception occurred in the database while saving changes for context type 'AuditSystem.Infrastructure.Data.AuditSystemDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23514: new row for relation "users" violates check constraint "users_role_check"
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23514
+    MessageText: new row for relation "users" violates check constraint "users_role_check"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: users
+    ConstraintName: users_role_check
+    File: execMain.c
+    Line: 2028
+    Routine: ExecConstraints
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23514: new row for relation "users" violates check constraint "users_role_check"
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23514
+    MessageText: new row for relation "users" violates check constraint "users_role_check"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: users
+    ConstraintName: users_role_check
+    File: execMain.c
+    Line: 2028
+    Routine: ExecConstraints
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+2025-06-28 19:33:38.480 +05:30 [ERR] Error during registration for user: user2961
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23514: new row for relation "users" violates check constraint "users_role_check"
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23514
+    MessageText: new row for relation "users" violates check constraint "users_role_check"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: users
+    ConstraintName: users_role_check
+    File: execMain.c
+    Line: 2028
+    Routine: ExecConstraints
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at AuditSystem.Infrastructure.Repositories.Repository`1.SaveChangesAsync() in D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.Infrastructure\Repositories\Repository.cs:line 63
+   at AuditSystem.Services.UserService.CreateUserAsync(User user, String password) in D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.Services\UserService.cs:line 63
+   at AuditSystem.API.Controllers.AuthController.Register(RegisterRequest request) in D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.API\Controllers\AuthController.cs:line 56
+2025-06-28 19:33:38.624 +05:30 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-28 19:33:38.670 +05:30 [INF] Executed action AuditSystem.API.Controllers.AuthController.Register (AuditSystem.API) in 8361.3614ms
+2025-06-28 19:33:38.678 +05:30 [INF] Executed endpoint 'AuditSystem.API.Controllers.AuthController.Register (AuditSystem.API)'
+2025-06-28 19:33:38.686 +05:30 [ERR] HTTP POST /api/v1/Auth/register responded 500 in 8645.9847 ms
+2025-06-28 19:33:38.727 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5049/api/v1/Auth/register - 500 null application/json; charset=utf-8 8712.8132ms
+2025-06-28 19:41:44.511 +05:30 [INF] Application is shutting down...
+2025-06-28 19:46:23.427 +05:30 [INF] User profile is available. Using 'C:\Users\sunny\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-06-28 19:46:23.598 +05:30 [WRN] The WebRootPath was not found: D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.API\wwwroot. Static files may be unavailable.
+2025-06-28 19:46:23.633 +05:30 [INF] Now listening on: http://localhost:5049
+2025-06-28 19:46:23.640 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-28 19:46:23.645 +05:30 [INF] Hosting environment: Development
+2025-06-28 19:46:23.647 +05:30 [INF] Content root path: D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.API
+2025-06-28 19:46:27.553 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5049/api/v1/Auth/register - application/json 248
+2025-06-28 19:46:27.626 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-28 19:46:27.703 +05:30 [INF] Executing endpoint 'AuditSystem.API.Controllers.AuthController.Register (AuditSystem.API)'
+2025-06-28 19:46:27.753 +05:30 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[AuditSystem.API.Controllers.AuthResponse]] Register(AuditSystem.API.Controllers.RegisterRequest) on controller AuditSystem.API.Controllers.AuthController (AuditSystem.API).
+2025-06-28 19:46:30.317 +05:30 [INF] Executed DbCommand (82ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u.user_id, u.created_at, u.email, u.first_name, u.is_active, u.last_name, u.organisation_id, u.password_hash, u.password_salt, u.phone, u.role, u.username
+FROM users AS u
+WHERE lower(u.username) = @__ToLower_0
+LIMIT 1
+2025-06-28 19:46:30.429 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM users AS u
+    WHERE lower(u.username) = @__ToLower_0)
+2025-06-28 19:46:30.465 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM users AS u
+    WHERE lower(u.email) = @__ToLower_0)
+2025-06-28 19:46:30.866 +05:30 [ERR] Failed executing DbCommand (38ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?', @p4='?', @p5='?' (DbType = Guid), @p6='?', @p7='?', @p8='?', @p9='?', @p10='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO users (user_id, created_at, email, first_name, last_name, organisation_id, password_hash, password_salt, phone, role, username)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10)
+RETURNING is_active;
+2025-06-28 19:46:30.914 +05:30 [ERR] An exception occurred in the database while saving changes for context type 'AuditSystem.Infrastructure.Data.AuditSystemDbContext'.
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23503: insert or update on table "users" violates foreign key constraint "users_organisation_id_fkey"
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23503
+    MessageText: insert or update on table "users" violates foreign key constraint "users_organisation_id_fkey"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: users
+    ConstraintName: users_organisation_id_fkey
+    File: ri_triggers.c
+    Line: 2607
+    Routine: ri_ReportViolation
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23503: insert or update on table "users" violates foreign key constraint "users_organisation_id_fkey"
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23503
+    MessageText: insert or update on table "users" violates foreign key constraint "users_organisation_id_fkey"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: users
+    ConstraintName: users_organisation_id_fkey
+    File: ri_triggers.c
+    Line: 2607
+    Routine: ri_ReportViolation
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+2025-06-28 19:46:30.953 +05:30 [ERR] Error during registration for user: testuser_1751120187
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 23503: insert or update on table "users" violates foreign key constraint "users_organisation_id_fkey"
+
+DETAIL: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 23503
+    MessageText: insert or update on table "users" violates foreign key constraint "users_organisation_id_fkey"
+    Detail: Detail redacted as it may contain sensitive data. Specify 'Include Error Detail' in the connection string to include this information.
+    SchemaName: public
+    TableName: users
+    ConstraintName: users_organisation_id_fkey
+    File: ri_triggers.c
+    Line: 2607
+    Routine: ri_ReportViolation
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.<>c__DisplayClass30_0`2.<<ExecuteAsync>b__0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteImplementationAsync[TState,TResult](Func`4 operation, Func`4 verifySucceeded, TState state, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.ExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at AuditSystem.Infrastructure.Repositories.Repository`1.SaveChangesAsync() in D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.Infrastructure\Repositories\Repository.cs:line 63
+   at AuditSystem.Services.UserService.CreateUserAsync(User user, String password) in D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.Services\UserService.cs:line 63
+   at AuditSystem.API.Controllers.AuthController.Register(RegisterRequest request) in D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.API\Controllers\AuthController.cs:line 57
+2025-06-28 19:46:31.143 +05:30 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType0`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-28 19:46:31.282 +05:30 [INF] Executed action AuditSystem.API.Controllers.AuthController.Register (AuditSystem.API) in 3511.0202ms
+2025-06-28 19:46:31.344 +05:30 [INF] Executed endpoint 'AuditSystem.API.Controllers.AuthController.Register (AuditSystem.API)'
+2025-06-28 19:46:31.352 +05:30 [ERR] HTTP POST /api/v1/Auth/register responded 500 in 3720.3885 ms
+2025-06-28 19:46:31.381 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5049/api/v1/Auth/register - 500 null application/json; charset=utf-8 3830.5888ms

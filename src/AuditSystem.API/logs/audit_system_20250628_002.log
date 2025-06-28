@@ -1,0 +1,226 @@
+2025-06-28 23:38:40.616 +05:30 [INF] User profile is available. Using 'C:\Users\sunny\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-06-28 23:38:41.541 +05:30 [WRN] The WebRootPath was not found: D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.API\wwwroot. Static files may be unavailable.
+2025-06-28 23:38:41.768 +05:30 [ERR] Hosting failed to start
+System.IO.IOException: Failed to bind to address http://127.0.0.1:5049: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+ ---> System.Net.Sockets.SocketException (10048): Only one usage of each socket address (protocol/network address/port) is normally permitted.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2025-06-28 23:40:30.851 +05:30 [INF] User profile is available. Using 'C:\Users\sunny\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-06-28 23:40:31.666 +05:30 [WRN] The WebRootPath was not found: D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.API\wwwroot. Static files may be unavailable.
+2025-06-28 23:40:31.921 +05:30 [ERR] Hosting failed to start
+System.IO.IOException: Failed to bind to address http://127.0.0.1:5049: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+ ---> System.Net.Sockets.SocketException (10048): Only one usage of each socket address (protocol/network address/port) is normally permitted.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2025-06-28 23:44:17.540 +05:30 [INF] User profile is available. Using 'C:\Users\sunny\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-06-28 23:44:18.591 +05:30 [WRN] The WebRootPath was not found: D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.API\wwwroot. Static files may be unavailable.
+2025-06-28 23:44:18.804 +05:30 [ERR] Hosting failed to start
+System.IO.IOException: Failed to bind to address http://127.0.0.1:5049: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+ ---> System.Net.Sockets.SocketException (10048): Only one usage of each socket address (protocol/network address/port) is normally permitted.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+2025-06-28 23:54:39.765 +05:30 [INF] User profile is available. Using 'C:\Users\sunny\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-06-28 23:54:39.970 +05:30 [WRN] The WebRootPath was not found: D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.API\wwwroot. Static files may be unavailable.
+2025-06-28 23:54:40.006 +05:30 [INF] Now listening on: http://localhost:5049
+2025-06-28 23:54:40.009 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-28 23:54:40.011 +05:30 [INF] Hosting environment: Development
+2025-06-28 23:54:40.013 +05:30 [INF] Content root path: D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.API
+2025-06-28 23:54:40.540 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5049/api/v1/Auth/register - application/json 226
+2025-06-28 23:54:40.625 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-28 23:54:40.679 +05:30 [INF] Executing endpoint 'AuditSystem.API.Controllers.AuthController.Register (AuditSystem.API)'
+2025-06-28 23:54:40.726 +05:30 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[AuditSystem.API.Controllers.AuthResponse]] Register(AuditSystem.API.Controllers.RegisterRequest) on controller AuditSystem.API.Controllers.AuthController (AuditSystem.API).
+2025-06-28 23:54:42.864 +05:30 [INF] Executed DbCommand (93ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u.user_id, u.created_at, u.email, u.first_name, u.is_active, u.last_name, u.organisation_id, u.password_hash, u.password_salt, u.phone, u.role, u.username
+FROM users AS u
+WHERE lower(u.username) = @__ToLower_0
+LIMIT 1
+2025-06-28 23:54:42.964 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM users AS u
+    WHERE lower(u.username) = @__ToLower_0)
+2025-06-28 23:54:42.999 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM users AS u
+    WHERE lower(u.email) = @__ToLower_0)
+2025-06-28 23:54:43.457 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?', @p4='?', @p5='?' (DbType = Guid), @p6='?', @p7='?', @p8='?', @p9='?', @p10='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO users (user_id, created_at, email, first_name, last_name, organisation_id, password_hash, password_salt, phone, role, username)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10)
+RETURNING is_active;
+2025-06-28 23:54:43.551 +05:30 [INF] Executing OkObjectResult, writing value of type 'AuditSystem.API.Controllers.AuthResponse'.
+2025-06-28 23:54:43.580 +05:30 [INF] Executed action AuditSystem.API.Controllers.AuthController.Register (AuditSystem.API) in 2845.0601ms
+2025-06-28 23:54:43.600 +05:30 [INF] Executed endpoint 'AuditSystem.API.Controllers.AuthController.Register (AuditSystem.API)'
+2025-06-28 23:54:43.613 +05:30 [INF] HTTP POST /api/v1/Auth/register responded 200 in 2980.0240 ms
+2025-06-28 23:54:43.643 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/api/v1/Templates - application/json null
+2025-06-28 23:54:43.656 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5049/api/v1/Auth/register - 200 null application/json; charset=utf-8 3118.125ms
+2025-06-28 23:54:43.774 +05:30 [INF] Executing endpoint 'AuditSystem.API.Controllers.TemplatesController.GetTemplates (AuditSystem.API)'
+2025-06-28 23:54:43.783 +05:30 [INF] Route matched with {action = "GetTemplates", controller = "Templates"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[AuditSystem.Domain.Entities.Template]]] GetTemplates() on controller AuditSystem.API.Controllers.TemplatesController (AuditSystem.API).
+2025-06-28 23:54:43.863 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT t.template_id, t.category, t.created_at, t.created_by, t.description, t.is_published, t.name, t.questions, t.scoring_rules, t.valid_from, t.valid_to, t.version
+FROM template AS t
+2025-06-28 23:54:43.874 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[AuditSystem.Domain.Entities.Template, AuditSystem.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-28 23:54:43.928 +05:30 [INF] Executed action AuditSystem.API.Controllers.TemplatesController.GetTemplates (AuditSystem.API) in 139.3271ms
+2025-06-28 23:54:43.930 +05:30 [INF] Executed endpoint 'AuditSystem.API.Controllers.TemplatesController.GetTemplates (AuditSystem.API)'
+2025-06-28 23:54:43.937 +05:30 [INF] HTTP GET /api/v1/Templates responded 200 in 266.7109 ms
+2025-06-28 23:54:43.942 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/api/v1/Templates - 200 null application/json; charset=utf-8 299.3532ms
+2025-06-28 23:54:43.947 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5049/api/v1/Templates - application/json 612
+2025-06-28 23:54:43.970 +05:30 [INF] Executing endpoint 'AuditSystem.API.Controllers.TemplatesController.CreateTemplate (AuditSystem.API)'
+2025-06-28 23:54:43.980 +05:30 [INF] Route matched with {action = "CreateTemplate", controller = "Templates"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[AuditSystem.Domain.Entities.Template]] CreateTemplate(AuditSystem.Domain.Entities.Template) on controller AuditSystem.API.Controllers.TemplatesController (AuditSystem.API).
+2025-06-28 23:54:44.024 +05:30 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2025-06-28 23:54:44.134 +05:30 [INF] Executed action AuditSystem.API.Controllers.TemplatesController.CreateTemplate (AuditSystem.API) in 148.7867ms
+2025-06-28 23:54:44.445 +05:30 [INF] Executed endpoint 'AuditSystem.API.Controllers.TemplatesController.CreateTemplate (AuditSystem.API)'
+2025-06-28 23:54:44.458 +05:30 [INF] HTTP POST /api/v1/Templates responded 400 in 498.1520 ms
+2025-06-28 23:54:44.463 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5049/api/v1/Templates - 400 null application/problem+json; charset=utf-8 515.1238ms
+2025-06-28 23:55:10.576 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5049/api/v1/Auth/register - application/json 226
+2025-06-28 23:55:10.581 +05:30 [INF] Executing endpoint 'AuditSystem.API.Controllers.AuthController.Register (AuditSystem.API)'
+2025-06-28 23:55:10.585 +05:30 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[AuditSystem.API.Controllers.AuthResponse]] Register(AuditSystem.API.Controllers.RegisterRequest) on controller AuditSystem.API.Controllers.AuthController (AuditSystem.API).
+2025-06-28 23:55:10.690 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u.user_id, u.created_at, u.email, u.first_name, u.is_active, u.last_name, u.organisation_id, u.password_hash, u.password_salt, u.phone, u.role, u.username
+FROM users AS u
+WHERE lower(u.username) = @__ToLower_0
+LIMIT 1
+2025-06-28 23:55:10.696 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM users AS u
+    WHERE lower(u.username) = @__ToLower_0)
+2025-06-28 23:55:10.703 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM users AS u
+    WHERE lower(u.email) = @__ToLower_0)
+2025-06-28 23:55:10.711 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?', @p4='?', @p5='?' (DbType = Guid), @p6='?', @p7='?', @p8='?', @p9='?', @p10='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO users (user_id, created_at, email, first_name, last_name, organisation_id, password_hash, password_salt, phone, role, username)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10)
+RETURNING is_active;
+2025-06-28 23:55:10.718 +05:30 [INF] Executing OkObjectResult, writing value of type 'AuditSystem.API.Controllers.AuthResponse'.
+2025-06-28 23:55:10.723 +05:30 [INF] Executed action AuditSystem.API.Controllers.AuthController.Register (AuditSystem.API) in 132.0587ms
+2025-06-28 23:55:10.726 +05:30 [INF] Executed endpoint 'AuditSystem.API.Controllers.AuthController.Register (AuditSystem.API)'
+2025-06-28 23:55:10.729 +05:30 [INF] HTTP POST /api/v1/Auth/register responded 200 in 148.4963 ms
+2025-06-28 23:55:10.736 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5049/api/v1/Auth/register - 200 null application/json; charset=utf-8 160.3893ms
+2025-06-28 23:55:10.753 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/api/v1/Templates - application/json null
+2025-06-28 23:55:10.761 +05:30 [INF] Executing endpoint 'AuditSystem.API.Controllers.TemplatesController.GetTemplates (AuditSystem.API)'
+2025-06-28 23:55:10.765 +05:30 [INF] Route matched with {action = "GetTemplates", controller = "Templates"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[AuditSystem.Domain.Entities.Template]]] GetTemplates() on controller AuditSystem.API.Controllers.TemplatesController (AuditSystem.API).
+2025-06-28 23:55:10.779 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT t.template_id, t.category, t.created_at, t.created_by, t.description, t.is_published, t.name, t.questions, t.scoring_rules, t.valid_from, t.valid_to, t.version
+FROM template AS t
+2025-06-28 23:55:10.788 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[AuditSystem.Domain.Entities.Template, AuditSystem.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-28 23:55:10.792 +05:30 [INF] Executed action AuditSystem.API.Controllers.TemplatesController.GetTemplates (AuditSystem.API) in 19.3584ms
+2025-06-28 23:55:10.795 +05:30 [INF] Executed endpoint 'AuditSystem.API.Controllers.TemplatesController.GetTemplates (AuditSystem.API)'
+2025-06-28 23:55:10.798 +05:30 [INF] HTTP GET /api/v1/Templates responded 200 in 39.1494 ms
+2025-06-28 23:55:10.805 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/api/v1/Templates - 200 null application/json; charset=utf-8 51.3914ms
+2025-06-28 23:55:10.830 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5049/api/v1/Templates - application/json 612
+2025-06-28 23:55:10.837 +05:30 [INF] Executing endpoint 'AuditSystem.API.Controllers.TemplatesController.CreateTemplate (AuditSystem.API)'
+2025-06-28 23:55:10.840 +05:30 [INF] Route matched with {action = "CreateTemplate", controller = "Templates"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[AuditSystem.Domain.Entities.Template]] CreateTemplate(AuditSystem.Domain.Entities.Template) on controller AuditSystem.API.Controllers.TemplatesController (AuditSystem.API).
+2025-06-28 23:55:10.844 +05:30 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2025-06-28 23:55:10.846 +05:30 [INF] Executed action AuditSystem.API.Controllers.TemplatesController.CreateTemplate (AuditSystem.API) in 3.2832ms
+2025-06-28 23:55:10.850 +05:30 [INF] Executed endpoint 'AuditSystem.API.Controllers.TemplatesController.CreateTemplate (AuditSystem.API)'
+2025-06-28 23:55:10.856 +05:30 [INF] HTTP POST /api/v1/Templates responded 400 in 18.7337 ms
+2025-06-28 23:55:10.861 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5049/api/v1/Templates - 400 null application/problem+json; charset=utf-8 30.7285ms
+2025-06-28 23:58:17.745 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5049/api/v1/Auth/register - application/json 226
+2025-06-28 23:58:17.751 +05:30 [INF] Executing endpoint 'AuditSystem.API.Controllers.AuthController.Register (AuditSystem.API)'
+2025-06-28 23:58:17.753 +05:30 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[AuditSystem.API.Controllers.AuthResponse]] Register(AuditSystem.API.Controllers.RegisterRequest) on controller AuditSystem.API.Controllers.AuthController (AuditSystem.API).
+2025-06-28 23:58:17.767 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u.user_id, u.created_at, u.email, u.first_name, u.is_active, u.last_name, u.organisation_id, u.password_hash, u.password_salt, u.phone, u.role, u.username
+FROM users AS u
+WHERE lower(u.username) = @__ToLower_0
+LIMIT 1
+2025-06-28 23:58:17.776 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM users AS u
+    WHERE lower(u.username) = @__ToLower_0)
+2025-06-28 23:58:17.780 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__ToLower_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM users AS u
+    WHERE lower(u.email) = @__ToLower_0)
+2025-06-28 23:58:17.786 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?', @p4='?', @p5='?' (DbType = Guid), @p6='?', @p7='?', @p8='?', @p9='?', @p10='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO users (user_id, created_at, email, first_name, last_name, organisation_id, password_hash, password_salt, phone, role, username)
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10)
+RETURNING is_active;
+2025-06-28 23:58:17.795 +05:30 [INF] Executing OkObjectResult, writing value of type 'AuditSystem.API.Controllers.AuthResponse'.
+2025-06-28 23:58:17.797 +05:30 [INF] Executed action AuditSystem.API.Controllers.AuthController.Register (AuditSystem.API) in 36.8991ms
+2025-06-28 23:58:17.798 +05:30 [INF] Executed endpoint 'AuditSystem.API.Controllers.AuthController.Register (AuditSystem.API)'
+2025-06-28 23:58:17.800 +05:30 [INF] HTTP POST /api/v1/Auth/register responded 200 in 50.0064 ms
+2025-06-28 23:58:17.805 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5049/api/v1/Auth/register - 200 null application/json; charset=utf-8 59.5649ms
+2025-06-28 23:58:17.812 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5049/api/v1/Templates - application/json null
+2025-06-28 23:58:17.817 +05:30 [INF] Executing endpoint 'AuditSystem.API.Controllers.TemplatesController.GetTemplates (AuditSystem.API)'
+2025-06-28 23:58:17.819 +05:30 [INF] Route matched with {action = "GetTemplates", controller = "Templates"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[AuditSystem.Domain.Entities.Template]]] GetTemplates() on controller AuditSystem.API.Controllers.TemplatesController (AuditSystem.API).
+2025-06-28 23:58:17.828 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT t.template_id, t.category, t.created_at, t.created_by, t.description, t.is_published, t.name, t.questions, t.scoring_rules, t.valid_from, t.valid_to, t.version
+FROM template AS t
+2025-06-28 23:58:17.831 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[AuditSystem.Domain.Entities.Template, AuditSystem.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-28 23:58:17.833 +05:30 [INF] Executed action AuditSystem.API.Controllers.TemplatesController.GetTemplates (AuditSystem.API) in 7.5327ms
+2025-06-28 23:58:17.836 +05:30 [INF] Executed endpoint 'AuditSystem.API.Controllers.TemplatesController.GetTemplates (AuditSystem.API)'
+2025-06-28 23:58:17.840 +05:30 [INF] HTTP GET /api/v1/Templates responded 200 in 23.5416 ms
+2025-06-28 23:58:17.845 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5049/api/v1/Templates - 200 null application/json; charset=utf-8 32.7664ms
+2025-06-28 23:58:17.850 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5049/api/v1/Templates - application/json 612
+2025-06-28 23:58:17.858 +05:30 [INF] Executing endpoint 'AuditSystem.API.Controllers.TemplatesController.CreateTemplate (AuditSystem.API)'
+2025-06-28 23:58:17.860 +05:30 [INF] Route matched with {action = "CreateTemplate", controller = "Templates"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[AuditSystem.Domain.Entities.Template]] CreateTemplate(AuditSystem.Domain.Entities.Template) on controller AuditSystem.API.Controllers.TemplatesController (AuditSystem.API).
+2025-06-28 23:58:17.864 +05:30 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2025-06-28 23:58:17.866 +05:30 [INF] Executed action AuditSystem.API.Controllers.TemplatesController.CreateTemplate (AuditSystem.API) in 2.6627ms
+2025-06-28 23:58:17.868 +05:30 [INF] Executed endpoint 'AuditSystem.API.Controllers.TemplatesController.CreateTemplate (AuditSystem.API)'
+2025-06-28 23:58:17.872 +05:30 [INF] HTTP POST /api/v1/Templates responded 400 in 14.6033 ms
+2025-06-28 23:58:17.877 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5049/api/v1/Templates - 400 null application/problem+json; charset=utf-8 27.3331ms

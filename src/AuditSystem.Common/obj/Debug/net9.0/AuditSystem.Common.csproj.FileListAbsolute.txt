@@ -1,0 +1,11 @@
+D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.Common\bin\Debug\net9.0\AuditSystem.Common.deps.json
+D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.Common\bin\Debug\net9.0\AuditSystem.Common.dll
+D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.Common\bin\Debug\net9.0\AuditSystem.Common.pdb
+D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.Common\obj\Debug\net9.0\AuditSystem.Common.GeneratedMSBuildEditorConfig.editorconfig
+D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.Common\obj\Debug\net9.0\AuditSystem.Common.AssemblyInfoInputs.cache
+D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.Common\obj\Debug\net9.0\AuditSystem.Common.AssemblyInfo.cs
+D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.Common\obj\Debug\net9.0\AuditSystem.Common.csproj.CoreCompileInputs.cache
+D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.Common\obj\Debug\net9.0\AuditSystem.Common.dll
+D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.Common\obj\Debug\net9.0\refint\AuditSystem.Common.dll
+D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.Common\obj\Debug\net9.0\AuditSystem.Common.pdb
+D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.Common\obj\Debug\net9.0\ref\AuditSystem.Common.dll
