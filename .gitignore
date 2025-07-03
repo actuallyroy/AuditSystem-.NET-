@@ -1,0 +1,4 @@
+/python_tests/test_reports/
+/python_tests/__pycache__/
+/src/*/logs/
+/src/*/bin/

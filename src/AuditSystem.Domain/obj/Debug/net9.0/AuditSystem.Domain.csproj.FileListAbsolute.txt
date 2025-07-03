@@ -10,3 +10,16 @@ D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.Domain\obj\
 D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.Domain\obj\Debug\net9.0\refint\AuditSystem.Domain.dll
 D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.Domain\obj\Debug\net9.0\AuditSystem.Domain.pdb
 D:\MyWorks\Retail-Execution-Audit-System\AuditSystem\src\AuditSystem.Domain\obj\Debug\net9.0\ref\AuditSystem.Domain.dll
+D:\Retail-Execution-Audit-System\AuditSystem-.NET-\src\AuditSystem.Domain\bin\Debug\net9.0\AuditSystem.Domain.deps.json
+D:\Retail-Execution-Audit-System\AuditSystem-.NET-\src\AuditSystem.Domain\bin\Debug\net9.0\AuditSystem.Domain.dll
+D:\Retail-Execution-Audit-System\AuditSystem-.NET-\src\AuditSystem.Domain\bin\Debug\net9.0\AuditSystem.Domain.pdb
+D:\Retail-Execution-Audit-System\AuditSystem-.NET-\src\AuditSystem.Domain\obj\Debug\net9.0\AuditSystem.Domain.csproj.AssemblyReference.cache
+D:\Retail-Execution-Audit-System\AuditSystem-.NET-\src\AuditSystem.Domain\obj\Debug\net9.0\AuditSystem.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Retail-Execution-Audit-System\AuditSystem-.NET-\src\AuditSystem.Domain\obj\Debug\net9.0\AuditSystem.Domain.AssemblyInfoInputs.cache
+D:\Retail-Execution-Audit-System\AuditSystem-.NET-\src\AuditSystem.Domain\obj\Debug\net9.0\AuditSystem.Domain.AssemblyInfo.cs
+D:\Retail-Execution-Audit-System\AuditSystem-.NET-\src\AuditSystem.Domain\obj\Debug\net9.0\AuditSystem.Domain.csproj.CoreCompileInputs.cache
+D:\Retail-Execution-Audit-System\AuditSystem-.NET-\src\AuditSystem.Domain\obj\Debug\net9.0\AuditSystem.Domain.sourcelink.json
+D:\Retail-Execution-Audit-System\AuditSystem-.NET-\src\AuditSystem.Domain\obj\Debug\net9.0\AuditSystem.Domain.dll
+D:\Retail-Execution-Audit-System\AuditSystem-.NET-\src\AuditSystem.Domain\obj\Debug\net9.0\refint\AuditSystem.Domain.dll
+D:\Retail-Execution-Audit-System\AuditSystem-.NET-\src\AuditSystem.Domain\obj\Debug\net9.0\AuditSystem.Domain.pdb
+D:\Retail-Execution-Audit-System\AuditSystem-.NET-\src\AuditSystem.Domain\obj\Debug\net9.0\ref\AuditSystem.Domain.dll

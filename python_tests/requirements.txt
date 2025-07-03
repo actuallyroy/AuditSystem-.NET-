@@ -1,0 +1,10 @@
+pytest==7.4.3
+pytest-asyncio==0.21.1
+requests==2.31.0
+PyJWT==2.8.0
+Faker==20.1.0
+pytest-html==4.1.1
+pytest-cov==4.1.0
+
+# Optional for database tests (Windows installation can be complex)
+# psycopg2-binary==2.9.9 

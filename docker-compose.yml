@@ -1,0 +1,147 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: audit_postgres
+    environment:
+      POSTGRES_DB: retail-execution-audit-system
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --lc-collate=C --lc-ctype=C --auth-host=md5 --auth-local=trust"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d
+    networks:
+      - audit_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d retail-execution-audit-system"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: audit_redis
+    command: redis-server --appendonly yes --requirepass redis_password_123
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - audit_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  # RabbitMQ Message Queue
+  rabbitmq:
+    image: rabbitmq:3.12-management-alpine
+    container_name: audit_rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: audit_user
+      RABBITMQ_DEFAULT_PASS: rabbitmq_password_123
+      RABBITMQ_DEFAULT_VHOST: audit_vhost
+    ports:
+      - "5672:5672"     # AMQP port
+      - "15672:15672"   # Management UI port
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - audit_network
+    restart: unless-stopped
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 30s
+      timeout: 30s
+      retries: 3
+
+  # pgAdmin - PostgreSQL Administration Tool
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: audit_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@audit-system.com
+      PGADMIN_DEFAULT_PASSWORD: pgadmin_password_123
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: 'False'
+    ports:
+      - "5050:80"       # pgAdmin web interface
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+      - ./pgadmin/servers.json:/pgadmin4/servers.json:ro
+      - ./pgadmin/pgpass:/pgpass:ro
+    networks:
+      - audit_network
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # .NET API Application
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: audit_api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=retail-execution-audit-system;Username=postgres;Password=123456;Timeout=30;CommandTimeout=30;TimeZone=UTC;Trust Server Certificate=true
+      - JWT__Secret=YourProductionSecretKeyHereMakeSureItIsAtLeast32CharactersLongAndSecure
+      - JWT__Issuer=AuditSystem
+      - JWT__Audience=AuditSystemClients
+      - Redis__ConnectionString=audit_redis:6379,password=redis_password_123
+      - RabbitMQ__HostName=rabbitmq
+      - RabbitMQ__UserName=audit_user
+      - RabbitMQ__Password=rabbitmq_password_123
+      - RabbitMQ__VirtualHost=audit_vhost
+      - Serilog__MinimumLevel__Default=Information
+      - Serilog__WriteTo__0__Name=Console
+      - Serilog__WriteTo__1__Name=File
+      - Serilog__WriteTo__1__Args__path=logs/audit_system_.log
+      - Serilog__WriteTo__1__Args__rollingInterval=Day
+    ports:
+      - "8080:8080"
+    volumes:
+      - api_logs:/app/logs
+    networks:
+      - audit_network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  rabbitmq_data:
+    driver: local
+  pgadmin_data:
+    driver: local
+  api_logs:
+    driver: local
+
+networks:
+  audit_network:
+    driver: bridge 

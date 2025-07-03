@@ -167,7 +167,7 @@ namespace AuditSystem.API.Controllers
                 new Claim(ClaimTypes.Name, user.Username),
                 new Claim(ClaimTypes.GivenName, user.FirstName),
                 new Claim(ClaimTypes.Surname, user.LastName),
-                new Claim(ClaimTypes.Role, user.Role)
+                new Claim(ClaimTypes.Role, NormalizeRole(user.Role))
             };
             
             if (!string.IsNullOrEmpty(user.Email))
@@ -186,6 +186,22 @@ namespace AuditSystem.API.Controllers
             
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+
+        private string NormalizeRole(string role)
+        {
+            if (string.IsNullOrWhiteSpace(role))
+                return role;
+
+            // Normalize common roles to match authorization attributes
+            return role.ToLowerInvariant() switch
+            {
+                "admin" => "Administrator",
+                "manager" => "Manager",
+                "supervisor" => "Supervisor",
+                "auditor" => "Auditor",
+                _ => System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(role.ToLower())
+            };
         }
     }
 
