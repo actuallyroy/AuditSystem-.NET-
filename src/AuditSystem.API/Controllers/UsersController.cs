@@ -22,7 +22,7 @@ namespace AuditSystem.API.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "admin,manager")]
+        [Authorize(Policy = "AdminOrManager")]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             try
@@ -56,7 +56,7 @@ namespace AuditSystem.API.Controllers
         }
 
         [HttpGet("by-username/{username}")]
-        [Authorize(Roles = "admin,manager")]
+        [Authorize(Policy = "AdminOrManager")]
         public async Task<ActionResult<User>> GetUserByUsername(string username)
         {
             try
@@ -75,7 +75,7 @@ namespace AuditSystem.API.Controllers
         }
 
         [HttpGet("by-organisation/{organisationId:guid}")]
-        [Authorize(Roles = "admin,manager")]
+        [Authorize(Policy = "AdminOrManager")]
         public async Task<ActionResult<IEnumerable<User>>> GetUsersByOrganisation(Guid organisationId)
         {
             try
@@ -91,7 +91,7 @@ namespace AuditSystem.API.Controllers
         }
 
         [HttpGet("by-role/{role}")]
-        [Authorize(Roles = "admin,manager")]
+        [Authorize(Policy = "AdminOrManager")]
         public async Task<ActionResult<IEnumerable<User>>> GetUsersByRole(string role)
         {
             try
@@ -107,7 +107,7 @@ namespace AuditSystem.API.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "admin")]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<ActionResult<User>> CreateUser(CreateUserRequest request)
         {
             if (!ModelState.IsValid)
@@ -141,7 +141,7 @@ namespace AuditSystem.API.Controllers
         }
 
         [HttpPut("{id:guid}")]
-        [Authorize(Roles = "admin,manager")]
+        [Authorize(Policy = "AdminOrManager")]
         public async Task<ActionResult<User>> UpdateUser(Guid id, UpdateUserRequest request)
         {
             if (id != request.UserId)
@@ -178,7 +178,7 @@ namespace AuditSystem.API.Controllers
         }
 
         [HttpPatch("{id:guid}/deactivate")]
-        [Authorize(Roles = "admin")]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<ActionResult> DeactivateUser(Guid id)
         {
             try

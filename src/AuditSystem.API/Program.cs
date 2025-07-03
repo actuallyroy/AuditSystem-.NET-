@@ -3,7 +3,9 @@ using AuditSystem.Domain.Services;
 using AuditSystem.Infrastructure.Data;
 using AuditSystem.Infrastructure.Repositories;
 using AuditSystem.Services;
+using AuditSystem.API.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -40,6 +42,7 @@ builder.Services.AddDbContext<AuditSystemDbContext>(options =>
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITemplateRepository, TemplateRepository>();
+builder.Services.AddScoped<IAssignmentRepository, AssignmentRepository>();
 builder.Services.AddScoped<IAuditRepository, AuditRepository>();
 builder.Services.AddScoped<IOrganisationRepository, OrganisationRepository>();
 builder.Services.AddScoped<IRepository<AuditSystem.Domain.Entities.OrganisationInvitation>, Repository<AuditSystem.Domain.Entities.OrganisationInvitation>>();
@@ -47,6 +50,7 @@ builder.Services.AddScoped<IRepository<AuditSystem.Domain.Entities.OrganisationI
 // Add services
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITemplateService, TemplateService>();
+builder.Services.AddScoped<IAssignmentService, AssignmentService>();
 // builder.Services.AddScoped<IAuditService, AuditService>();
 builder.Services.AddScoped<IOrganisationService, OrganisationService>();
 
@@ -81,6 +85,24 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ClockSkew = TimeSpan.Zero
         };
     });
+
+// Add custom authorization
+builder.Services.AddScoped<IAuthorizationHandler, CaseInsensitiveRoleHandler>();
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOrManager", policy =>
+        policy.Requirements.Add(new CaseInsensitiveRoleRequirement("admin", "manager")));
+    
+    options.AddPolicy("AdminOnly", policy =>
+        policy.Requirements.Add(new CaseInsensitiveRoleRequirement("admin")));
+    
+    options.AddPolicy("ManagerOnly", policy =>
+        policy.Requirements.Add(new CaseInsensitiveRoleRequirement("manager")));
+    
+    options.AddPolicy("AllRoles", policy =>
+        policy.Requirements.Add(new CaseInsensitiveRoleRequirement("admin", "manager", "auditor")));
+});
 
 // Add Swagger
 builder.Services.AddEndpointsApiExplorer();
