@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Retail-Execution-Audit-System\\AuditSystem-.NET-\\src\\AuditSystem.Domain\\AuditSystem.Domain.csproj": {}
+    "D:\\MyWorks\\Retail-Execution-Audit-System\\AuditSystem\\src\\AuditSystem.Domain\\AuditSystem.Domain.csproj": {}
   },
   "projects": {
-    "D:\\Retail-Execution-Audit-System\\AuditSystem-.NET-\\src\\AuditSystem.Domain\\AuditSystem.Domain.csproj": {
+    "D:\\MyWorks\\Retail-Execution-Audit-System\\AuditSystem\\src\\AuditSystem.Domain\\AuditSystem.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Retail-Execution-Audit-System\\AuditSystem-.NET-\\src\\AuditSystem.Domain\\AuditSystem.Domain.csproj",
+        "projectUniqueName": "D:\\MyWorks\\Retail-Execution-Audit-System\\AuditSystem\\src\\AuditSystem.Domain\\AuditSystem.Domain.csproj",
         "projectName": "AuditSystem.Domain",
-        "projectPath": "D:\\Retail-Execution-Audit-System\\AuditSystem-.NET-\\src\\AuditSystem.Domain\\AuditSystem.Domain.csproj",
-        "packagesPath": "C:\\Users\\npteg\\.nuget\\packages\\",
-        "outputPath": "D:\\Retail-Execution-Audit-System\\AuditSystem-.NET-\\src\\AuditSystem.Domain\\obj\\",
+        "projectPath": "D:\\MyWorks\\Retail-Execution-Audit-System\\AuditSystem\\src\\AuditSystem.Domain\\AuditSystem.Domain.csproj",
+        "packagesPath": "C:\\Users\\sunny\\.nuget\\packages\\",
+        "outputPath": "D:\\MyWorks\\Retail-Execution-Audit-System\\AuditSystem\\src\\AuditSystem.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\npteg\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\sunny\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"

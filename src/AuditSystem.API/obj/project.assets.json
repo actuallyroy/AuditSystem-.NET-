@@ -4019,19 +4019,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\npteg\\.nuget\\packages\\": {}
+    "C:\\Users\\sunny\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Retail-Execution-Audit-System\\AuditSystem-.NET-\\src\\AuditSystem.API\\AuditSystem.API.csproj",
+      "projectUniqueName": "D:\\MyWorks\\Retail-Execution-Audit-System\\AuditSystem\\src\\AuditSystem.API\\AuditSystem.API.csproj",
       "projectName": "AuditSystem.API",
-      "projectPath": "D:\\Retail-Execution-Audit-System\\AuditSystem-.NET-\\src\\AuditSystem.API\\AuditSystem.API.csproj",
-      "packagesPath": "C:\\Users\\npteg\\.nuget\\packages\\",
-      "outputPath": "D:\\Retail-Execution-Audit-System\\AuditSystem-.NET-\\src\\AuditSystem.API\\obj\\",
+      "projectPath": "D:\\MyWorks\\Retail-Execution-Audit-System\\AuditSystem\\src\\AuditSystem.API\\AuditSystem.API.csproj",
+      "packagesPath": "C:\\Users\\sunny\\.nuget\\packages\\",
+      "outputPath": "D:\\MyWorks\\Retail-Execution-Audit-System\\AuditSystem\\src\\AuditSystem.API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\npteg\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\sunny\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -4043,17 +4043,17 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "D:\\Retail-Execution-Audit-System\\AuditSystem-.NET-\\src\\AuditSystem.Common\\AuditSystem.Common.csproj": {
-              "projectPath": "D:\\Retail-Execution-Audit-System\\AuditSystem-.NET-\\src\\AuditSystem.Common\\AuditSystem.Common.csproj"
+            "D:\\MyWorks\\Retail-Execution-Audit-System\\AuditSystem\\src\\AuditSystem.Common\\AuditSystem.Common.csproj": {
+              "projectPath": "D:\\MyWorks\\Retail-Execution-Audit-System\\AuditSystem\\src\\AuditSystem.Common\\AuditSystem.Common.csproj"
             },
-            "D:\\Retail-Execution-Audit-System\\AuditSystem-.NET-\\src\\AuditSystem.Domain\\AuditSystem.Domain.csproj": {
-              "projectPath": "D:\\Retail-Execution-Audit-System\\AuditSystem-.NET-\\src\\AuditSystem.Domain\\AuditSystem.Domain.csproj"
+            "D:\\MyWorks\\Retail-Execution-Audit-System\\AuditSystem\\src\\AuditSystem.Domain\\AuditSystem.Domain.csproj": {
+              "projectPath": "D:\\MyWorks\\Retail-Execution-Audit-System\\AuditSystem\\src\\AuditSystem.Domain\\AuditSystem.Domain.csproj"
             },
-            "D:\\Retail-Execution-Audit-System\\AuditSystem-.NET-\\src\\AuditSystem.Infrastructure\\AuditSystem.Infrastructure.csproj": {
-              "projectPath": "D:\\Retail-Execution-Audit-System\\AuditSystem-.NET-\\src\\AuditSystem.Infrastructure\\AuditSystem.Infrastructure.csproj"
+            "D:\\MyWorks\\Retail-Execution-Audit-System\\AuditSystem\\src\\AuditSystem.Infrastructure\\AuditSystem.Infrastructure.csproj": {
+              "projectPath": "D:\\MyWorks\\Retail-Execution-Audit-System\\AuditSystem\\src\\AuditSystem.Infrastructure\\AuditSystem.Infrastructure.csproj"
             },
-            "D:\\Retail-Execution-Audit-System\\AuditSystem-.NET-\\src\\AuditSystem.Services\\AuditSystem.Services.csproj": {
-              "projectPath": "D:\\Retail-Execution-Audit-System\\AuditSystem-.NET-\\src\\AuditSystem.Services\\AuditSystem.Services.csproj"
+            "D:\\MyWorks\\Retail-Execution-Audit-System\\AuditSystem\\src\\AuditSystem.Services\\AuditSystem.Services.csproj": {
+              "projectPath": "D:\\MyWorks\\Retail-Execution-Audit-System\\AuditSystem\\src\\AuditSystem.Services\\AuditSystem.Services.csproj"
             }
           }
         }

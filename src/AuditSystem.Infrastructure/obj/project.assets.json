@@ -2962,19 +2962,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\npteg\\.nuget\\packages\\": {}
+    "C:\\Users\\sunny\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Retail-Execution-Audit-System\\AuditSystem-.NET-\\src\\AuditSystem.Infrastructure\\AuditSystem.Infrastructure.csproj",
+      "projectUniqueName": "D:\\MyWorks\\Retail-Execution-Audit-System\\AuditSystem\\src\\AuditSystem.Infrastructure\\AuditSystem.Infrastructure.csproj",
       "projectName": "AuditSystem.Infrastructure",
-      "projectPath": "D:\\Retail-Execution-Audit-System\\AuditSystem-.NET-\\src\\AuditSystem.Infrastructure\\AuditSystem.Infrastructure.csproj",
-      "packagesPath": "C:\\Users\\npteg\\.nuget\\packages\\",
-      "outputPath": "D:\\Retail-Execution-Audit-System\\AuditSystem-.NET-\\src\\AuditSystem.Infrastructure\\obj\\",
+      "projectPath": "D:\\MyWorks\\Retail-Execution-Audit-System\\AuditSystem\\src\\AuditSystem.Infrastructure\\AuditSystem.Infrastructure.csproj",
+      "packagesPath": "C:\\Users\\sunny\\.nuget\\packages\\",
+      "outputPath": "D:\\MyWorks\\Retail-Execution-Audit-System\\AuditSystem\\src\\AuditSystem.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\npteg\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\sunny\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -2986,8 +2986,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "D:\\Retail-Execution-Audit-System\\AuditSystem-.NET-\\src\\AuditSystem.Domain\\AuditSystem.Domain.csproj": {
-              "projectPath": "D:\\Retail-Execution-Audit-System\\AuditSystem-.NET-\\src\\AuditSystem.Domain\\AuditSystem.Domain.csproj"
+            "D:\\MyWorks\\Retail-Execution-Audit-System\\AuditSystem\\src\\AuditSystem.Domain\\AuditSystem.Domain.csproj": {
+              "projectPath": "D:\\MyWorks\\Retail-Execution-Audit-System\\AuditSystem\\src\\AuditSystem.Domain\\AuditSystem.Domain.csproj"
             }
           }
         }

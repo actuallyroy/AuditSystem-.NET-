@@ -8,19 +8,19 @@
     "net9.0": []
   },
   "packageFolders": {
-    "C:\\Users\\npteg\\.nuget\\packages\\": {}
+    "C:\\Users\\sunny\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Retail-Execution-Audit-System\\AuditSystem-.NET-\\src\\AuditSystem.Common\\AuditSystem.Common.csproj",
+      "projectUniqueName": "D:\\MyWorks\\Retail-Execution-Audit-System\\AuditSystem\\src\\AuditSystem.Common\\AuditSystem.Common.csproj",
       "projectName": "AuditSystem.Common",
-      "projectPath": "D:\\Retail-Execution-Audit-System\\AuditSystem-.NET-\\src\\AuditSystem.Common\\AuditSystem.Common.csproj",
-      "packagesPath": "C:\\Users\\npteg\\.nuget\\packages\\",
-      "outputPath": "D:\\Retail-Execution-Audit-System\\AuditSystem-.NET-\\src\\AuditSystem.Common\\obj\\",
+      "projectPath": "D:\\MyWorks\\Retail-Execution-Audit-System\\AuditSystem\\src\\AuditSystem.Common\\AuditSystem.Common.csproj",
+      "packagesPath": "C:\\Users\\sunny\\.nuget\\packages\\",
+      "outputPath": "D:\\MyWorks\\Retail-Execution-Audit-System\\AuditSystem\\src\\AuditSystem.Common\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\npteg\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\sunny\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
