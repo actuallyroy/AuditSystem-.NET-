@@ -63,6 +63,7 @@ CREATE TABLE audit (
     template_id UUID REFERENCES template(template_id) ON DELETE CASCADE,
     template_version INTEGER,
     auditor_id UUID REFERENCES users(user_id) ON DELETE SET NULL,
+    assignment_id UUID REFERENCES assignment(assignment_id) ON DELETE CASCADE NOT NULL,
     organisation_id UUID REFERENCES organisation(organisation_id),
     status TEXT CHECK (status IN ('in_progress', 'submitted', 'synced', 'approved', 'rejected', 'pending_review')) NOT NULL,
     start_time TIMESTAMPTZ,

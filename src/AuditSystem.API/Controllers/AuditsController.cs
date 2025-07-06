@@ -171,6 +171,10 @@ namespace AuditSystem.API.Controllers
                 var currentUserId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
                 var currentUserRole = User.FindFirstValue(ClaimTypes.Role) ?? "";
                 
+                // Check user roles
+                var isAdmin = currentUserRole.Equals("Administrator", StringComparison.OrdinalIgnoreCase);
+                var isManager = currentUserRole.Equals("Manager", StringComparison.OrdinalIgnoreCase);
+                
                 // Get organization ID from JWT claims instead of hardcoded value
                 var orgIdClaim = User.FindFirstValue("organisation_id");
                 if (string.IsNullOrEmpty(orgIdClaim))
@@ -178,33 +182,32 @@ namespace AuditSystem.API.Controllers
                 
                 var organisationId = Guid.Parse(orgIdClaim);
                 
-                Audit audit;
+                // Get the assignment to validate it exists and user has access
+                var assignment = await _assignmentService.GetAssignmentByIdAsync(createDto.AssignmentId);
+                if (assignment == null)
+                    return NotFound(new { message = "Assignment not found" });
 
-                if (createDto.AssignmentId.HasValue)
-                {
-                    // Convert assignment to audit
-                    JsonDocument storeInfo = null;
-                    JsonDocument location = null;
+                // Check if the current user is assigned to this assignment
+                if (assignment.AssignedToId != currentUserId && !isAdmin && !isManager)
+                    return Forbid();
 
-                    if (createDto.StoreInfo.HasValue)
-                        storeInfo = JsonDocument.Parse(createDto.StoreInfo.Value.GetRawText());
+                // Convert assignment to audit
+                JsonDocument storeInfo = null;
+                JsonDocument location = null;
 
-                    if (createDto.Location.HasValue)
-                        location = JsonDocument.Parse(createDto.Location.Value.GetRawText());
-                    
-                    audit = await _auditService.StartAuditFromAssignmentAsync(
-                        createDto.TemplateId, 
-                        currentUserId, 
-                        organisationId, 
-                        createDto.AssignmentId.Value, 
-                        storeInfo, 
-                        location);
-                }
-                else
-                {
-                    // Create new audit without assignment
-                    audit = await _auditService.StartAuditAsync(createDto.TemplateId, currentUserId, organisationId);
-                }
+                if (createDto.StoreInfo.HasValue)
+                    storeInfo = JsonDocument.Parse(createDto.StoreInfo.Value.GetRawText());
+
+                if (createDto.Location.HasValue)
+                    location = JsonDocument.Parse(createDto.Location.Value.GetRawText());
+                
+                var audit = await _auditService.StartAuditFromAssignmentAsync(
+                    createDto.TemplateId, 
+                    currentUserId, 
+                    organisationId, 
+                    createDto.AssignmentId, 
+                    storeInfo, 
+                    location);
 
                 // Set store information
                 if (!string.IsNullOrEmpty(createDto.StoreName) || !string.IsNullOrEmpty(createDto.StoreLocation))
@@ -438,6 +441,7 @@ namespace AuditSystem.API.Controllers
                 TemplateVersion = audit.TemplateVersion,
                 AuditorId = audit.AuditorId,
                 OrganisationId = audit.OrganisationId,
+                AssignmentId = audit.AssignmentId,
                 Status = audit.Status,
                 StartTime = audit.StartTime,
                 EndTime = audit.EndTime,
@@ -486,18 +490,8 @@ namespace AuditSystem.API.Controllers
                 rejectionReason = audit.ManagerNotes;
             }
             
-            // Try to find related assignment
-            Guid? assignmentId = null;
-            try
-            {
-                var assignments = await _assignmentService.GetAssignmentsByTemplateAsync(audit.TemplateId);
-                var relatedAssignment = assignments.FirstOrDefault(a => a.AssignedToId == audit.AuditorId);
-                assignmentId = relatedAssignment?.AssignmentId;
-            }
-            catch
-            {
-                // Ignore assignment lookup errors
-            }
+            // Get assignment ID from audit entity
+            Guid? assignmentId = audit.AssignmentId;
             
             return new AuditSummaryDto
             {

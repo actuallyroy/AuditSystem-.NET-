@@ -1,5 +1,6 @@
 using AuditSystem.Domain.Repositories;
 using AuditSystem.Domain.Services;
+using AuditSystem.Domain.Entities;
 using AuditSystem.Infrastructure.Data;
 using AuditSystem.Infrastructure.Repositories;
 using AuditSystem.Services;
@@ -9,9 +10,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using StackExchange.Redis;
 using System.Text;
 using System.Threading.RateLimiting;
 using System.Text.Json.Serialization;
@@ -22,7 +25,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddEnvironmentVariables();
 
 // Add logging with Serilog
-Log.Logger = new LoggerConfiguration()
+Serilog.Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Information()
     .WriteTo.Console()
     .WriteTo.File("logs/audit_system_.log", rollingInterval: RollingInterval.Day)
@@ -43,6 +46,33 @@ builder.Services.AddDbContext<AuditSystemDbContext>(options =>
     options.EnableSensitiveDataLogging(builder.Environment.IsDevelopment());
 });
 
+// Add Redis Cache
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration.GetConnectionString("Redis");
+    options.InstanceName = "AuditSystem";
+});
+
+// Add Redis connection multiplexer with error handling
+builder.Services.AddSingleton<IConnectionMultiplexer>(provider =>
+{
+    var connectionString = builder.Configuration.GetConnectionString("Redis");
+    var logger = provider.GetRequiredService<ILogger<Program>>();
+    
+    try
+    {
+        var redis = ConnectionMultiplexer.Connect(connectionString);
+        logger.LogInformation("Redis connection established successfully");
+        return redis;
+    }
+    catch (Exception ex)
+    {
+        logger.LogWarning("Failed to connect to Redis: {Message}. Application will continue without caching.", ex.Message);
+        // Return a connection multiplexer that won't fail the application startup
+        return ConnectionMultiplexer.Connect("audit_redis:6379,password=redis_password_123,abortConnect=false,connectTimeout=5000,syncTimeout=5000");
+    }
+});
+
 // Add repositories
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -52,12 +82,78 @@ builder.Services.AddScoped<IAuditRepository, AuditRepository>();
 builder.Services.AddScoped<IOrganisationRepository, OrganisationRepository>();
 builder.Services.AddScoped<IRepository<AuditSystem.Domain.Entities.OrganisationInvitation>, Repository<AuditSystem.Domain.Entities.OrganisationInvitation>>();
 
-// Add services
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<ITemplateService, TemplateService>();
+// Add cache service with fallback
+builder.Services.AddScoped<ICacheService>(provider =>
+{
+    var logger = provider.GetRequiredService<ILogger<Program>>();
+    var redisConnection = provider.GetRequiredService<IConnectionMultiplexer>();
+    
+    try
+    {
+        // Test if Redis is actually working
+        var database = redisConnection.GetDatabase();
+        database.Ping();
+        
+        logger.LogInformation("Using Redis cache service");
+        var distributedCache = provider.GetRequiredService<IDistributedCache>();
+        var redisLogger = provider.GetRequiredService<ILogger<RedisCacheService>>();
+        return new RedisCacheService(distributedCache, redisConnection, redisLogger);
+    }
+    catch (Exception ex)
+    {
+        logger.LogWarning("Redis not available, using null cache service: {Message}", ex.Message);
+        var nullCacheLogger = provider.GetRequiredService<ILogger<NullCacheService>>();
+        return new NullCacheService(nullCacheLogger);
+    }
+});
+
+// Register original services
+builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<TemplateService>();
+builder.Services.AddScoped<AssignmentService>();
+builder.Services.AddScoped<AuditService>();
+builder.Services.AddScoped<OrganisationService>();
+
+// Register notification services
+builder.Services.AddScoped<INotificationService, NotificationService>();
+builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<ISmsService, SmsService>();
+builder.Services.AddScoped<IPushNotificationService, PushNotificationService>();
+builder.Services.AddScoped<IQueueService, NullQueueService>();
+
+// Configure notification queue settings
+builder.Services.Configure<NotificationQueueConfig>(builder.Configuration.GetSection("NotificationQueue"));
+
+// Register cached services as primary implementations
+builder.Services.AddScoped<IUserService>(provider =>
+{
+    var originalService = provider.GetRequiredService<UserService>();
+    var cacheService = provider.GetRequiredService<ICacheService>();
+    var logger = provider.GetRequiredService<ILogger<CachedUserService>>();
+    return new CachedUserService(originalService, cacheService, logger);
+});
+
+builder.Services.AddScoped<ITemplateService>(provider =>
+{
+    var originalService = provider.GetRequiredService<TemplateService>();
+    var cacheService = provider.GetRequiredService<ICacheService>();
+    var logger = provider.GetRequiredService<ILogger<CachedTemplateService>>();
+    return new CachedTemplateService(originalService, cacheService, logger);
+});
+
 builder.Services.AddScoped<IAssignmentService, AssignmentService>();
 builder.Services.AddScoped<IAuditService, AuditService>();
-builder.Services.AddScoped<IOrganisationService, OrganisationService>();
+
+builder.Services.AddScoped<IOrganisationService>(provider =>
+{
+    var originalService = provider.GetRequiredService<OrganisationService>();
+    var cacheService = provider.GetRequiredService<ICacheService>();
+    var logger = provider.GetRequiredService<ILogger<CachedOrganisationService>>();
+    return new CachedOrganisationService(originalService, cacheService, logger);
+});
+
+builder.Services.AddScoped<DashboardCacheService>();
 
 // Add controllers with improved JSON options
 builder.Services.AddControllers()

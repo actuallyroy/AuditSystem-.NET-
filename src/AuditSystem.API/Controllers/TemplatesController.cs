@@ -1,6 +1,7 @@
 using AuditSystem.Domain.Entities;
 using AuditSystem.Domain.Services;
 using AuditSystem.API.Models;
+using AuditSystem.API.Attributes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -24,6 +25,7 @@ namespace AuditSystem.API.Controllers
         
         [HttpGet]
         [Authorize(Policy = "AllRoles")]
+        [CacheResponse(durationInMinutes: 10, varyByUser: true)]
         public async Task<ActionResult<IEnumerable<TemplateResponseDto>>> GetTemplates()
         {
             try
@@ -44,6 +46,7 @@ namespace AuditSystem.API.Controllers
         
         [HttpGet("{id}")]
         [Authorize(Policy = "AllRoles")]
+        [CacheResponse(durationInMinutes: 30, varyByUser: true)]
         public async Task<ActionResult<TemplateResponseDto>> GetTemplate(Guid id)
         {
             try
@@ -102,6 +105,7 @@ namespace AuditSystem.API.Controllers
         
         [HttpGet("published")]
         [Authorize(Policy = "AllRoles")]
+        [CacheResponse(durationInMinutes: 15, varyByUser: true)]
         public async Task<ActionResult<IEnumerable<TemplateResponseDto>>> GetPublishedTemplates()
         {
             try

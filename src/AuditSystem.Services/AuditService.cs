@@ -63,7 +63,7 @@ namespace AuditSystem.Services
             return await _auditRepository.GetAuditsByDateRangeAsync(startDate, endDate);
         }
 
-        public async Task<Audit> StartAuditAsync(Guid templateId, Guid auditorId, Guid organisationId)
+        public async Task<Audit> StartAuditAsync(Guid templateId, Guid auditorId, Guid organisationId, Guid assignmentId)
         {
             var template = await _templateRepository.GetByIdAsync(templateId);
             if (template == null)
@@ -72,6 +72,10 @@ namespace AuditSystem.Services
             var auditor = await _userRepository.GetByIdAsync(auditorId);
             if (auditor == null)
                 throw new ArgumentException("Auditor not found");
+
+            var assignment = await _assignmentRepository.GetByIdAsync(assignmentId);
+            if (assignment == null)
+                throw new ArgumentException("Assignment not found");
 
             // Temporarily comment out organization validation to test
             // var organisation = await _organisationRepository.GetByIdAsync(organisationId);
@@ -85,6 +89,7 @@ namespace AuditSystem.Services
                 TemplateVersion = template?.Version,
                 AuditorId = auditorId,
                 OrganisationId = organisationId,
+                AssignmentId = assignmentId,
                 Status = "in_progress",
                 StartTime = DateTime.UtcNow,
                 CreatedAt = DateTime.UtcNow,
@@ -134,9 +139,10 @@ namespace AuditSystem.Services
                     TemplateVersion = template?.Version,
                     AuditorId = auditorId,
                     OrganisationId = organisationId,
+                    AssignmentId = assignmentId,
                     Status = "in_progress",
-                    // StartTime = DateTime.Parse("2025-07-05 16:19:51.39876+00"),
-                    // CreatedAt = DateTime.Parse("2025-07-05 16:19:51.39876+00"),
+                    // StartTime = DateTime.Parse("2025-07-05 16:19:51.39876+00"), // Ignore this for now
+                    // CreatedAt = DateTime.Parse("2025-07-05 16:19:51.39876+00"), // Ignore this for now
                     SyncFlag = false,
                     IsFlagged = false,
                     CriticalIssues = 0,
@@ -148,8 +154,6 @@ namespace AuditSystem.Services
                     ManagerNotes = null
                 };
 
-                // Ensure all DateTime values are UTC before saving
-                // EnsureAuditDateTimesAreUtc(audit);
                 
                 await _auditRepository.AddAsync(audit);
                 await _auditRepository.SaveChangesAsync();

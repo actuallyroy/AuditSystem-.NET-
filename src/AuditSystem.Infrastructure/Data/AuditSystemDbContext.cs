@@ -19,6 +19,8 @@ namespace AuditSystem.Infrastructure.Data
         public DbSet<Report> Reports { get; set; }
         public DbSet<Log> Logs { get; set; }
         public DbSet<OrganisationInvitation> OrganisationInvitations { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
+        public DbSet<NotificationTemplate> NotificationTemplates { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -33,6 +35,8 @@ namespace AuditSystem.Infrastructure.Data
             ConfigureReport(modelBuilder);
             ConfigureLog(modelBuilder);
             ConfigureOrganisationInvitation(modelBuilder);
+            ConfigureNotification(modelBuilder);
+            ConfigureNotificationTemplate(modelBuilder);
         }
 
         private void ConfigureOrganisation(ModelBuilder modelBuilder)
@@ -269,6 +273,10 @@ namespace AuditSystem.Infrastructure.Data
                 entity.Property(e => e.AuditorId)
                     .HasColumnName("auditor_id");
 
+                entity.Property(e => e.AssignmentId)
+                    .HasColumnName("assignment_id")
+                    .IsRequired();
+
                 entity.Property(e => e.OrganisationId)
                     .HasColumnName("organisation_id");
 
@@ -334,6 +342,11 @@ namespace AuditSystem.Infrastructure.Data
                 entity.HasOne(d => d.Organisation)
                     .WithMany(p => p.Audits)
                     .HasForeignKey(d => d.OrganisationId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne(d => d.Assignment)
+                    .WithMany()
+                    .HasForeignKey(d => d.AssignmentId)
                     .OnDelete(DeleteBehavior.Restrict);
             });
         }
@@ -474,6 +487,144 @@ namespace AuditSystem.Infrastructure.Data
                     .HasForeignKey(d => d.UserId);
 
                 entity.HasIndex(e => e.Token)
+                    .IsUnique();
+            });
+        }
+
+        private void ConfigureNotification(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Notification>(entity =>
+            {
+                entity.ToTable("notification");
+                entity.HasKey(e => e.NotificationId);
+
+                entity.Property(e => e.NotificationId)
+                    .HasColumnName("notification_id")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.UserId)
+                    .HasColumnName("user_id");
+
+                entity.Property(e => e.OrganisationId)
+                    .HasColumnName("organisation_id");
+
+                entity.Property(e => e.Type)
+                    .HasColumnName("type")
+                    .IsRequired();
+
+                entity.Property(e => e.Title)
+                    .HasColumnName("title")
+                    .IsRequired();
+
+                entity.Property(e => e.Message)
+                    .HasColumnName("message")
+                    .IsRequired();
+
+                entity.Property(e => e.Priority)
+                    .HasColumnName("priority")
+                    .IsRequired();
+
+                entity.Property(e => e.IsRead)
+                    .HasColumnName("is_read")
+                    .HasDefaultValue(false);
+
+                entity.Property(e => e.ReadAt)
+                    .HasColumnName("read_at");
+
+                entity.Property(e => e.Channel)
+                    .HasColumnName("channel")
+                    .IsRequired();
+
+                entity.Property(e => e.Status)
+                    .HasColumnName("status")
+                    .IsRequired();
+
+                entity.Property(e => e.RetryCount)
+                    .HasColumnName("retry_count")
+                    .HasDefaultValue(0);
+
+                entity.Property(e => e.SentAt)
+                    .HasColumnName("sent_at");
+
+                entity.Property(e => e.DeliveredAt)
+                    .HasColumnName("delivered_at");
+
+                entity.Property(e => e.ErrorMessage)
+                    .HasColumnName("error_message");
+
+                entity.Property(e => e.Metadata)
+                    .HasColumnName("metadata")
+                    .HasColumnType("jsonb");
+
+                entity.Property(e => e.CreatedAt)
+                    .HasColumnName("created_at")
+                    .HasDefaultValueSql("NOW()");
+
+                entity.Property(e => e.ExpiresAt)
+                    .HasColumnName("expires_at");
+
+                entity.HasOne(d => d.User)
+                    .WithMany()
+                    .HasForeignKey(d => d.UserId);
+
+                entity.HasOne(d => d.Organisation)
+                    .WithMany()
+                    .HasForeignKey(d => d.OrganisationId);
+
+                entity.HasIndex(e => e.UserId);
+                entity.HasIndex(e => e.OrganisationId);
+                entity.HasIndex(e => e.Status);
+                entity.HasIndex(e => e.CreatedAt);
+            });
+        }
+
+        private void ConfigureNotificationTemplate(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<NotificationTemplate>(entity =>
+            {
+                entity.ToTable("notification_template");
+                entity.HasKey(e => e.TemplateId);
+
+                entity.Property(e => e.TemplateId)
+                    .HasColumnName("template_id")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.Name)
+                    .HasColumnName("name")
+                    .IsRequired();
+
+                entity.Property(e => e.Type)
+                    .HasColumnName("type")
+                    .IsRequired();
+
+                entity.Property(e => e.Channel)
+                    .HasColumnName("channel")
+                    .IsRequired();
+
+                entity.Property(e => e.Subject)
+                    .HasColumnName("subject")
+                    .IsRequired();
+
+                entity.Property(e => e.Body)
+                    .HasColumnName("body")
+                    .IsRequired();
+
+                entity.Property(e => e.IsActive)
+                    .HasColumnName("is_active")
+                    .HasDefaultValue(true);
+
+                entity.Property(e => e.Placeholders)
+                    .HasColumnName("placeholders")
+                    .HasColumnType("jsonb");
+
+                entity.Property(e => e.CreatedAt)
+                    .HasColumnName("created_at")
+                    .HasDefaultValueSql("NOW()");
+
+                entity.Property(e => e.UpdatedAt)
+                    .HasColumnName("updated_at");
+
+                entity.HasIndex(e => e.Name)
                     .IsUnique();
             });
         }

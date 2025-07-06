@@ -99,7 +99,7 @@ services:
       - JWT__Secret=YourProductionSecretKeyHereMakeSureItIsAtLeast32CharactersLongAndSecure
       - JWT__Issuer=AuditSystem
       - JWT__Audience=AuditSystemClients
-      - Redis__ConnectionString=audit_redis:6379,password=redis_password_123
+      - Redis__ConnectionString=audit_redis:6379,password=redis_password_123,abortConnect=false
       - RabbitMQ__HostName=rabbitmq
       - RabbitMQ__UserName=audit_user
       - RabbitMQ__Password=rabbitmq_password_123

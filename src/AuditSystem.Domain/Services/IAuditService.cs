@@ -14,7 +14,7 @@ namespace AuditSystem.Domain.Services
         Task<IEnumerable<Audit>> GetAuditsByOrganisationAsync(Guid organisationId);
         Task<IEnumerable<Audit>> GetAuditsByTemplateAsync(Guid templateId);
         Task<IEnumerable<Audit>> GetAuditsByDateRangeAsync(DateTime startDate, DateTime endDate);
-        Task<Audit> StartAuditAsync(Guid templateId, Guid auditorId, Guid organisationId);
+        Task<Audit> StartAuditAsync(Guid templateId, Guid auditorId, Guid organisationId, Guid assignmentId);
         Task<Audit> StartAuditFromAssignmentAsync(Guid templateId, Guid auditorId, Guid organisationId, Guid assignmentId, JsonDocument? storeInfo = null, JsonDocument? location = null);
         Task<Audit> SubmitAuditAsync(Audit audit);
         Task<bool> SyncAuditAsync(Guid auditId);

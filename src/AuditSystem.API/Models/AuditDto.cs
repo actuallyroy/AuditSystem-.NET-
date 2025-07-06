@@ -10,9 +10,10 @@ namespace AuditSystem.API.Models
         public Guid TemplateId { get; set; }
         
         /// <summary>
-        /// Assignment ID - if provided, the assignment will be converted to an audit
+        /// Assignment ID - required to create an audit
         /// </summary>
-        public Guid? AssignmentId { get; set; }
+        [Required]
+        public Guid AssignmentId { get; set; }
         
         /// <summary>
         /// Store name
@@ -111,6 +112,7 @@ namespace AuditSystem.API.Models
         public int? TemplateVersion { get; set; }
         public Guid AuditorId { get; set; }
         public Guid OrganisationId { get; set; }
+        public Guid AssignmentId { get; set; }
         public string? Status { get; set; }
         public DateTime? StartTime { get; set; }
         public DateTime? EndTime { get; set; }
