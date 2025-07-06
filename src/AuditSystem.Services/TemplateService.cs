@@ -21,7 +21,9 @@ namespace AuditSystem.Services
             if (templateId == Guid.Empty)
                 throw new ArgumentException("Template ID cannot be empty", nameof(templateId));
                 
-            return await _templateRepository.GetByIdAsync(templateId);
+            var template = await _templateRepository.GetByIdAsync(templateId);
+            EnsureTemplateDateTimesAreUtc(template);
+            return template;
         }
 
         public async Task<IEnumerable<Template>> GetAllTemplatesAsync()
@@ -32,6 +34,14 @@ namespace AuditSystem.Services
         public async Task<IEnumerable<Template>> GetPublishedTemplatesAsync()
         {
             return await _templateRepository.GetPublishedTemplatesAsync();
+        }
+
+        public async Task<IEnumerable<Template>> GetPublishedTemplatesAsync(Guid userId)
+        {
+            if (userId == Guid.Empty)
+                throw new ArgumentException("User ID cannot be empty", nameof(userId));
+                
+            return await _templateRepository.GetPublishedTemplatesAsync(userId);
         }
 
         public async Task<IEnumerable<Template>> GetTemplatesByUserAsync(Guid userId)
@@ -50,12 +60,29 @@ namespace AuditSystem.Services
             return await _templateRepository.GetTemplatesByCategoryAsync(category);
         }
 
+        public async Task<IEnumerable<Template>> GetTemplatesByCategoryAsync(string category, Guid userId)
+        {
+            if (string.IsNullOrWhiteSpace(category))
+                throw new ArgumentException("Category cannot be empty", nameof(category));
+                
+            if (userId == Guid.Empty)
+                throw new ArgumentException("User ID cannot be empty", nameof(userId));
+                
+            return await _templateRepository.GetTemplatesByCategoryAsync(category, userId);
+        }
+
         public async Task<Template> CreateTemplateAsync(Template template)
         {
             if (template == null)
                 throw new ArgumentNullException(nameof(template));
 
             ValidateTemplate(template);
+
+            // Check if template with same name already exists for this user
+            if (await _templateRepository.TemplateNameExistsAsync(template.Name, template.CreatedById))
+            {
+                throw new InvalidOperationException($"A template with the name '{template.Name}' already exists. Please choose a different name.");
+            }
 
             // Set initial values for new template
             template.TemplateId = Guid.NewGuid();
@@ -77,6 +104,7 @@ namespace AuditSystem.Services
             ValidateTemplate(template);
 
             var existingTemplate = await _templateRepository.GetByIdAsync(template.TemplateId);
+            EnsureTemplateDateTimesAreUtc(existingTemplate);
             if (existingTemplate == null)
                 throw new InvalidOperationException($"Template with ID {template.TemplateId} not found");
 
@@ -101,6 +129,7 @@ namespace AuditSystem.Services
                 throw new ArgumentException("Template ID cannot be empty", nameof(templateId));
                 
             var template = await _templateRepository.GetByIdAsync(templateId);
+            EnsureTemplateDateTimesAreUtc(template);
             if (template == null)
                 throw new InvalidOperationException($"Template with ID {templateId} not found");
 
@@ -123,6 +152,7 @@ namespace AuditSystem.Services
                 throw new ArgumentNullException(nameof(updatedTemplate));
                 
             var currentTemplate = await _templateRepository.GetByIdAsync(templateId);
+            EnsureTemplateDateTimesAreUtc(currentTemplate);
             if (currentTemplate == null)
                 throw new InvalidOperationException($"Template with ID {templateId} not found");
 
@@ -158,6 +188,7 @@ namespace AuditSystem.Services
                 throw new ArgumentException("Template ID cannot be empty", nameof(templateId));
                 
             var template = await _templateRepository.GetByIdAsync(templateId);
+            EnsureTemplateDateTimesAreUtc(template);
             if (template == null)
                 return false;
 
@@ -193,6 +224,17 @@ namespace AuditSystem.Services
             return await _templateRepository.GetAssignedTemplatesAsync(auditorId);
         }
         
+        public async Task<bool> TemplateNameExistsAsync(string name, Guid createdById)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+                throw new ArgumentException("Template name cannot be empty", nameof(name));
+                
+            if (createdById == Guid.Empty)
+                throw new ArgumentException("Created By ID cannot be empty", nameof(createdById));
+                
+            return await _templateRepository.TemplateNameExistsAsync(name, createdById);
+        }
+        
         private void ValidateTemplate(Template template)
         {
             if (string.IsNullOrWhiteSpace(template.Name))
@@ -221,6 +263,17 @@ namespace AuditSystem.Services
                 
             if (template.ScoringRules == null)
                 throw new InvalidOperationException("Scoring rules are required for publishing");
+        }
+
+        private static void EnsureTemplateDateTimesAreUtc(Template template)
+        {
+            if (template == null) return;
+            if (template.ValidFrom.HasValue && template.ValidFrom.Value.Kind != DateTimeKind.Utc)
+                template.ValidFrom = DateTime.SpecifyKind(template.ValidFrom.Value, DateTimeKind.Utc);
+            if (template.ValidTo.HasValue && template.ValidTo.Value.Kind != DateTimeKind.Utc)
+                template.ValidTo = DateTime.SpecifyKind(template.ValidTo.Value, DateTimeKind.Utc);
+            if (template.CreatedAt.Kind != DateTimeKind.Utc)
+                template.CreatedAt = DateTime.SpecifyKind(template.CreatedAt, DateTimeKind.Utc);
         }
     }
 }

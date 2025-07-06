@@ -4,6 +4,7 @@ using AuditSystem.Infrastructure.Data;
 using AuditSystem.Infrastructure.Repositories;
 using AuditSystem.Services;
 using AuditSystem.API.Authorization;
+using AuditSystem.API.SwaggerSchemaFilters;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.RateLimiting;
@@ -36,6 +37,10 @@ builder.Services.AddDbContext<AuditSystemDbContext>(options =>
     {
         npgsqlOptions.EnableRetryOnFailure();
     });
+    
+    // Configure JSON handling for PostgreSQL
+    options.LogTo(Console.WriteLine, LogLevel.Information);
+    options.EnableSensitiveDataLogging(builder.Environment.IsDevelopment());
 });
 
 // Add repositories
@@ -51,7 +56,7 @@ builder.Services.AddScoped<IRepository<AuditSystem.Domain.Entities.OrganisationI
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITemplateService, TemplateService>();
 builder.Services.AddScoped<IAssignmentService, AssignmentService>();
-// builder.Services.AddScoped<IAuditService, AuditService>();
+builder.Services.AddScoped<IAuditService, AuditService>();
 builder.Services.AddScoped<IOrganisationService, OrganisationService>();
 
 // Add controllers with improved JSON options
@@ -101,7 +106,7 @@ builder.Services.AddAuthorization(options =>
         policy.Requirements.Add(new CaseInsensitiveRoleRequirement("manager")));
     
     options.AddPolicy("AllRoles", policy =>
-        policy.Requirements.Add(new CaseInsensitiveRoleRequirement("admin", "manager", "auditor")));
+        policy.Requirements.Add(new CaseInsensitiveRoleRequirement("admin", "manager", "supervisor", "auditor")));
 });
 
 // Add Swagger
@@ -140,6 +145,9 @@ builder.Services.AddSwaggerGen(c =>
             new string[] {}
         }
     });
+
+    // Add custom schema filter for JsonElement types
+    c.SchemaFilter<JsonElementSchemaFilter>();
 });
 
 // Add CORS

@@ -13,7 +13,7 @@ CREATE TABLE organisation (
 -- 2. USERS
 CREATE TABLE users (
     user_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    organisation_id UUID REFERENCES organisation(organisation_id),
+    organisation_id UUID REFERENCES organisation(organisation_id) ON DELETE CASCADE,
     username TEXT UNIQUE NOT NULL,
     first_name TEXT NOT NULL,
     last_name TEXT NOT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE template (
     scoring_rules JSONB,
     valid_from DATE,
     valid_to DATE,
-    created_by UUID REFERENCES users(user_id),
+    created_by UUID REFERENCES users(user_id) ON DELETE SET NULL,
     is_published BOOLEAN DEFAULT FALSE,
     version INTEGER DEFAULT 1,
     created_at TIMESTAMPTZ DEFAULT NOW()
@@ -45,9 +45,9 @@ CREATE TABLE template (
 -- 4. ASSIGNMENT
 CREATE TABLE assignment (
     assignment_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    template_id UUID REFERENCES template(template_id),
-    assigned_to UUID REFERENCES users(user_id),
-    assigned_by UUID REFERENCES users(user_id),
+    template_id UUID REFERENCES template(template_id) ON DELETE CASCADE,
+    assigned_to UUID REFERENCES users(user_id) ON DELETE SET NULL,
+    assigned_by UUID REFERENCES users(user_id) ON DELETE SET NULL,
     organisation_id UUID REFERENCES organisation(organisation_id),
     store_info JSONB,
     due_date DATE,
@@ -60,11 +60,11 @@ CREATE TABLE assignment (
 -- 5. AUDIT
 CREATE TABLE audit (
     audit_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    template_id UUID REFERENCES template(template_id),
+    template_id UUID REFERENCES template(template_id) ON DELETE CASCADE,
     template_version INTEGER,
-    auditor_id UUID REFERENCES users(user_id),
+    auditor_id UUID REFERENCES users(user_id) ON DELETE SET NULL,
     organisation_id UUID REFERENCES organisation(organisation_id),
-    status TEXT CHECK (status IN ('in_progress', 'submitted', 'synced')) NOT NULL,
+    status TEXT CHECK (status IN ('in_progress', 'submitted', 'synced', 'approved', 'rejected', 'pending_review')) NOT NULL,
     start_time TIMESTAMPTZ,
     end_time TIMESTAMPTZ,
     store_info JSONB,
@@ -82,7 +82,7 @@ CREATE TABLE audit (
 -- 6. REPORT
 CREATE TABLE report (
     report_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    generated_by UUID REFERENCES users(user_id),
+    generated_by UUID REFERENCES users(user_id) ON DELETE SET NULL,
     name TEXT,
     report_type TEXT,
     format TEXT CHECK (format IN ('pdf', 'xlsx', 'json')),
@@ -95,7 +95,7 @@ CREATE TABLE report (
 -- 7. LOG
 CREATE TABLE log (
     log_id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    user_id UUID REFERENCES users(user_id),
+    user_id UUID REFERENCES users(user_id) ON DELETE SET NULL,
     action TEXT,
     entity_type TEXT,
     entity_id UUID,
@@ -108,11 +108,11 @@ CREATE TABLE log (
 -- Create organisation_invitation table
 CREATE TABLE IF NOT EXISTS organisation_invitation (
     invitation_id UUID PRIMARY KEY,
-    organisation_id UUID NOT NULL REFERENCES organisation(organisation_id),
+    organisation_id UUID NOT NULL REFERENCES organisation(organisation_id) ON DELETE CASCADE,
     email VARCHAR(255) NOT NULL,
     token VARCHAR(100) NOT NULL UNIQUE,
     role VARCHAR(50),
-    user_id UUID REFERENCES users(user_id),
+    user_id UUID REFERENCES users(user_id) ON DELETE SET NULL,
     created_at TIMESTAMP DEFAULT NOW(),
     expires_at TIMESTAMP NOT NULL,
     status VARCHAR(20) NOT NULL

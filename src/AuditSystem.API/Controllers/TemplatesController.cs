@@ -23,16 +23,16 @@ namespace AuditSystem.API.Controllers
         }
         
         [HttpGet]
+        [Authorize(Policy = "AllRoles")]
         public async Task<ActionResult<IEnumerable<TemplateResponseDto>>> GetTemplates()
         {
             try
             {
-                // Get current user's role and ID for proper access filtering
-                var currentUserRole = User.FindFirstValue(ClaimTypes.Role) ?? "Auditor"; // Default to most restricted role
+                // Get current user's ID
                 var currentUserId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
                 
-                // Get templates based on user role
-                var templates = await _templateService.GetTemplatesByRoleAsync(currentUserRole, currentUserId);
+                // Only return templates created by the requesting user
+                var templates = await _templateService.GetTemplatesByUserAsync(currentUserId);
                 var templateDtos = templates.Select(t => ConvertToResponseDto(t)).ToList();
                 return Ok(templateDtos);
             }
@@ -43,6 +43,7 @@ namespace AuditSystem.API.Controllers
         }
         
         [HttpGet("{id}")]
+        [Authorize(Policy = "AllRoles")]
         public async Task<ActionResult<TemplateResponseDto>> GetTemplate(Guid id)
         {
             try
@@ -100,13 +101,28 @@ namespace AuditSystem.API.Controllers
         }
         
         [HttpGet("published")]
+        [Authorize(Policy = "AllRoles")]
         public async Task<ActionResult<IEnumerable<TemplateResponseDto>>> GetPublishedTemplates()
         {
             try
             {
-                var templates = await _templateService.GetPublishedTemplatesAsync();
-                var templateDtos = templates.Select(t => ConvertToResponseDto(t)).ToList();
-                return Ok(templateDtos);
+                var currentUserId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                var currentUserRole = User.FindFirstValue(ClaimTypes.Role) ?? "";
+                
+                // Admin can see all published templates
+                if (currentUserRole.Equals("Administrator", StringComparison.OrdinalIgnoreCase))
+                {
+                    var templates = await _templateService.GetPublishedTemplatesAsync();
+                    var templateDtos = templates.Select(t => ConvertToResponseDto(t)).ToList();
+                    return Ok(templateDtos);
+                }
+                else
+                {
+                    // Other roles see only published templates from their organization
+                    var templates = await _templateService.GetPublishedTemplatesAsync(currentUserId);
+                    var templateDtos = templates.Select(t => ConvertToResponseDto(t)).ToList();
+                    return Ok(templateDtos);
+                }
             }
             catch (Exception ex)
             {
@@ -115,6 +131,7 @@ namespace AuditSystem.API.Controllers
         }
         
         [HttpGet("user/{userId}")]
+        [Authorize(Policy = "AdminOrManager")]
         public async Task<ActionResult<IEnumerable<TemplateResponseDto>>> GetTemplatesByUser(Guid userId)
         {
             try
@@ -139,13 +156,28 @@ namespace AuditSystem.API.Controllers
         }
         
         [HttpGet("category/{category}")]
+        [Authorize(Policy = "AllRoles")]
         public async Task<ActionResult<IEnumerable<TemplateResponseDto>>> GetTemplatesByCategory(string category)
         {
             try
             {
-                var templates = await _templateService.GetTemplatesByCategoryAsync(category);
-                var templateDtos = templates.Select(t => ConvertToResponseDto(t)).ToList();
-                return Ok(templateDtos);
+                var currentUserId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                var currentUserRole = User.FindFirstValue(ClaimTypes.Role) ?? "";
+                
+                // Admin can see all templates by category
+                if (currentUserRole.Equals("Administrator", StringComparison.OrdinalIgnoreCase))
+                {
+                    var templates = await _templateService.GetTemplatesByCategoryAsync(category);
+                    var templateDtos = templates.Select(t => ConvertToResponseDto(t)).ToList();
+                    return Ok(templateDtos);
+                }
+                else
+                {
+                    // Other roles see only templates by category from their organization
+                    var templates = await _templateService.GetTemplatesByCategoryAsync(category, currentUserId);
+                    var templateDtos = templates.Select(t => ConvertToResponseDto(t)).ToList();
+                    return Ok(templateDtos);
+                }
             }
             catch (Exception ex)
             {
@@ -154,7 +186,7 @@ namespace AuditSystem.API.Controllers
         }
         
         [HttpGet("assigned")]
-        [Authorize(Roles = "Auditor,Supervisor,Manager,Administrator")]
+        [Authorize(Policy = "AllRoles")]
         public async Task<ActionResult<IEnumerable<TemplateResponseDto>>> GetAssignedTemplates()
         {
             try
@@ -171,7 +203,7 @@ namespace AuditSystem.API.Controllers
         }
         
         [HttpPost]
-        [Authorize(Roles = "Manager,Administrator")]
+        [Authorize(Policy = "AdminOrManager")]
         public async Task<ActionResult<TemplateResponseDto>> CreateTemplate(CreateTemplateDto templateDto)
         {
             if (templateDto == null)
@@ -185,8 +217,8 @@ namespace AuditSystem.API.Controllers
                     Name = templateDto.Name,
                     Description = templateDto.Description,
                     Category = templateDto.Category,
-                    Questions = string.IsNullOrEmpty(templateDto.Questions) ? null : JsonDocument.Parse(templateDto.Questions),
-                    ScoringRules = string.IsNullOrEmpty(templateDto.ScoringRules) ? null : JsonDocument.Parse(templateDto.ScoringRules),
+                    Questions = templateDto.Questions.HasValue ? JsonDocument.Parse(templateDto.Questions.Value.GetRawText()) : null,
+                    ScoringRules = templateDto.ScoringRules.HasValue ? JsonDocument.Parse(templateDto.ScoringRules.Value.GetRawText()) : null,
                     ValidFrom = templateDto.ValidFrom.HasValue ? DateTime.SpecifyKind(templateDto.ValidFrom.Value, DateTimeKind.Utc) : null,
                     ValidTo = templateDto.ValidTo.HasValue ? DateTime.SpecifyKind(templateDto.ValidTo.Value, DateTimeKind.Utc) : null,
                     CreatedById = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier))
@@ -200,13 +232,9 @@ namespace AuditSystem.API.Controllers
                     ConvertToResponseDto(createdTemplate)
                 );
             }
-            catch (ArgumentException ex)
+            catch (JsonException ex)
             {
-                return BadRequest(new { message = ex.Message });
-            }
-            catch (InvalidOperationException ex)
-            {
-                return BadRequest(new { message = ex.Message });
+                return BadRequest(new { message = $"Invalid JSON format: {ex.Message}" });
             }
             catch (Exception ex)
             {
@@ -215,7 +243,7 @@ namespace AuditSystem.API.Controllers
         }
         
         [HttpPut("{id}")]
-        [Authorize(Roles = "Manager,Administrator")]
+        [Authorize(Policy = "AdminOrManager")]
         public async Task<ActionResult<TemplateResponseDto>> UpdateTemplate(Guid id, UpdateTemplateDto updateDto)
         {
             if (updateDto == null)
@@ -241,11 +269,11 @@ namespace AuditSystem.API.Controllers
                 existingTemplate.Description = updateDto.Description ?? existingTemplate.Description;
                 existingTemplate.Category = updateDto.Category ?? existingTemplate.Category;
                 
-                if (!string.IsNullOrEmpty(updateDto.Questions))
-                    existingTemplate.Questions = JsonDocument.Parse(updateDto.Questions);
+                if (updateDto.Questions.HasValue)
+                    existingTemplate.Questions = JsonDocument.Parse(updateDto.Questions.Value.GetRawText());
                 
-                if (!string.IsNullOrEmpty(updateDto.ScoringRules))
-                    existingTemplate.ScoringRules = JsonDocument.Parse(updateDto.ScoringRules);
+                if (updateDto.ScoringRules.HasValue)
+                    existingTemplate.ScoringRules = JsonDocument.Parse(updateDto.ScoringRules.Value.GetRawText());
                 
                 if (updateDto.ValidFrom.HasValue)
                     existingTemplate.ValidFrom = DateTime.SpecifyKind(updateDto.ValidFrom.Value, DateTimeKind.Utc);
@@ -255,6 +283,10 @@ namespace AuditSystem.API.Controllers
                 
                 var updatedTemplate = await _templateService.UpdateTemplateAsync(existingTemplate);
                 return Ok(ConvertToResponseDto(updatedTemplate));
+            }
+            catch (JsonException ex)
+            {
+                return BadRequest(new { message = $"Invalid JSON format: {ex.Message}" });
             }
             catch (InvalidOperationException ex)
             {
@@ -267,7 +299,7 @@ namespace AuditSystem.API.Controllers
         }
         
         [HttpPut("{id}/publish")]
-        [Authorize(Roles = "Manager,Administrator")]
+        [Authorize(Policy = "AdminOrManager")]
         public async Task<ActionResult<TemplateResponseDto>> PublishTemplate(Guid id)
         {
             try
@@ -298,7 +330,7 @@ namespace AuditSystem.API.Controllers
         }
         
         [HttpPost("{id}/version")]
-        [Authorize(Roles = "Manager,Administrator")]
+        [Authorize(Policy = "AdminOrManager")]
         public async Task<ActionResult<TemplateResponseDto>> CreateNewVersion(Guid id, UpdateTemplateDto updateDto)
         {
             try
@@ -325,11 +357,11 @@ namespace AuditSystem.API.Controllers
                     Name = updateDto.Name ?? template.Name,
                     Description = updateDto.Description ?? template.Description,
                     Category = updateDto.Category ?? template.Category,
-                    Questions = !string.IsNullOrEmpty(updateDto.Questions) 
-                        ? JsonDocument.Parse(updateDto.Questions) 
+                    Questions = updateDto.Questions.HasValue 
+                        ? JsonDocument.Parse(updateDto.Questions.Value.GetRawText()) 
                         : template.Questions,
-                    ScoringRules = !string.IsNullOrEmpty(updateDto.ScoringRules) 
-                        ? JsonDocument.Parse(updateDto.ScoringRules) 
+                    ScoringRules = updateDto.ScoringRules.HasValue 
+                        ? JsonDocument.Parse(updateDto.ScoringRules.Value.GetRawText()) 
                         : template.ScoringRules,
                     ValidFrom = updateDto.ValidFrom.HasValue 
                         ? DateTime.SpecifyKind(updateDto.ValidFrom.Value, DateTimeKind.Utc) 
@@ -348,6 +380,10 @@ namespace AuditSystem.API.Controllers
                     ConvertToResponseDto(newVersion)
                 );
             }
+            catch (JsonException ex)
+            {
+                return BadRequest(new { message = $"Invalid JSON format: {ex.Message}" });
+            }
             catch (InvalidOperationException ex)
             {
                 return BadRequest(new { message = ex.Message });
@@ -359,7 +395,7 @@ namespace AuditSystem.API.Controllers
         }
         
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Manager,Administrator")]
+        [Authorize(Policy = "AdminOrManager")]
         public async Task<IActionResult> DeleteTemplate(Guid id)
         {
             try
@@ -401,8 +437,8 @@ namespace AuditSystem.API.Controllers
                 Name = template.Name,
                 Description = template.Description,
                 Category = template.Category,
-                Questions = template.Questions?.RootElement.ToString(),
-                ScoringRules = template.ScoringRules?.RootElement.ToString(),
+                Questions = template.Questions?.RootElement,
+                ScoringRules = template.ScoringRules?.RootElement,
                 ValidFrom = template.ValidFrom,
                 ValidTo = template.ValidTo,
                 CreatedById = template.CreatedById,

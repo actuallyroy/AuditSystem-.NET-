@@ -1,10 +1,12 @@
 using AuditSystem.Domain.Entities;
 using AuditSystem.Domain.Services;
+using AuditSystem.API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AuditSystem.API.Controllers
@@ -23,12 +25,13 @@ namespace AuditSystem.API.Controllers
 
         [HttpGet]
         [Authorize(Policy = "AdminOrManager")]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<UserDto>>> GetUsers()
         {
             try
             {
                 var users = await _userService.GetAllUsersAsync();
-                return Ok(users);
+                var userDtos = users.Select(MapToUserDto);
+                return Ok(userDtos);
             }
             catch (Exception ex)
             {
@@ -38,7 +41,7 @@ namespace AuditSystem.API.Controllers
         }
 
         [HttpGet("{id:guid}")]
-        public async Task<ActionResult<User>> GetUser(Guid id)
+        public async Task<ActionResult<UserDto>> GetUser(Guid id)
         {
             try
             {
@@ -46,7 +49,7 @@ namespace AuditSystem.API.Controllers
                 if (user == null)
                     return NotFound();
 
-                return Ok(user);
+                return Ok(MapToUserDto(user));
             }
             catch (Exception ex)
             {
@@ -57,7 +60,7 @@ namespace AuditSystem.API.Controllers
 
         [HttpGet("by-username/{username}")]
         [Authorize(Policy = "AdminOrManager")]
-        public async Task<ActionResult<User>> GetUserByUsername(string username)
+        public async Task<ActionResult<UserDto>> GetUserByUsername(string username)
         {
             try
             {
@@ -65,7 +68,7 @@ namespace AuditSystem.API.Controllers
                 if (user == null)
                     return NotFound();
 
-                return Ok(user);
+                return Ok(MapToUserDto(user));
             }
             catch (Exception ex)
             {
@@ -76,12 +79,13 @@ namespace AuditSystem.API.Controllers
 
         [HttpGet("by-organisation/{organisationId:guid}")]
         [Authorize(Policy = "AdminOrManager")]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsersByOrganisation(Guid organisationId)
+        public async Task<ActionResult<IEnumerable<UserDto>>> GetUsersByOrganisation(Guid organisationId)
         {
             try
             {
                 var users = await _userService.GetUsersByOrganisationAsync(organisationId);
-                return Ok(users);
+                var userDtos = users.Select(MapToUserDto);
+                return Ok(userDtos);
             }
             catch (Exception ex)
             {
@@ -92,12 +96,13 @@ namespace AuditSystem.API.Controllers
 
         [HttpGet("by-role/{role}")]
         [Authorize(Policy = "AdminOrManager")]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsersByRole(string role)
+        public async Task<ActionResult<IEnumerable<UserDto>>> GetUsersByRole(string role)
         {
             try
             {
                 var users = await _userService.GetUsersByRoleAsync(role);
-                return Ok(users);
+                var userDtos = users.Select(MapToUserDto);
+                return Ok(userDtos);
             }
             catch (Exception ex)
             {
@@ -108,7 +113,7 @@ namespace AuditSystem.API.Controllers
 
         [HttpPost]
         [Authorize(Policy = "AdminOnly")]
-        public async Task<ActionResult<User>> CreateUser(CreateUserRequest request)
+        public async Task<ActionResult<UserDto>> CreateUser(CreateUserDto request)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -127,7 +132,7 @@ namespace AuditSystem.API.Controllers
                 };
 
                 var createdUser = await _userService.CreateUserAsync(user, request.Password);
-                return CreatedAtAction(nameof(GetUser), new { id = createdUser.UserId }, createdUser);
+                return CreatedAtAction(nameof(GetUser), new { id = createdUser.UserId }, MapToUserDto(createdUser));
             }
             catch (InvalidOperationException ex)
             {
@@ -142,7 +147,7 @@ namespace AuditSystem.API.Controllers
 
         [HttpPut("{id:guid}")]
         [Authorize(Policy = "AdminOrManager")]
-        public async Task<ActionResult<User>> UpdateUser(Guid id, UpdateUserRequest request)
+        public async Task<ActionResult<UserDto>> UpdateUser(Guid id, UpdateUserDto request)
         {
             if (id != request.UserId)
                 return BadRequest("User ID mismatch");
@@ -164,7 +169,7 @@ namespace AuditSystem.API.Controllers
                 };
 
                 var updatedUser = await _userService.UpdateUserAsync(user);
-                return Ok(updatedUser);
+                return Ok(MapToUserDto(updatedUser));
             }
             catch (KeyNotFoundException ex)
             {
@@ -197,7 +202,7 @@ namespace AuditSystem.API.Controllers
         }
 
         [HttpPatch("{id:guid}/change-password")]
-        public async Task<ActionResult> ChangePassword(Guid id, ChangePasswordRequest request)
+        public async Task<ActionResult> ChangePassword(Guid id, ChangePasswordDto request)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -216,36 +221,24 @@ namespace AuditSystem.API.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
+
+        private static UserDto MapToUserDto(User user)
+        {
+            return new UserDto
+            {
+                UserId = user.UserId,
+                OrganisationId = user.OrganisationId,
+                Username = user.Username,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Phone = user.Phone,
+                Role = user.Role,
+                IsActive = user.IsActive,
+                CreatedAt = user.CreatedAt
+            };
+        }
     }
 
-    #region Request Models
-    public class CreateUserRequest
-    {
-        public Guid OrganisationId { get; set; }
-        public string Username { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
-        public string Role { get; set; }
-        public string Password { get; set; }
-    }
 
-    public class UpdateUserRequest
-    {
-        public Guid UserId { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
-        public string Role { get; set; }
-        public bool IsActive { get; set; }
-    }
-
-    public class ChangePasswordRequest
-    {
-        public string CurrentPassword { get; set; }
-        public string NewPassword { get; set; }
-    }
-    #endregion
 } 

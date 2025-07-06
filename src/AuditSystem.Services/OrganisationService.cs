@@ -68,6 +68,7 @@ namespace AuditSystem.Services
         public async Task<bool> DeleteOrganisationAsync(Guid organisationId)
         {
             var organisation = await _organisationRepository.GetByIdAsync(organisationId);
+            EnsureOrganisationDateTimesAreUtc(organisation);
             if (organisation == null)
                 return false;
 
@@ -82,7 +83,9 @@ namespace AuditSystem.Services
 
         public async Task<Organisation> GetOrganisationByIdAsync(Guid organisationId)
         {
-            return await _organisationRepository.GetByIdAsync(organisationId);
+            var organisation = await _organisationRepository.GetByIdAsync(organisationId);
+            EnsureOrganisationDateTimesAreUtc(organisation);
+            return organisation;
         }
 
         public async Task<Organisation> GetOrganisationByNameAsync(string name)
@@ -96,6 +99,7 @@ namespace AuditSystem.Services
                 throw new ArgumentNullException(nameof(organisation));
 
             var existingOrganisation = await _organisationRepository.GetByIdAsync(organisation.OrganisationId);
+            EnsureOrganisationDateTimesAreUtc(existingOrganisation);
             if (existingOrganisation == null)
                 throw new KeyNotFoundException($"Organisation with ID {organisation.OrganisationId} not found");
 
@@ -113,11 +117,13 @@ namespace AuditSystem.Services
         public async Task<bool> InviteUserToOrganisationAsync(Guid organisationId, string email, string role)
         {
             var organisation = await _organisationRepository.GetByIdAsync(organisationId);
+            EnsureOrganisationDateTimesAreUtc(organisation);
             if (organisation == null)
                 throw new KeyNotFoundException($"Organisation with ID {organisationId} not found");
 
             // Check if user already exists
             var existingUser = await _userRepository.GetByEmailAsync(email);
+            EnsureUserDateTimesAreUtc(existingUser);
             
             // Generate token for invitation
             string token = Guid.NewGuid().ToString();
@@ -170,6 +176,7 @@ namespace AuditSystem.Services
             if (invitation.UserId.HasValue)
             {
                 var user = await _userRepository.GetByIdAsync(invitation.UserId.Value);
+                EnsureUserDateTimesAreUtc(user);
                 if (user != null)
                 {
                     user.OrganisationId = invitation.OrganisationId;
@@ -188,10 +195,12 @@ namespace AuditSystem.Services
         public async Task<bool> JoinOrganisationAsync(Guid userId, Guid organisationId)
         {
             var user = await _userRepository.GetByIdAsync(userId);
+            EnsureUserDateTimesAreUtc(user);
             if (user == null)
                 return false;
 
             var organisation = await _organisationRepository.GetByIdAsync(organisationId);
+            EnsureOrganisationDateTimesAreUtc(organisation);
             if (organisation == null)
                 return false;
 
@@ -205,6 +214,7 @@ namespace AuditSystem.Services
         public async Task<bool> RemoveUserFromOrganisationAsync(Guid userId, Guid organisationId)
         {
             var user = await _userRepository.GetByIdAsync(userId);
+            EnsureUserDateTimesAreUtc(user);
             if (user == null || !user.OrganisationId.HasValue || user.OrganisationId.Value != organisationId)
                 return false;
 
@@ -220,6 +230,19 @@ namespace AuditSystem.Services
             // Return only organizations that are set to allow public joining
             // This is a simplified implementation - in a real app, you might have an "IsPublic" flag
             return await _organisationRepository.FindAsync(o => o.Type != "Personal");
+        }
+
+        private static void EnsureOrganisationDateTimesAreUtc(Organisation organisation)
+        {
+            if (organisation == null) return;
+            if (organisation.CreatedAt.Kind != DateTimeKind.Utc)
+                organisation.CreatedAt = DateTime.SpecifyKind(organisation.CreatedAt, DateTimeKind.Utc);
+        }
+        private static void EnsureUserDateTimesAreUtc(User user)
+        {
+            if (user == null) return;
+            if (user.CreatedAt.Kind != DateTimeKind.Utc)
+                user.CreatedAt = DateTime.SpecifyKind(user.CreatedAt, DateTimeKind.Utc);
         }
     }
 } 

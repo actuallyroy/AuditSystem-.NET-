@@ -173,6 +173,10 @@ namespace AuditSystem.API.Controllers
             if (!string.IsNullOrEmpty(user.Email))
                 claims.Add(new Claim(ClaimTypes.Email, user.Email));
             
+            // Add organization ID to claims if available
+            if (user.OrganisationId.HasValue)
+                claims.Add(new Claim("organisation_id", user.OrganisationId.Value.ToString()));
+            
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
@@ -193,14 +197,14 @@ namespace AuditSystem.API.Controllers
             if (string.IsNullOrWhiteSpace(role))
                 return role;
 
-            // Normalize common roles to match authorization attributes
+            // Normalize common roles to match authorization attributes (lowercase)
             return role.ToLowerInvariant() switch
             {
-                "admin" => "Administrator",
-                "manager" => "Manager",
-                "supervisor" => "Supervisor",
-                "auditor" => "Auditor",
-                _ => System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(role.ToLower())
+                "admin" => "admin",
+                "manager" => "manager",
+                "supervisor" => "supervisor",
+                "auditor" => "auditor",
+                _ => role.ToLowerInvariant()
             };
         }
     }

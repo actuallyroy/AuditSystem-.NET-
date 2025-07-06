@@ -28,7 +28,7 @@ namespace AuditSystem.API.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "admin,manager")]
+        [Authorize(Policy = "AdminOrManager")]
         public async Task<ActionResult<IEnumerable<Organisation>>> GetOrganisations()
         {
             try
@@ -62,7 +62,7 @@ namespace AuditSystem.API.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "admin,manager")]
+        [Authorize(Policy = "AdminOrManager")]
         public async Task<ActionResult<Organisation>> CreateOrganisation(CreateOrganisationRequest request)
         {
             if (!ModelState.IsValid)
@@ -88,7 +88,7 @@ namespace AuditSystem.API.Controllers
         }
 
         [HttpPut("{id:guid}")]
-        [Authorize(Roles = "admin,manager")]
+        [Authorize(Policy = "AdminOrManager")]
         public async Task<ActionResult<Organisation>> UpdateOrganisation(Guid id, UpdateOrganisationRequest request)
         {
             if (id != request.OrganisationId)
@@ -122,7 +122,7 @@ namespace AuditSystem.API.Controllers
         }
 
         [HttpDelete("{id:guid}")]
-        [Authorize(Roles = "admin")]
+        [Authorize(Policy = "AdminOnly")]
         public async Task<ActionResult> DeleteOrganisation(Guid id)
         {
             try
@@ -143,7 +143,7 @@ namespace AuditSystem.API.Controllers
         // Endpoints for organization invitations
 
         [HttpPost("{id:guid}/invite")]
-        [Authorize(Roles = "admin,manager")]
+        [Authorize(Policy = "AdminOrManager")]
         public async Task<ActionResult> InviteUser(Guid id, InviteUserRequest request)
         {
             if (!ModelState.IsValid)
@@ -213,7 +213,7 @@ namespace AuditSystem.API.Controllers
         }
 
         [HttpDelete("{organisationId:guid}/users/{userId:guid}")]
-        [Authorize(Roles = "admin,manager")]
+        [Authorize(Policy = "AdminOrManager")]
         public async Task<ActionResult> RemoveUserFromOrganisation(Guid organisationId, Guid userId)
         {
             try

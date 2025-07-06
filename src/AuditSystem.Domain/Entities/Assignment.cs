@@ -16,6 +16,7 @@ namespace AuditSystem.Domain.Entities
         public string Notes { get; set; }
         public string Status { get; set; }
         public DateTime CreatedAt { get; set; }
+        public DateTime? CompletedAt { get; set; }
 
         // Navigation properties
         public virtual Template Template { get; set; }

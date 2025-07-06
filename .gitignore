@@ -2,3 +2,10 @@
 /python_tests/__pycache__/
 /src/*/logs/
 /src/*/bin/
+/src/*/obj/
+/src/*/Properties/
+/src/*/appsettings.json
+/src/*/appsettings.Development.json
+/src/*/appsettings.Production.json
+/src/*/appsettings.Testing.json
+/src/*/appsettings.Testing.json

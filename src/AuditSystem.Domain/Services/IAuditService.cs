@@ -1,6 +1,7 @@
 using AuditSystem.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace AuditSystem.Domain.Services
@@ -14,6 +15,7 @@ namespace AuditSystem.Domain.Services
         Task<IEnumerable<Audit>> GetAuditsByTemplateAsync(Guid templateId);
         Task<IEnumerable<Audit>> GetAuditsByDateRangeAsync(DateTime startDate, DateTime endDate);
         Task<Audit> StartAuditAsync(Guid templateId, Guid auditorId, Guid organisationId);
+        Task<Audit> StartAuditFromAssignmentAsync(Guid templateId, Guid auditorId, Guid organisationId, Guid assignmentId, JsonDocument? storeInfo = null, JsonDocument? location = null);
         Task<Audit> SubmitAuditAsync(Audit audit);
         Task<bool> SyncAuditAsync(Guid auditId);
         Task<Audit> UpdateAuditStatusAsync(Guid auditId, string status);

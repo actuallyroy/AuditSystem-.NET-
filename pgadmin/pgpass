@@ -1,3 +1,4 @@
 # PostgreSQL password file for pgAdmin
 # Format: hostname:port:database:username:password
 postgres:5432:*:postgres:123456
+172.18.0.4:5432:*:postgres:123456

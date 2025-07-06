@@ -23,6 +23,23 @@ namespace AuditSystem.Infrastructure.Repositories
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<Template>> GetPublishedTemplatesAsync(Guid userId)
+        {
+            // Get user details to check organization
+            var user = await _context.Users
+                .Where(u => u.UserId == userId)
+                .FirstOrDefaultAsync();
+                
+            if (user == null)
+                return new List<Template>(); // Return empty list if user not found
+            
+            // Return published templates from user's organization
+            return await _context.Templates
+                .Where(t => t.IsPublished && t.CreatedBy.OrganisationId == user.OrganisationId)
+                .OrderBy(t => t.Name)
+                .ToListAsync();
+        }
+
         public async Task<IEnumerable<Template>> GetTemplatesByUserIdAsync(Guid userId)
         {
             return await _context.Templates
@@ -39,6 +56,25 @@ namespace AuditSystem.Infrastructure.Repositories
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<Template>> GetTemplatesByCategoryAsync(string category, Guid userId)
+        {
+            // Get user details to check organization
+            var user = await _context.Users
+                .Where(u => u.UserId == userId)
+                .FirstOrDefaultAsync();
+                
+            if (user == null)
+                return new List<Template>(); // Return empty list if user not found
+            
+            // Return templates by category from user's organization
+            return await _context.Templates
+                .Where(t => t.Category == category && 
+                           t.IsPublished && 
+                           t.CreatedBy.OrganisationId == user.OrganisationId)
+                .OrderBy(t => t.Name)
+                .ToListAsync();
+        }
+
         public async Task<Template> GetLatestVersionAsync(Guid templateId)
         {
             return await _context.Templates
@@ -49,6 +85,14 @@ namespace AuditSystem.Infrastructure.Repositories
         
         public async Task<IEnumerable<Template>> GetTemplatesByRoleAsync(string role, Guid userId)
         {
+            // Get user details to check organization
+            var user = await _context.Users
+                .Where(u => u.UserId == userId)
+                .FirstOrDefaultAsync();
+                
+            if (user == null)
+                return new List<Template>(); // Return empty list if user not found
+            
             // Admin can see all templates
             if (role.Equals("Administrator", StringComparison.OrdinalIgnoreCase))
             {
@@ -57,20 +101,21 @@ namespace AuditSystem.Infrastructure.Repositories
                     .ToListAsync();
             }
             
-            // Manager can see their own templates and all published templates
+            // Manager can see their own templates and published templates from their organization
             if (role.Equals("Manager", StringComparison.OrdinalIgnoreCase))
             {
                 return await _context.Templates
-                    .Where(t => t.CreatedById == userId || t.IsPublished)
+                    .Where(t => (t.CreatedById == userId || t.IsPublished) && 
+                               (t.CreatedBy.OrganisationId == user.OrganisationId || t.IsPublished))
                     .OrderByDescending(t => t.CreatedAt)
                     .ToListAsync();
             }
             
-            // Supervisor can only see published templates
+            // Supervisor can only see published templates from their organization
             if (role.Equals("Supervisor", StringComparison.OrdinalIgnoreCase))
             {
                 return await _context.Templates
-                    .Where(t => t.IsPublished)
+                    .Where(t => t.IsPublished && t.CreatedBy.OrganisationId == user.OrganisationId)
                     .OrderByDescending(t => t.CreatedAt)
                     .ToListAsync();
             }
@@ -81,14 +126,30 @@ namespace AuditSystem.Infrastructure.Repositories
 
         public async Task<IEnumerable<Template>> GetAssignedTemplatesAsync(Guid auditorId)
         {
-            // Get templates from assignments where user is assigned
+            // Get user details to check organization
+            var user = await _context.Users
+                .Where(u => u.UserId == auditorId)
+                .FirstOrDefaultAsync();
+                
+            if (user == null)
+                return new List<Template>(); // Return empty list if user not found
+            
+            // Get templates from assignments where user is assigned, only from their organization
             return await _context.Assignments
-                .Where(a => a.AssignedToId == auditorId)
+                .Where(a => a.AssignedToId == auditorId && 
+                           a.OrganisationId == user.OrganisationId)
                 .Include(a => a.Template)
                 .Select(a => a.Template)
                 .Distinct()
                 .OrderBy(t => t.Name)
                 .ToListAsync();
+        }
+        
+        public async Task<bool> TemplateNameExistsAsync(string name, Guid createdById)
+        {
+            return await _context.Templates
+                .AnyAsync(t => t.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && 
+                              t.CreatedById == createdById);
         }
     }
 } 

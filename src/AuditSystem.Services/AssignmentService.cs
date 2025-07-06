@@ -64,6 +64,7 @@ namespace AuditSystem.Services
                 throw new ArgumentNullException(nameof(assignment));
 
             var existingAssignment = await _assignmentRepository.GetByIdAsync(assignment.AssignmentId);
+            EnsureAssignmentDateTimesAreUtc(existingAssignment);
             if (existingAssignment == null)
                 throw new InvalidOperationException($"Assignment with ID {assignment.AssignmentId} not found");
 
@@ -84,6 +85,7 @@ namespace AuditSystem.Services
                 throw new ArgumentException("Assignment ID cannot be empty", nameof(assignmentId));
 
             var assignment = await _assignmentRepository.GetByIdAsync(assignmentId);
+            EnsureAssignmentDateTimesAreUtc(assignment);
             if (assignment == null)
                 return false;
 
@@ -181,14 +183,17 @@ namespace AuditSystem.Services
 
             // Validate entities exist
             var template = await _templateRepository.GetByIdAsync(templateId);
+            EnsureTemplateDateTimesAreUtc(template);
             if (template == null)
                 throw new InvalidOperationException($"Template with ID {templateId} not found");
 
             var auditor = await _userRepository.GetByIdAsync(auditorId);
+            EnsureUserDateTimesAreUtc(auditor);
             if (auditor == null)
                 throw new InvalidOperationException($"User with ID {auditorId} not found");
 
             var assigner = await _userRepository.GetByIdAsync(assignerId);
+            EnsureUserDateTimesAreUtc(assigner);
             if (assigner == null)
                 throw new InvalidOperationException($"Assigner with ID {assignerId} not found");
 
@@ -248,6 +253,7 @@ namespace AuditSystem.Services
                 throw new ArgumentException("Status cannot be empty", nameof(status));
 
             var assignment = await _assignmentRepository.GetByIdAsync(assignmentId);
+            EnsureAssignmentDateTimesAreUtc(assignment);
             if (assignment == null)
                 throw new InvalidOperationException($"Assignment with ID {assignmentId} not found");
 
@@ -266,10 +272,12 @@ namespace AuditSystem.Services
                 return false;
 
             var assignment = await _assignmentRepository.GetByIdAsync(assignmentId);
+            EnsureAssignmentDateTimesAreUtc(assignment);
             if (assignment == null)
                 return false;
 
             var user = await _userRepository.GetByIdAsync(userId);
+            EnsureUserDateTimesAreUtc(user);
             if (user == null)
                 return false;
 
@@ -288,6 +296,7 @@ namespace AuditSystem.Services
                 return false;
 
             var user = await _userRepository.GetByIdAsync(userId);
+            EnsureUserDateTimesAreUtc(user);
             if (user == null)
                 return false;
 
@@ -351,6 +360,33 @@ namespace AuditSystem.Services
             var validPriorities = new[] { "Low", "Medium", "High", "Critical" };
             if (!validPriorities.Contains(priority, StringComparer.OrdinalIgnoreCase))
                 throw new ArgumentException($"Invalid priority. Valid priorities are: {string.Join(", ", validPriorities)}");
+        }
+
+        private static void EnsureAssignmentDateTimesAreUtc(Assignment assignment)
+        {
+            if (assignment == null) return;
+            if (assignment.DueDate.HasValue && assignment.DueDate.Value.Kind != DateTimeKind.Utc)
+                assignment.DueDate = DateTime.SpecifyKind(assignment.DueDate.Value, DateTimeKind.Utc);
+            if (assignment.CreatedAt.Kind != DateTimeKind.Utc)
+                assignment.CreatedAt = DateTime.SpecifyKind(assignment.CreatedAt, DateTimeKind.Utc);
+            if (assignment.CompletedAt.HasValue && assignment.CompletedAt.Value.Kind != DateTimeKind.Utc)
+                assignment.CompletedAt = DateTime.SpecifyKind(assignment.CompletedAt.Value, DateTimeKind.Utc);
+        }
+        private static void EnsureUserDateTimesAreUtc(User user)
+        {
+            if (user == null) return;
+            if (user.CreatedAt.Kind != DateTimeKind.Utc)
+                user.CreatedAt = DateTime.SpecifyKind(user.CreatedAt, DateTimeKind.Utc);
+        }
+        private static void EnsureTemplateDateTimesAreUtc(Template template)
+        {
+            if (template == null) return;
+            if (template.ValidFrom.HasValue && template.ValidFrom.Value.Kind != DateTimeKind.Utc)
+                template.ValidFrom = DateTime.SpecifyKind(template.ValidFrom.Value, DateTimeKind.Utc);
+            if (template.ValidTo.HasValue && template.ValidTo.Value.Kind != DateTimeKind.Utc)
+                template.ValidTo = DateTime.SpecifyKind(template.ValidTo.Value, DateTimeKind.Utc);
+            if (template.CreatedAt.Kind != DateTimeKind.Utc)
+                template.CreatedAt = DateTime.SpecifyKind(template.CreatedAt, DateTimeKind.Utc);
         }
     }
 } 

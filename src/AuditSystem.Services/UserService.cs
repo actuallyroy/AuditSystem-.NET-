@@ -68,6 +68,7 @@ namespace AuditSystem.Services
         public async Task<bool> DeactivateUserAsync(Guid userId)
         {
             var user = await _userRepository.GetByIdAsync(userId);
+            EnsureUserDateTimesAreUtc(user);
             if (user == null)
                 return false;
 
@@ -84,7 +85,9 @@ namespace AuditSystem.Services
 
         public async Task<User> GetUserByIdAsync(Guid userId)
         {
-            return await _userRepository.GetByIdAsync(userId);
+            var user = await _userRepository.GetByIdAsync(userId);
+            EnsureUserDateTimesAreUtc(user);
+            return user;
         }
 
         public async Task<User> GetUserByUsernameAsync(string username)
@@ -106,6 +109,7 @@ namespace AuditSystem.Services
         public async Task<User> UpdateUserAsync(User user)
         {
             var existingUser = await _userRepository.GetByIdAsync(user.UserId);
+            EnsureUserDateTimesAreUtc(existingUser);
             if (existingUser == null)
                 throw new KeyNotFoundException($"User with ID {user.UserId} not found");
 
@@ -129,6 +133,7 @@ namespace AuditSystem.Services
                 return false;
 
             var user = await _userRepository.GetByIdAsync(userId);
+            EnsureUserDateTimesAreUtc(user);
             if (user == null)
                 return false;
 
@@ -188,5 +193,12 @@ namespace AuditSystem.Services
             }
         }
         #endregion
+
+        private static void EnsureUserDateTimesAreUtc(User user)
+        {
+            if (user == null) return;
+            if (user.CreatedAt.Kind != DateTimeKind.Utc)
+                user.CreatedAt = DateTime.SpecifyKind(user.CreatedAt, DateTimeKind.Utc);
+        }
     }
 } 

@@ -225,6 +225,9 @@ namespace AuditSystem.Infrastructure.Data
                     .HasColumnName("created_at")
                     .HasDefaultValueSql("NOW()");
 
+                // Ignore CompletedAt property until database column is added
+                entity.Ignore(e => e.CompletedAt);
+
                 entity.HasOne(d => d.Template)
                     .WithMany(p => p.Assignments)
                     .HasForeignKey(d => d.TemplateId);
@@ -260,7 +263,8 @@ namespace AuditSystem.Infrastructure.Data
                     .HasColumnName("template_id");
 
                 entity.Property(e => e.TemplateVersion)
-                    .HasColumnName("template_version");
+                    .HasColumnName("template_version")
+                    .IsRequired(false);
 
                 entity.Property(e => e.AuditorId)
                     .HasColumnName("auditor_id");
@@ -285,7 +289,7 @@ namespace AuditSystem.Infrastructure.Data
                 entity.Property(e => e.Responses)
                     .HasColumnName("responses")
                     .HasColumnType("jsonb")
-                    .IsRequired();
+                    .IsRequired(false);
 
                 entity.Property(e => e.Media)
                     .HasColumnName("media")
@@ -319,15 +323,18 @@ namespace AuditSystem.Infrastructure.Data
 
                 entity.HasOne(d => d.Template)
                     .WithMany(p => p.Audits)
-                    .HasForeignKey(d => d.TemplateId);
+                    .HasForeignKey(d => d.TemplateId)
+                    .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.Auditor)
                     .WithMany(p => p.Audits)
-                    .HasForeignKey(d => d.AuditorId);
+                    .HasForeignKey(d => d.AuditorId)
+                    .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(d => d.Organisation)
                     .WithMany(p => p.Audits)
-                    .HasForeignKey(d => d.OrganisationId);
+                    .HasForeignKey(d => d.OrganisationId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
         }
 
