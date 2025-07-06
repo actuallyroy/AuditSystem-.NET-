@@ -3,6 +3,8 @@ using AuditSystem.Domain.Repositories;
 using AuditSystem.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AuditSystem.Infrastructure.Repositories
@@ -67,6 +69,21 @@ namespace AuditSystem.Infrastructure.Repositories
             {
                 // If we can't query due to null organisation_id, assume email doesn't exist
                 return false;
+            }
+        }
+
+        public async Task<IEnumerable<User>> GetUsersByOrganisationAsync(Guid organisationId)
+        {
+            try
+            {
+                return await _context.Users
+                    .Where(u => u.OrganisationId == organisationId)
+                    .ToListAsync();
+            }
+            catch (InvalidCastException ex) when (ex.Message.Contains("organisation_id"))
+            {
+                // Handle the specific case where organisation_id is null
+                return new List<User>();
             }
         }
     }

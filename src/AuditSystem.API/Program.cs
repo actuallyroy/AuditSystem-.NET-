@@ -114,16 +114,8 @@ builder.Services.AddScoped<AssignmentService>();
 builder.Services.AddScoped<AuditService>();
 builder.Services.AddScoped<OrganisationService>();
 
-// Register notification services
-builder.Services.AddScoped<INotificationService, NotificationService>();
-builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
-builder.Services.AddScoped<IEmailService, EmailService>();
-builder.Services.AddScoped<ISmsService, SmsService>();
-builder.Services.AddScoped<IPushNotificationService, PushNotificationService>();
-builder.Services.AddScoped<IQueueService, NullQueueService>();
-
-// Configure notification queue settings
-builder.Services.Configure<NotificationQueueConfig>(builder.Configuration.GetSection("NotificationQueue"));
+// Add HttpClient for external service calls
+builder.Services.AddHttpClient();
 
 // Register cached services as primary implementations
 builder.Services.AddScoped<IUserService>(provider =>
@@ -154,6 +146,10 @@ builder.Services.AddScoped<IOrganisationService>(provider =>
 });
 
 builder.Services.AddScoped<DashboardCacheService>();
+builder.Services.AddScoped<IDashboardService, DashboardService>();
+
+// Add SignalR
+builder.Services.AddSignalR();
 
 // Add controllers with improved JSON options
 builder.Services.AddControllers()
@@ -184,6 +180,21 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidAudience = jwtAudience,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret)),
             ClockSkew = TimeSpan.Zero
+        };
+
+        // Configure JWT for SignalR WebSocket connections
+        options.Events = new JwtBearerEvents
+        {
+            OnMessageReceived = context =>
+            {
+                var accessToken = context.Request.Query["access_token"];
+                var path = context.HttpContext.Request.Path;
+                if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/notify"))
+                {
+                    context.Token = accessToken;
+                }
+                return Task.CompletedTask;
+            }
         };
     });
 
@@ -251,9 +262,10 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder =>
     {
-        builder.AllowAnyOrigin()
+        builder.WithOrigins("http://localhost:19006", "http://localhost:3000", "http://localhost:4200")
                .AllowAnyMethod()
-               .AllowAnyHeader();
+               .AllowAnyHeader()
+               .AllowCredentials();
     });
 });
 
