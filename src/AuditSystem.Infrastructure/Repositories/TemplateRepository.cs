@@ -148,7 +148,7 @@ namespace AuditSystem.Infrastructure.Repositories
         public async Task<bool> TemplateNameExistsAsync(string name, Guid createdById)
         {
             return await _context.Templates
-                .AnyAsync(t => t.Name.Equals(name, StringComparison.OrdinalIgnoreCase) && 
+                .AnyAsync(t => t.Name.ToLower() == name.ToLower() && 
                               t.CreatedById == createdById);
         }
     }

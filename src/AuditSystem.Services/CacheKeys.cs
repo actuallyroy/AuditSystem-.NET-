@@ -36,7 +36,7 @@ namespace AuditSystem.Services
         public static string TemplatesByCategoryAndUser(string category, Guid userId) => $"{TEMPLATE_PREFIX}:category:{category.ToLower()}:user:{userId}";
         public static string AssignedTemplates(Guid auditorId) => $"{TEMPLATE_PREFIX}:assigned:{auditorId}";
         public static string TemplatePattern(Guid templateId) => $"{TEMPLATE_PREFIX}:*:{templateId}*";
-        public static string UserTemplatesPattern(Guid userId) => $"{TEMPLATE_PREFIX}:*:{userId}*";
+        public static string UserTemplatesPattern(Guid userId) => $"{TEMPLATE_PREFIX}:user:{userId}";
         
         // Organization cache keys
         public static string OrganizationById(Guid organizationId) => $"{ORGANIZATION_PREFIX}:id:{organizationId}";

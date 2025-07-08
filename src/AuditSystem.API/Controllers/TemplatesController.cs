@@ -4,6 +4,7 @@ using AuditSystem.API.Models;
 using AuditSystem.API.Attributes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
@@ -427,8 +428,15 @@ namespace AuditSystem.API.Controllers
             {
                 return BadRequest(new { message = ex.Message });
             }
+            catch (Microsoft.EntityFrameworkCore.DbUpdateException dbEx)
+            {
+                // Handle database constraint violations
+                return StatusCode(500, new { message = $"Database constraint violation: {dbEx.InnerException?.Message ?? dbEx.Message}" });
+            }
             catch (Exception ex)
             {
+                // Log the full exception details for debugging
+                Console.WriteLine($"Template deletion error: {ex}");
                 return StatusCode(500, new { message = $"An error occurred deleting the template: {ex.Message}" });
             }
         }

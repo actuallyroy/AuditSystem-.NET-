@@ -115,7 +115,8 @@ namespace AuditSystem.Infrastructure.Data
 
                 entity.HasOne(d => d.Organisation)
                     .WithMany(p => p.Users)
-                    .HasForeignKey(d => d.OrganisationId);
+                    .HasForeignKey(d => d.OrganisationId)
+                    .OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasIndex(e => e.Username)
                     .IsUnique();
@@ -178,7 +179,8 @@ namespace AuditSystem.Infrastructure.Data
 
                 entity.HasOne(d => d.CreatedBy)
                     .WithMany(p => p.CreatedTemplates)
-                    .HasForeignKey(d => d.CreatedById);
+                    .HasForeignKey(d => d.CreatedById)
+                    .OnDelete(DeleteBehavior.SetNull);
             });
         }
 
@@ -231,21 +233,23 @@ namespace AuditSystem.Infrastructure.Data
 
                 entity.HasOne(d => d.Template)
                     .WithMany(p => p.Assignments)
-                    .HasForeignKey(d => d.TemplateId);
+                    .HasForeignKey(d => d.TemplateId)
+                    .OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasOne(d => d.AssignedTo)
                     .WithMany(p => p.AssignedToAssignments)
                     .HasForeignKey(d => d.AssignedToId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.SetNull);
 
                 entity.HasOne(d => d.AssignedBy)
                     .WithMany(p => p.AssignedByAssignments)
                     .HasForeignKey(d => d.AssignedById)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.SetNull);
 
                 entity.HasOne(d => d.Organisation)
                     .WithMany(p => p.Assignments)
-                    .HasForeignKey(d => d.OrganisationId);
+                    .HasForeignKey(d => d.OrganisationId)
+                    .OnDelete(DeleteBehavior.SetNull);
             });
         }
 
@@ -294,7 +298,7 @@ namespace AuditSystem.Infrastructure.Data
                 entity.Property(e => e.Responses)
                     .HasColumnName("responses")
                     .HasColumnType("jsonb")
-                    .IsRequired(false);
+                    .IsRequired();
 
                 entity.Property(e => e.Media)
                     .HasColumnName("media")
@@ -329,22 +333,22 @@ namespace AuditSystem.Infrastructure.Data
                 entity.HasOne(d => d.Template)
                     .WithMany(p => p.Audits)
                     .HasForeignKey(d => d.TemplateId)
-                    .OnDelete(DeleteBehavior.Restrict);
+                    .OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasOne(d => d.Auditor)
                     .WithMany(p => p.Audits)
                     .HasForeignKey(d => d.AuditorId)
-                    .OnDelete(DeleteBehavior.Restrict);
+                    .OnDelete(DeleteBehavior.SetNull);
 
                 entity.HasOne(d => d.Organisation)
                     .WithMany(p => p.Audits)
                     .HasForeignKey(d => d.OrganisationId)
-                    .OnDelete(DeleteBehavior.Restrict);
+                    .OnDelete(DeleteBehavior.SetNull);
 
                 entity.HasOne(d => d.Assignment)
                     .WithMany()
                     .HasForeignKey(d => d.AssignmentId)
-                    .OnDelete(DeleteBehavior.Restrict);
+                    .OnDelete(DeleteBehavior.Cascade);
             });
         }
 

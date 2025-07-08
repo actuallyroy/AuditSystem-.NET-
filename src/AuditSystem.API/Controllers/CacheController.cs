@@ -135,6 +135,34 @@ namespace AuditSystem.API.Controllers
         }
 
         /// <summary>
+        /// Clear all template cache entries
+        /// </summary>
+        [HttpDelete("clear-all-templates")]
+        public async Task<ActionResult<CacheOperationResponse>> ClearAllTemplateCache()
+        {
+            try
+            {
+                await _cacheService.RemoveByPatternAsync("template:*");
+                
+                return Ok(new CacheOperationResponse
+                {
+                    Success = true,
+                    Message = "All template cache entries cleared",
+                    ExecutedAt = DateTime.UtcNow
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new CacheOperationResponse
+                {
+                    Success = false,
+                    Message = $"Failed to clear all template cache: {ex.Message}",
+                    ExecutedAt = DateTime.UtcNow
+                });
+            }
+        }
+
+        /// <summary>
         /// Clear organization-related cache entries
         /// </summary>
         [HttpDelete("clear-organization/{organizationId}")]

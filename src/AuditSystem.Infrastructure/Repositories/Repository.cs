@@ -60,7 +60,8 @@ namespace AuditSystem.Infrastructure.Repositories
 
         public async Task<bool> SaveChangesAsync()
         {
-            return await _context.SaveChangesAsync() > 0;
+            await _context.SaveChangesAsync();
+            return true;
         }
     }
 } 

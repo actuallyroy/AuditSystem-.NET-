@@ -95,12 +95,30 @@ namespace AuditSystem.Services
             try
             {
                 var server = _redis.GetServer(_redis.GetEndPoints().First());
-                var keys = server.Keys(pattern: pattern);
+                
+                // Add the AuditSystem prefix to the pattern since IDistributedCache adds it automatically
+                var prefixedPattern = $"AuditSystem:{pattern}";
+                
+                _logger.LogInformation("Attempting to remove cache keys with pattern: {Pattern} (prefixed: {PrefixedPattern})", pattern, prefixedPattern);
+                
+                var keys = server.Keys(pattern: prefixedPattern);
                 
                 var keyArray = keys.ToArray();
+                _logger.LogInformation("Found {Count} keys matching pattern: {PrefixedPattern}", keyArray.Length, prefixedPattern);
+                
                 if (keyArray.Any())
                 {
+                    foreach (var key in keyArray)
+                    {
+                        _logger.LogInformation("Found key to remove: {Key}", key);
+                    }
+                    
                     await _database.KeyDeleteAsync(keyArray);
+                    _logger.LogInformation("Successfully removed {Count} cache keys matching pattern: {Pattern} (prefixed: {PrefixedPattern})", keyArray.Length, pattern, prefixedPattern);
+                }
+                else
+                {
+                    _logger.LogWarning("No cache keys found matching pattern: {Pattern} (prefixed: {PrefixedPattern})", pattern, prefixedPattern);
                 }
             }
             catch (Exception ex)

@@ -1,6 +1,7 @@
 using AuditSystem.Domain.Entities;
 using AuditSystem.Domain.Repositories;
 using AuditSystem.Domain.Services;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -192,17 +193,45 @@ namespace AuditSystem.Services
             if (template == null)
                 return false;
 
-            // Don't allow deletion of published templates that might be in use
+            // Allow deletion of published templates - related assignments and audits will be cascaded
+            // Note: This will delete all related assignments and audits
             if (template.IsPublished)
             {
-                // Check if template is in use before deleting
-                // This would typically check related tables like assignments or audits
-                // For now, we'll just throw an exception
-                throw new InvalidOperationException("Cannot delete a published template. Unpublish it first.");
+                // Log a warning that published template is being deleted
+                // In a production system, you might want to add additional logging here
             }
 
-            _templateRepository.Remove(template);
-            return await _templateRepository.SaveChangesAsync();
+            try
+            {
+                // Log the template details for debugging
+                Console.WriteLine($"Attempting to delete template: {template.TemplateId}, Name: {template.Name}, IsPublished: {template.IsPublished}");
+                
+                _templateRepository.Remove(template);
+                var result = await _templateRepository.SaveChangesAsync();
+                
+                // If SaveChangesAsync returns false, it might indicate an issue
+                if (!result)
+                {
+                    throw new InvalidOperationException("SaveChangesAsync returned false - template deletion may have failed");
+                }
+                
+                Console.WriteLine($"Template deletion successful: {template.TemplateId}");
+                return result;
+            }
+            catch (Microsoft.EntityFrameworkCore.DbUpdateException dbEx)
+            {
+                // Handle database constraint violations
+                var innerMessage = dbEx.InnerException?.Message ?? "No inner exception";
+                var constraintMessage = $"Database constraint violation while deleting template: {dbEx.Message}. Inner: {innerMessage}";
+                Console.WriteLine($"Database update exception: {constraintMessage}");
+                throw new InvalidOperationException(constraintMessage, dbEx);
+            }
+            catch (Exception ex)
+            {
+                // Log the specific error for debugging
+                var errorMessage = $"Failed to delete template: {ex.Message}. Type: {ex.GetType().Name}";
+                throw new InvalidOperationException(errorMessage, ex);
+            }
         }
         
         public async Task<IEnumerable<Template>> GetTemplatesByRoleAsync(string role, Guid userId)
