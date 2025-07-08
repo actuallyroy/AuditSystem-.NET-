@@ -40,7 +40,7 @@ namespace AuditSystem.Services
 
         public async Task<IEnumerable<Audit>> GetAllAuditsAsync()
         {
-            return await _auditRepository.GetAllAsync();
+            return await _auditRepository.GetAllAuditsWithNavigationPropertiesAsync();
         }
 
         public async Task<IEnumerable<Audit>> GetAuditsByAuditorAsync(Guid auditorId)
@@ -270,6 +270,23 @@ namespace AuditSystem.Services
             return audit;
         }
 
+        public async Task<Audit> RecalculateAuditScoreAsync(Guid auditId)
+        {
+            var audit = await _auditRepository.GetByIdAsync(auditId);
+            if (audit == null)
+                throw new ArgumentException("Audit not found");
+
+            // Recalculate score
+            audit.Score = await CalculateAuditScoreAsync(audit);
+            
+            // Ensure all DateTime values are UTC before saving
+            EnsureAuditDateTimesAreUtc(audit);
+            
+            _auditRepository.Update(audit);
+            await _auditRepository.SaveChangesAsync();
+            return audit;
+        }
+
         public async Task<decimal> CalculateAuditScoreAsync(Audit audit)
         {
             if (audit == null || audit.Responses == null)
@@ -282,27 +299,30 @@ namespace AuditSystem.Services
                 if (template == null || template.ScoringRules == null)
                     return 0;
 
-                // Basic scoring logic - this should be enhanced based on your specific needs
                 var responses = audit.Responses.RootElement;
                 var scoringRules = template.ScoringRules.RootElement;
 
                 decimal totalScore = 0;
-                int answeredQuestions = 0;
                 int criticalIssues = 0;
 
-                // Iterate through responses and calculate score
-                if (responses.ValueKind == JsonValueKind.Object)
+                // Parse scoring rules
+                if (scoringRules.TryGetProperty("questionScores", out var questionScores) && 
+                    questionScores.ValueKind == JsonValueKind.Object)
                 {
-                    foreach (var response in responses.EnumerateObject())
+                    // Iterate through each question in the scoring rules
+                    foreach (var questionScore in questionScores.EnumerateObject())
                     {
-                        if (response.Value.ValueKind == JsonValueKind.Number)
-                        {
-                            var score = response.Value.GetDecimal();
-                            totalScore += score;
-                            answeredQuestions++;
+                        var questionId = questionScore.Name;
+                        var maxScore = questionScore.Value.GetDecimal();
 
-                            // Check for critical issues (scores below threshold)
-                            if (score < 3) // Assuming 3 is the threshold
+                        // Check if this question was answered
+                        if (responses.TryGetProperty(questionId, out var response))
+                        {
+                            var score = CalculateQuestionScore(response, maxScore);
+                            totalScore += score;
+
+                            // Check for critical issues (scores below 50% of max score)
+                            if (score < (maxScore * 0.5m))
                             {
                                 criticalIssues++;
                             }
@@ -310,17 +330,67 @@ namespace AuditSystem.Services
                     }
                 }
 
-                // Calculate average score
-                decimal averageScore = answeredQuestions > 0 ? totalScore / answeredQuestions : 0;
-
                 // Update critical issues count
                 audit.CriticalIssues = criticalIssues;
 
-                return Math.Round(averageScore, 2);
+                return Math.Round(totalScore, 2);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception for debugging
+                Console.WriteLine($"Error calculating audit score: {ex.Message}");
+                return 0;
+            }
+        }
+
+        private decimal CalculateQuestionScore(JsonElement response, decimal maxScore)
+        {
+            try
+            {
+                // Handle different response types
+                switch (response.ValueKind)
+                {
+                    case JsonValueKind.String:
+                        var answer = response.GetString()?.ToLower();
+                        if (string.IsNullOrEmpty(answer))
+                            return 0;
+
+                        // Score based on answer content
+                        if (answer.Contains("yes") || answer.Contains("excellent") || answer.Contains("good"))
+                            return maxScore;
+                        else if (answer.Contains("partially") || answer.Contains("fair"))
+                            return maxScore * 0.6m;
+                        else if (answer.Contains("no") || answer.Contains("poor"))
+                            return 0;
+                        else
+                            return maxScore * 0.5m; // Default score for other answers
+
+                    case JsonValueKind.Number:
+                        var numericValue = response.GetDecimal();
+                        // If it's already a score, return it (capped at max score)
+                        return Math.Min(numericValue, maxScore);
+
+                    case JsonValueKind.Object:
+                        // For complex responses, check if there's a score property
+                        if (response.TryGetProperty("score", out var scoreElement) && 
+                            scoreElement.ValueKind == JsonValueKind.Number)
+                        {
+                            var score = scoreElement.GetDecimal();
+                            return Math.Min(score, maxScore);
+                        }
+                        // If no score property, give partial credit for having a response
+                        return maxScore * 0.5m;
+
+                    case JsonValueKind.Array:
+                        // For array responses, give partial credit
+                        return maxScore * 0.5m;
+
+                    default:
+                        return 0;
+                }
             }
             catch (Exception)
             {
-                // If scoring fails, return 0
                 return 0;
             }
         }

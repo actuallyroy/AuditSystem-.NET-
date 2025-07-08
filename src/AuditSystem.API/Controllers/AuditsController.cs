@@ -432,6 +432,26 @@ namespace AuditSystem.API.Controllers
             }
         }
 
+        [HttpPost("{id:guid}/recalculate-score")]
+        [Authorize(Policy = "AdminOrManager")]
+        public async Task<ActionResult<AuditResponseDto>> RecalculateAuditScore(Guid id)
+        {
+            try
+            {
+                var audit = await _auditService.RecalculateAuditScoreAsync(id);
+                return Ok(MapToAuditResponseDto(audit));
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error recalculating score for audit with ID: {AuditId}", id);
+                return StatusCode(500, new { message = "Internal server error" });
+            }
+        }
+
         private static AuditResponseDto MapToAuditResponseDto(Audit audit)
         {
             return new AuditResponseDto

@@ -21,6 +21,7 @@ namespace AuditSystem.Domain.Services
         Task<Audit> UpdateAuditStatusAsync(Guid auditId, string status);
         Task<Audit> FlagAuditAsync(Guid auditId, bool isFlagged);
         Task<Audit> AddManagerNotesAsync(Guid auditId, string notes);
+        Task<Audit> RecalculateAuditScoreAsync(Guid auditId);
         Task<decimal> CalculateAuditScoreAsync(Audit audit);
     }
 } 
