@@ -6,11 +6,13 @@ using AuditSystem.Infrastructure.Repositories;
 using AuditSystem.Services;
 using AuditSystem.API.Authorization;
 using AuditSystem.API.SwaggerSchemaFilters;
+using AuditSystem.API.Hubs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
@@ -82,6 +84,10 @@ builder.Services.AddScoped<IAuditRepository, AuditRepository>();
 builder.Services.AddScoped<IOrganisationRepository, OrganisationRepository>();
 builder.Services.AddScoped<IRepository<AuditSystem.Domain.Entities.OrganisationInvitation>, Repository<AuditSystem.Domain.Entities.OrganisationInvitation>>();
 
+// Add notification repositories
+builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
+builder.Services.AddScoped<INotificationTemplateRepository, NotificationTemplateRepository>();
+
 // Add cache service with fallback
 builder.Services.AddScoped<ICacheService>(provider =>
 {
@@ -148,6 +154,12 @@ builder.Services.AddScoped<IOrganisationService>(provider =>
 builder.Services.AddScoped<DashboardCacheService>();
 builder.Services.AddScoped<IDashboardService, DashboardService>();
 
+// Add notification service
+builder.Services.AddScoped<INotificationService, NotificationService>();
+
+// Add notification background service
+builder.Services.AddHostedService<NotificationBackgroundService>();
+
 // Add SignalR
 builder.Services.AddSignalR();
 
@@ -189,7 +201,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             {
                 var accessToken = context.Request.Query["access_token"];
                 var path = context.HttpContext.Request.Path;
-                if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/notify"))
+                if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/hubs/notifications"))
                 {
                     context.Token = accessToken;
                 }
@@ -318,6 +330,9 @@ app.UseRateLimiter();
 
 // Add a route group for API versioning
 app.MapControllers().RequireAuthorization();
+
+// Add SignalR hub
+app.MapHub<NotificationHub>("/hubs/notifications");
 
 // Add health check endpoint
 app.MapGet("/health", () => "Healthy").AllowAnonymous();

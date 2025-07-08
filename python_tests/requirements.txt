@@ -1,2 +1,4 @@
-requests>=2.31.0
-redis>=4.5.0 
+requests
+psycopg2-binary
+tabulate
+signalrcore==0.10.4 
