@@ -7,6 +7,7 @@ using AuditSystem.Services;
 using AuditSystem.API.Authorization;
 using AuditSystem.API.SwaggerSchemaFilters;
 using AuditSystem.API.Hubs;
+using AuditSystem.API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.RateLimiting;
@@ -159,6 +160,9 @@ builder.Services.AddScoped<INotificationService, NotificationService>();
 
 // Add notification background service
 builder.Services.AddHostedService<NotificationBackgroundService>();
+
+// Add notification broadcast service
+builder.Services.AddHostedService<NotificationBroadcastService>();
 
 // Add SignalR with improved configuration
 builder.Services.AddSignalR(options =>

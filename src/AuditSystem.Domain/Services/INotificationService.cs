@@ -24,5 +24,10 @@ namespace AuditSystem.Domain.Services
         Task<bool> SendBulkNotificationAsync(string title, string message, List<Guid> userIds, Guid? organisationId = null);
         Task<bool> ProcessNotificationDeliveryAsync();
         Task<bool> CleanupExpiredNotificationsAsync();
+        
+        // New methods for notification broadcasting
+        Task<IEnumerable<Notification>> GetReadyToSendNotificationsAsync();
+        Task<bool> MarkNotificationAsSentAsync(Guid notificationId);
+        Task<bool> MarkNotificationAsFailedAsync(Guid notificationId, string errorMessage);
     }
 } 

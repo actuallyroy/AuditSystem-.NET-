@@ -357,15 +357,29 @@ namespace AuditSystem.Services
         {
             try
             {
-                // This method would handle the actual delivery of notifications
-                // For now, we'll just mark pending notifications as sent
-                var pendingNotifications = await _notificationRepository.FindAsync(n => n.Status == "pending");
+                // Get pending notifications that should be sent via SignalR
+                var pendingNotifications = await _notificationRepository.FindAsync(n => n.Status == "pending" && n.Channel == "in_app");
                 
                 foreach (var notification in pendingNotifications)
                 {
-                    notification.Status = "sent";
-                    notification.SentAt = DateTime.UtcNow;
-                    _notificationRepository.Update(notification);
+                    try
+                    {
+                        // Mark notification as ready for sending
+                        notification.Status = "sent";
+                        notification.SentAt = DateTime.UtcNow;
+                        _notificationRepository.Update(notification);
+                        
+                        _logger.LogInformation("Marked notification {NotificationId} as sent via SignalR", 
+                            notification.NotificationId);
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex, "Failed to process notification {NotificationId}", notification.NotificationId);
+                        notification.Status = "failed";
+                        notification.ErrorMessage = ex.Message;
+                        notification.RetryCount++;
+                        _notificationRepository.Update(notification);
+                    }
                 }
 
                 await _notificationRepository.SaveChangesAsync();
@@ -387,6 +401,69 @@ namespace AuditSystem.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Failed to cleanup expired notifications");
+                return false;
+            }
+        }
+
+        public async Task<IEnumerable<Notification>> GetReadyToSendNotificationsAsync()
+        {
+            try
+            {
+                var readyNotifications = await _notificationRepository.FindAsync(n => n.Status == "sent");
+                return readyNotifications;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to get ready to send notifications");
+                return new List<Notification>();
+            }
+        }
+
+        public async Task<bool> MarkNotificationAsSentAsync(Guid notificationId)
+        {
+            try
+            {
+                var notification = await _notificationRepository.GetByIdAsync(notificationId);
+                if (notification != null)
+                {
+                    notification.Status = "sent";
+                    notification.SentAt = DateTime.UtcNow;
+                    _notificationRepository.Update(notification);
+                    await _notificationRepository.SaveChangesAsync();
+                    
+                    _logger.LogInformation("Marked notification {NotificationId} as sent", notificationId);
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to mark notification {NotificationId} as sent", notificationId);
+                return false;
+            }
+        }
+
+        public async Task<bool> MarkNotificationAsFailedAsync(Guid notificationId, string errorMessage)
+        {
+            try
+            {
+                var notification = await _notificationRepository.GetByIdAsync(notificationId);
+                if (notification != null)
+                {
+                    notification.Status = "failed";
+                    notification.ErrorMessage = errorMessage;
+                    notification.RetryCount++;
+                    _notificationRepository.Update(notification);
+                    await _notificationRepository.SaveChangesAsync();
+                    
+                    _logger.LogInformation("Marked notification {NotificationId} as failed: {ErrorMessage}", notificationId, errorMessage);
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to mark notification {NotificationId} as failed", notificationId);
                 return false;
             }
         }

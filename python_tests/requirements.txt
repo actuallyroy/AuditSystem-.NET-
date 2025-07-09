@@ -1,4 +1,0 @@
-requests
-psycopg2-binary
-tabulate
-signalrcore==0.10.4 
