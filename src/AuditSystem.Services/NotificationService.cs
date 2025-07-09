@@ -17,6 +17,7 @@ namespace AuditSystem.Services
         private readonly IUserRepository _userRepository;
         private readonly IAuditRepository _auditRepository;
         private readonly IOrganisationRepository _organisationRepository;
+        private readonly IAssignmentRepository _assignmentRepository;
         private readonly ILogger<NotificationService> _logger;
 
         public NotificationService(
@@ -25,6 +26,7 @@ namespace AuditSystem.Services
             IUserRepository userRepository,
             IAuditRepository auditRepository,
             IOrganisationRepository organisationRepository,
+            IAssignmentRepository assignmentRepository,
             ILogger<NotificationService> logger)
         {
             _notificationRepository = notificationRepository;
@@ -32,6 +34,7 @@ namespace AuditSystem.Services
             _userRepository = userRepository;
             _auditRepository = auditRepository;
             _organisationRepository = organisationRepository;
+            _assignmentRepository = assignmentRepository;
             _logger = logger;
         }
 
@@ -192,6 +195,37 @@ namespace AuditSystem.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Failed to send audit assignment notification for audit {AuditId}", auditId);
+                return false;
+            }
+        }
+
+        public async Task<bool> SendAssignmentNotificationAsync(Guid assignmentId, Guid userId, Guid organisationId)
+        {
+            try
+            {
+                var assignment = await _assignmentRepository.GetByIdAsync(assignmentId);
+                var user = await _userRepository.GetByIdAsync(userId);
+                var organisation = await _organisationRepository.GetByIdAsync(organisationId);
+
+                if (assignment == null || user == null || organisation == null)
+                {
+                    return false;
+                }
+
+                var placeholders = new Dictionary<string, object>
+                {
+                    { "user_name", $"{user.FirstName} {user.LastName}" },
+                    { "template_name", assignment.Template?.Name ?? "Unknown Template" },
+                    { "due_date", assignment.DueDate?.ToString("MMM dd, yyyy") ?? "TBD" },
+                    { "priority", assignment.Priority ?? "medium" }
+                };
+
+                await CreateNotificationFromTemplateAsync("assignment_notification", placeholders, userId, organisationId);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to send assignment notification for assignment {AssignmentId}", assignmentId);
                 return false;
             }
         }

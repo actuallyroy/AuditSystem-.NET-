@@ -160,8 +160,15 @@ builder.Services.AddScoped<INotificationService, NotificationService>();
 // Add notification background service
 builder.Services.AddHostedService<NotificationBackgroundService>();
 
-// Add SignalR
-builder.Services.AddSignalR();
+// Add SignalR with improved configuration
+builder.Services.AddSignalR(options =>
+{
+    options.EnableDetailedErrors = true;
+    options.ClientTimeoutInterval = TimeSpan.FromSeconds(30);
+    options.HandshakeTimeout = TimeSpan.FromSeconds(15);
+    options.KeepAliveInterval = TimeSpan.FromSeconds(10);
+    options.MaximumReceiveMessageSize = 1024 * 1024; // 1MB
+});
 
 // Add controllers with improved JSON options
 builder.Services.AddControllers()
@@ -274,10 +281,16 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder =>
     {
-        builder.WithOrigins("http://localhost:19006", "http://localhost:3000", "http://localhost:4200", "http://localhost:8081")
-               .AllowAnyMethod()
-               .AllowAnyHeader()
-               .AllowCredentials();
+        builder.WithOrigins(
+                "http://localhost:19006", 
+                "http://localhost:3000", 
+                "http://localhost:4200", 
+                "http://localhost:8081",
+                "https://test.scorptech.co"
+            )
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials();
     });
 });
 

@@ -16,15 +16,18 @@ namespace AuditSystem.API.Controllers
     {
         private readonly IAssignmentService _assignmentService;
         private readonly IUserService _userService;
+        private readonly INotificationService _notificationService;
         private readonly ILogger<AssignmentsController> _logger;
 
         public AssignmentsController(
             IAssignmentService assignmentService,
             IUserService userService,
+            INotificationService notificationService,
             ILogger<AssignmentsController> logger)
         {
             _assignmentService = assignmentService;
             _userService = userService;
+            _notificationService = notificationService;
             _logger = logger;
         }
 
@@ -289,6 +292,24 @@ namespace AuditSystem.API.Controllers
 
                 var createdAssignment = await _assignmentService.CreateAssignmentAsync(assignment);
 
+                // Send notification to the assigned user
+                try
+                {
+                    await _notificationService.SendAssignmentNotificationAsync(
+                        createdAssignment.AssignmentId,
+                        createdAssignment.AssignedToId,
+                        createdAssignment.OrganisationId
+                    );
+                    _logger.LogInformation("Assignment notification sent to user {UserId} for assignment {AssignmentId}", 
+                        createdAssignment.AssignedToId, createdAssignment.AssignmentId);
+                }
+                catch (Exception notificationEx)
+                {
+                    _logger.LogError(notificationEx, "Failed to send assignment notification to user {UserId} for assignment {AssignmentId}", 
+                        createdAssignment.AssignedToId, createdAssignment.AssignmentId);
+                    // Don't fail the assignment creation if notification fails
+                }
+
                 return CreatedAtAction(
                     nameof(GetAssignment),
                     new { id = createdAssignment.AssignmentId },
@@ -348,6 +369,24 @@ namespace AuditSystem.API.Controllers
                     currentUserId,
                     assignmentDetails
                 );
+
+                // Send notification to the assigned auditor
+                try
+                {
+                    await _notificationService.SendAssignmentNotificationAsync(
+                        assignment.AssignmentId,
+                        assignment.AssignedToId,
+                        assignment.OrganisationId
+                    );
+                    _logger.LogInformation("Assignment notification sent to auditor {AuditorId} for assignment {AssignmentId}", 
+                        assignment.AssignedToId, assignment.AssignmentId);
+                }
+                catch (Exception notificationEx)
+                {
+                    _logger.LogError(notificationEx, "Failed to send assignment notification to auditor {AuditorId} for assignment {AssignmentId}", 
+                        assignment.AssignedToId, assignment.AssignmentId);
+                    // Don't fail the assignment creation if notification fails
+                }
 
                 return CreatedAtAction(
                     nameof(GetAssignment),

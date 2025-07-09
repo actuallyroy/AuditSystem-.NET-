@@ -17,6 +17,7 @@ namespace AuditSystem.Domain.Services
         Task<bool> MarkAllAsReadAsync(Guid userId);
         Task<bool> DeleteNotificationAsync(Guid notificationId, Guid userId);
         Task<bool> SendAuditAssignmentNotificationAsync(Guid auditId, Guid userId, Guid organisationId);
+        Task<bool> SendAssignmentNotificationAsync(Guid assignmentId, Guid userId, Guid organisationId);
         Task<bool> SendAuditCompletedNotificationAsync(Guid auditId, Guid userId, Guid organisationId);
         Task<bool> SendAuditReviewedNotificationAsync(Guid auditId, Guid userId, Guid organisationId, string status, decimal? score = null);
         Task<bool> SendSystemAlertAsync(string title, string message, Guid? organisationId = null, string priority = "medium");
