@@ -277,7 +277,16 @@ namespace AuditSystem.API.Controllers
                 // If audit has responses, submit it to save all the data
                 if (createDto.Responses.HasValue)
                 {
-                    audit = await _auditService.SubmitAuditAsync(audit);
+                    var responsesElement = createDto.Responses.Value;
+                    bool isEmpty = false;
+                    if (responsesElement.ValueKind == JsonValueKind.Object && responsesElement.EnumerateObject().MoveNext() == false)
+                    {
+                        isEmpty = true;
+                    }
+                    if (!isEmpty)
+                    {
+                        audit = await _auditService.SubmitAuditAsync(audit);
+                    }
                 }
 
                 return CreatedAtAction(nameof(GetAudit), new { id = audit.AuditId }, MapToAuditResponseDto(audit));

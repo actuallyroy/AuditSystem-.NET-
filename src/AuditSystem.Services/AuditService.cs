@@ -184,7 +184,14 @@ namespace AuditSystem.Services
             existingAudit.StoreInfo = audit.StoreInfo ?? existingAudit.StoreInfo;
             existingAudit.Location = audit.Location ?? existingAudit.Location;
             existingAudit.EndTime = DateTime.UtcNow;
-            existingAudit.Status = "submitted";
+            
+            // Only set status to "submitted" if it was previously "in_progress" (draft audit)
+            // Otherwise, respect the existing status that was set by the controller
+            if (existingAudit.Status?.ToLower() == "in_progress")
+            {
+                existingAudit.Status = "submitted";
+            }
+            
             existingAudit.SyncFlag = true;
 
             // Calculate score if responses are provided
