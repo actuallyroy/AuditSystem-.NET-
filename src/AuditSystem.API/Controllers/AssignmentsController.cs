@@ -659,7 +659,7 @@ namespace AuditSystem.API.Controllers
         public Guid AssignedToId { get; set; }
         public DateTime? DueDate { get; set; }
         public string Priority { get; set; }
-        public string Notes { get; set; }
+        public string? Notes { get; set; }
         public JsonDocument StoreInfo { get; set; }
     }
 
@@ -668,7 +668,7 @@ namespace AuditSystem.API.Controllers
         public Guid AssignmentId { get; set; }
         public DateTime? DueDate { get; set; }
         public string Priority { get; set; }
-        public string Notes { get; set; }
+        public string? Notes { get; set; }
         public string Status { get; set; }
         public JsonDocument StoreInfo { get; set; }
     }
@@ -679,7 +679,7 @@ namespace AuditSystem.API.Controllers
         public Guid AuditorId { get; set; }
         public DateTime? DueDate { get; set; }
         public string Priority { get; set; }
-        public string Notes { get; set; }
+        public string? Notes { get; set; }
         public JsonDocument StoreInfo { get; set; }
     }
 

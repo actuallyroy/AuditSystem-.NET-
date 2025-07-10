@@ -13,7 +13,7 @@ namespace AuditSystem.Domain.Entities
         public JsonDocument StoreInfo { get; set; }
         public DateTime? DueDate { get; set; }
         public string Priority { get; set; }
-        public string Notes { get; set; }
+        public string? Notes { get; set; }
         public string Status { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? CompletedAt { get; set; }

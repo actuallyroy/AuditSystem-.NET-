@@ -152,25 +152,27 @@ namespace AuditSystem.Services
         {
             var recentAudits = audits
                 .OrderByDescending(a => a.CreatedAt)
-                .Take(5)
-                .Select(async audit =>
+                .Take(5);
+
+            var result = new List<RecentAuditDto>();
+            
+            foreach (var audit in recentAudits)
+            {
+                var auditor = await _userRepository.GetByIdAsync(audit.AuditorId);
+                var template = await _templateRepository.GetByIdAsync(audit.TemplateId);
+
+                result.Add(new RecentAuditDto
                 {
-                    var auditor = await _userRepository.GetByIdAsync(audit.AuditorId);
-                    var template = await _templateRepository.GetByIdAsync(audit.TemplateId);
-
-                    return new RecentAuditDto
-                    {
-                        Id = $"AUD-{audit.AuditId.ToString().Substring(0, 8).ToUpper()}",
-                        Store = ExtractStoreName(audit.StoreInfo),
-                        Auditor = auditor?.Username ?? "Unknown",
-                        Status = FormatStatus(audit.Status),
-                        Score = audit.Score,
-                        Date = audit.CreatedAt.ToString("yyyy-MM-dd")
-                    };
+                    Id = $"AUD-{audit.AuditId.ToString().Substring(0, 8).ToUpper()}",
+                    Store = ExtractStoreName(audit.StoreInfo),
+                    Auditor = auditor?.Username ?? "Unknown",
+                    Status = FormatStatus(audit.Status),
+                    Score = audit.Score,
+                    Date = audit.CreatedAt.ToString("yyyy-MM-dd")
                 });
+            }
 
-            var results = await Task.WhenAll(recentAudits);
-            return results.ToList();
+            return result;
         }
 
         private async Task<List<UpcomingAssignmentDto>> GetUpcomingAssignmentsAsync(IEnumerable<Domain.Entities.Assignment> assignments)
@@ -178,25 +180,27 @@ namespace AuditSystem.Services
             var upcomingAssignments = assignments
                 .Where(a => a.Status == "pending" && a.DueDate > DateTime.UtcNow)
                 .OrderBy(a => a.DueDate)
-                .Take(5)
-                .Select(async assignment =>
+                .Take(5);
+
+            var result = new List<UpcomingAssignmentDto>();
+            
+            foreach (var assignment in upcomingAssignments)
+            {
+                var auditor = await _userRepository.GetByIdAsync(assignment.AssignedToId);
+                var template = await _templateRepository.GetByIdAsync(assignment.TemplateId);
+
+                result.Add(new UpcomingAssignmentDto
                 {
-                    var auditor = await _userRepository.GetByIdAsync(assignment.AssignedToId);
-                    var template = await _templateRepository.GetByIdAsync(assignment.TemplateId);
-
-                    return new UpcomingAssignmentDto
-                    {
-                        Id = $"ASG-{assignment.AssignmentId.ToString().Substring(0, 8).ToUpper()}",
-                        Template = template?.Name ?? "Unknown Template",
-                        Auditor = auditor?.Username ?? "Unknown",
-                        Store = ExtractStoreName(assignment.StoreInfo),
-                        DueDate = assignment.DueDate?.ToString("yyyy-MM-dd") ?? "No due date",
-                        Priority = assignment.Priority ?? "Medium"
-                    };
+                    Id = $"ASG-{assignment.AssignmentId.ToString().Substring(0, 8).ToUpper()}",
+                    Template = template?.Name ?? "Unknown Template",
+                    Auditor = auditor?.Username ?? "Unknown",
+                    Store = ExtractStoreName(assignment.StoreInfo),
+                    DueDate = assignment.DueDate?.ToString("yyyy-MM-dd") ?? "No due date",
+                    Priority = assignment.Priority ?? "Medium"
                 });
+            }
 
-            var results = await Task.WhenAll(upcomingAssignments);
-            return results.ToList();
+            return result;
         }
 
         private List<RegionalDataDto> GetRegionalData()
