@@ -156,6 +156,114 @@ namespace AuditSystem.API.Controllers
             }
         }
 
+        [HttpPost("validate-token")]
+        [AllowAnonymous]
+        public async Task<ActionResult<TokenValidationResponse>> ValidateToken(ValidateTokenRequest request)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(request.Token))
+                {
+                    return BadRequest(new { message = "Token is required" });
+                }
+
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.ASCII.GetBytes(_configuration["JWT:Secret"]);
+
+                var validationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = true,
+                    ValidIssuer = _configuration["JWT:Issuer"],
+                    ValidateAudience = true,
+                    ValidAudience = _configuration["JWT:Audience"],
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero
+                };
+
+                SecurityToken validatedToken;
+                ClaimsPrincipal claimsPrincipal;
+
+                try
+                {
+                    claimsPrincipal = tokenHandler.ValidateToken(request.Token, validationParameters, out validatedToken);
+                }
+                catch (SecurityTokenExpiredException)
+                {
+                    return Unauthorized(new { message = "Token has expired" });
+                }
+                catch (SecurityTokenInvalidSignatureException)
+                {
+                    return Unauthorized(new { message = "Invalid token signature" });
+                }
+                catch (SecurityTokenInvalidIssuerException)
+                {
+                    return Unauthorized(new { message = "Invalid token issuer" });
+                }
+                catch (SecurityTokenInvalidAudienceException)
+                {
+                    return Unauthorized(new { message = "Invalid token audience" });
+                }
+                catch (Exception)
+                {
+                    return Unauthorized(new { message = "Invalid token" });
+                }
+
+                // Extract user information from claims
+                var userIdClaim = claimsPrincipal.FindFirst(ClaimTypes.NameIdentifier);
+                var usernameClaim = claimsPrincipal.FindFirst(ClaimTypes.Name);
+                var firstNameClaim = claimsPrincipal.FindFirst(ClaimTypes.GivenName);
+                var lastNameClaim = claimsPrincipal.FindFirst(ClaimTypes.Surname);
+                var roleClaim = claimsPrincipal.FindFirst(ClaimTypes.Role);
+                var emailClaim = claimsPrincipal.FindFirst(ClaimTypes.Email);
+                var organisationIdClaim = claimsPrincipal.FindFirst("organisation_id");
+
+                if (userIdClaim == null || usernameClaim == null)
+                {
+                    return Unauthorized(new { message = "Token missing required claims" });
+                }
+
+                // Verify user still exists and is active
+                try
+                {
+                    var user = await _userService.GetUserByIdAsync(Guid.Parse(userIdClaim.Value));
+                    if (user == null)
+                    {
+                        return Unauthorized(new { message = "User not found" });
+                    }
+
+                    if (!user.IsActive)
+                    {
+                        return Unauthorized(new { message = "User account is deactivated" });
+                    }
+
+                    return Ok(new TokenValidationResponse
+                    {
+                        IsValid = true,
+                        UserId = user.UserId,
+                        Username = user.Username,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        Email = user.Email,
+                        Role = user.Role,
+                        OrganisationId = user.OrganisationId,
+                        ExpiresAt = validatedToken.ValidTo
+                    });
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Error validating user during token validation for user ID: {UserId}", userIdClaim.Value);
+                    return Unauthorized(new { message = "Error validating user" });
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error during token validation");
+                return StatusCode(500, new { message = "An unexpected error occurred during token validation" });
+            }
+        }
+
         private string GenerateJwtToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -234,5 +342,23 @@ namespace AuditSystem.API.Controllers
         public string LastName { get; set; }
         public string Token { get; set; }
         public string Role { get; set; }
+    }
+
+    public class ValidateTokenRequest
+    {
+        public string Token { get; set; }
+    }
+
+    public class TokenValidationResponse
+    {
+        public bool IsValid { get; set; }
+        public Guid UserId { get; set; }
+        public string Username { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string Role { get; set; }
+        public Guid? OrganisationId { get; set; }
+        public DateTime ExpiresAt { get; set; }
     }
 } 
