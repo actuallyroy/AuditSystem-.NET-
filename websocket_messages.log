@@ -1,0 +1,547 @@
+2025-07-10 11:10:21 - Starting persistent WebSocket listener for SignalR notifications
+2025-07-10 11:10:21 - Press Ctrl+C to exit
+2025-07-10 11:10:21 - Logging to: D:\MyWorks\RetailExecutionAuditSystem\AuditSystem\websocket_messages.log
+2025-07-10 11:10:21 - Attempting connection to SignalR hub: ws://localhost:8080/hubs/notifications?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyYzhlZjE0Yi04MDM4LTQ4NDEtOGE0MS0xMzEyMzZjNTUwODIiLCJ1bmlxdWVfbmFtZSI6ImpvaG5kb2UiLCJnaXZlbl9uYW1lIjoiSm9obiIsImZhbWlseV9uYW1lIjoiRG9lIiwicm9sZSI6ImF1ZGl0b3IiLCJlbWFpbCI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJvcmdhbmlzYXRpb25faWQiOiI4NWU3NDMzNi04M2MwLTQ3MWEtYWM5ZC1lOWQwOWQ3MjU2ZTQiLCJuYmYiOjE3NTIxMjI1ODUsImV4cCI6MTc1MjE1MTM4NSwiaWF0IjoxNzUyMTIyNTg1LCJpc3MiOiJBdWRpdFN5c3RlbSIsImF1ZCI6IkF1ZGl0U3lzdGVtQ2xpZW50cyJ9.klCluTBp9r8p9G_k7kJ0jYkEPeIHwdjLcVB1JBVnGzs
+2025-07-10 11:10:21 - WebSocket connection established
+2025-07-10 11:10:21 - Sending handshake frame: '{"protocol":"json","version":1}\x1e'
+2025-07-10 11:10:21 - Handshake sent
+2025-07-10 11:10:21 - Handshake response: {}
+2025-07-10 11:10:21 - Sending subscribe message: {"type": 1, "target": "SubscribeToUser", "arguments": ["2c8ef14b-8038-4841-8a41-131236c55082"]}
+2025-07-10 11:10:21 - Subscribe message sent
+2025-07-10 11:10:21 - === MESSAGE #1 ===
+2025-07-10 11:10:21 - Raw message: {"type":1,"target":"Heartbeat","arguments":[{"timestamp":"2025-07-10T05:40:21.857286Z"}]}
+2025-07-10 11:10:21 - === END MESSAGE #1 ===
+
+2025-07-10 11:10:21 - === MESSAGE #2 ===
+2025-07-10 11:10:21 - Raw message: {"type":1,"target":"UnreadCount","arguments":[5]}
+2025-07-10 11:10:21 - === END MESSAGE #2 ===
+
+2025-07-10 11:10:23 - === MESSAGE #3 ===
+2025-07-10 11:10:23 - Raw message: {"type":1,"target":"ReceiveNotification","arguments":[{"notificationId":"27077d2b-0a99-4d1a-a1b8-5516065f5f76","type":"assignment","title":"Test Notification 2","message":"This is another test notification","priority":"high","timestamp":"2025-07-10T05:40:19.238887Z","userId":"2c8ef14b-8038-4841-8a41-131236c55082","organisationId":"85e74336-83c0-471a-ac9d-e9d09d7256e4"}]}
+2025-07-10 11:10:23 - === END MESSAGE #3 ===
+
+2025-07-10 11:10:32 - === MESSAGE #4 ===
+2025-07-10 11:10:32 - Raw message: {"type":6}
+2025-07-10 11:10:32 - === END MESSAGE #4 ===
+
+2025-07-10 11:10:42 - === MESSAGE #5 ===
+2025-07-10 11:10:42 - Raw message: {"type":6}
+2025-07-10 11:10:42 - === END MESSAGE #5 ===
+
+2025-07-10 11:10:53 - === MESSAGE #6 ===
+2025-07-10 11:10:53 - Raw message: {"type":6}
+2025-07-10 11:10:53 - === END MESSAGE #6 ===
+
+2025-07-10 11:11:04 - === MESSAGE #7 ===
+2025-07-10 11:11:04 - Raw message: {"type":6}
+2025-07-10 11:11:04 - === END MESSAGE #7 ===
+
+2025-07-10 11:11:15 - === MESSAGE #8 ===
+2025-07-10 11:11:15 - Raw message: {"type":6}
+2025-07-10 11:11:15 - === END MESSAGE #8 ===
+
+2025-07-10 11:11:25 - === MESSAGE #9 ===
+2025-07-10 11:11:25 - Raw message: {"type":6}
+2025-07-10 11:11:25 - === END MESSAGE #9 ===
+
+2025-07-10 11:11:48 - Starting persistent WebSocket listener for SignalR notifications
+2025-07-10 11:11:48 - Press Ctrl+C to exit
+2025-07-10 11:11:48 - Logging to: D:\MyWorks\RetailExecutionAuditSystem\AuditSystem\websocket_messages.log
+2025-07-10 11:11:48 - Attempting connection to SignalR hub: ws://localhost:8080/hubs/notifications?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyYzhlZjE0Yi04MDM4LTQ4NDEtOGE0MS0xMzEyMzZjNTUwODIiLCJ1bmlxdWVfbmFtZSI6ImpvaG5kb2UiLCJnaXZlbl9uYW1lIjoiSm9obiIsImZhbWlseV9uYW1lIjoiRG9lIiwicm9sZSI6ImF1ZGl0b3IiLCJlbWFpbCI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJvcmdhbmlzYXRpb25faWQiOiI4NWU3NDMzNi04M2MwLTQ3MWEtYWM5ZC1lOWQwOWQ3MjU2ZTQiLCJuYmYiOjE3NTIxMjI1ODUsImV4cCI6MTc1MjE1MTM4NSwiaWF0IjoxNzUyMTIyNTg1LCJpc3MiOiJBdWRpdFN5c3RlbSIsImF1ZCI6IkF1ZGl0U3lzdGVtQ2xpZW50cyJ9.klCluTBp9r8p9G_k7kJ0jYkEPeIHwdjLcVB1JBVnGzs
+2025-07-10 11:11:48 - WebSocket connection established
+2025-07-10 11:11:48 - Sending handshake frame: '{"protocol":"json","version":1}\x1e'
+2025-07-10 11:11:48 - Handshake sent
+2025-07-10 11:11:48 - Handshake response: {}
+2025-07-10 11:11:48 - Sending subscribe message: {"type": 1, "target": "SubscribeToUser", "arguments": ["2c8ef14b-8038-4841-8a41-131236c55082"]}
+2025-07-10 11:11:48 - Subscribe message sent
+2025-07-10 11:11:48 - === MESSAGE #1 ===
+2025-07-10 11:11:48 - Raw message: {"type":1,"target":"Heartbeat","arguments":[{"timestamp":"2025-07-10T05:41:48.4242681Z"}]}
+2025-07-10 11:11:48 - Parsed JSON: {
+  "type": 1,
+  "target": "Heartbeat",
+  "arguments": [
+    {
+      "timestamp": "2025-07-10T05:41:48.4242681Z"
+    }
+  ]
+}
+2025-07-10 11:11:48 - *** HEARTBEAT: 2025-07-10T05:41:48.4242681Z ***
+2025-07-10 11:11:48 - === END MESSAGE #1 ===
+
+2025-07-10 11:11:48 - === MESSAGE #2 ===
+2025-07-10 11:11:48 - Raw message: {"type":1,"target":"UnreadCount","arguments":[5]}
+2025-07-10 11:11:48 - Parsed JSON: {
+  "type": 1,
+  "target": "UnreadCount",
+  "arguments": [
+    5
+  ]
+}
+2025-07-10 11:11:48 - *** UNREAD COUNT UPDATE: 5 ***
+2025-07-10 11:11:48 - === END MESSAGE #2 ===
+
+2025-07-10 11:11:54 - === MESSAGE #3 ===
+2025-07-10 11:11:54 - Raw message: {"type":1,"target":"ReceiveNotification","arguments":[{"notificationId":"596a195c-cea5-4e8d-9d7f-087a66c3f3ca","type":"assignment","title":"Test Notification 3","message":"This is the third test notification","priority":"high","timestamp":"2025-07-10T05:41:50.019095Z","userId":"2c8ef14b-8038-4841-8a41-131236c55082","organisationId":"85e74336-83c0-471a-ac9d-e9d09d7256e4"}]}
+2025-07-10 11:11:54 - Parsed JSON: {
+  "type": 1,
+  "target": "ReceiveNotification",
+  "arguments": [
+    {
+      "notificationId": "596a195c-cea5-4e8d-9d7f-087a66c3f3ca",
+      "type": "assignment",
+      "title": "Test Notification 3",
+      "message": "This is the third test notification",
+      "priority": "high",
+      "timestamp": "2025-07-10T05:41:50.019095Z",
+      "userId": "2c8ef14b-8038-4841-8a41-131236c55082",
+      "organisationId": "85e74336-83c0-471a-ac9d-e9d09d7256e4"
+    }
+  ]
+}
+2025-07-10 11:11:54 - *** NOTIFICATION RECEIVED ***
+2025-07-10 11:11:54 - Notification ID: 596a195c-cea5-4e8d-9d7f-087a66c3f3ca
+2025-07-10 11:11:54 - Title: Test Notification 3
+2025-07-10 11:11:54 - Message: This is the third test notification
+2025-07-10 11:11:54 - Type: assignment
+2025-07-10 11:11:54 - Priority: high
+2025-07-10 11:11:54 - === END MESSAGE #3 ===
+
+2025-07-10 11:11:59 - === MESSAGE #4 ===
+2025-07-10 11:11:59 - Raw message: {"type":6}
+2025-07-10 11:11:59 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:11:59 - === END MESSAGE #4 ===
+
+2025-07-10 11:12:10 - === MESSAGE #5 ===
+2025-07-10 11:12:10 - Raw message: {"type":6}
+2025-07-10 11:12:10 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:12:10 - === END MESSAGE #5 ===
+
+2025-07-10 11:12:12 - Starting persistent WebSocket listener for SignalR notifications
+2025-07-10 11:12:12 - Press Ctrl+C to exit
+2025-07-10 11:12:12 - Logging to: D:\MyWorks\RetailExecutionAuditSystem\AuditSystem\websocket_messages.log
+2025-07-10 11:12:12 - Attempting connection to SignalR hub: ws://localhost:8080/hubs/notifications?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyYzhlZjE0Yi04MDM4LTQ4NDEtOGE0MS0xMzEyMzZjNTUwODIiLCJ1bmlxdWVfbmFtZSI6ImpvaG5kb2UiLCJnaXZlbl9uYW1lIjoiSm9obiIsImZhbWlseV9uYW1lIjoiRG9lIiwicm9sZSI6ImF1ZGl0b3IiLCJlbWFpbCI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJvcmdhbmlzYXRpb25faWQiOiI4NWU3NDMzNi04M2MwLTQ3MWEtYWM5ZC1lOWQwOWQ3MjU2ZTQiLCJuYmYiOjE3NTIxMjI1ODUsImV4cCI6MTc1MjE1MTM4NSwiaWF0IjoxNzUyMTIyNTg1LCJpc3MiOiJBdWRpdFN5c3RlbSIsImF1ZCI6IkF1ZGl0U3lzdGVtQ2xpZW50cyJ9.klCluTBp9r8p9G_k7kJ0jYkEPeIHwdjLcVB1JBVnGzs
+2025-07-10 11:12:12 - WebSocket connection established
+2025-07-10 11:12:12 - Sending handshake frame: '{"protocol":"json","version":1}\x1e'
+2025-07-10 11:12:12 - Handshake sent
+2025-07-10 11:12:13 - Handshake response: {}
+2025-07-10 11:12:13 - Sending subscribe message: {"type": 1, "target": "SubscribeToUser", "arguments": ["2c8ef14b-8038-4841-8a41-131236c55082"]}
+2025-07-10 11:12:13 - Subscribe message sent
+2025-07-10 11:12:13 - === MESSAGE #1 ===
+2025-07-10 11:12:13 - Raw message: {"type":1,"target":"Heartbeat","arguments":[{"timestamp":"2025-07-10T05:42:13.0164122Z"}]}
+2025-07-10 11:12:13 - Parsed JSON: {
+  "type": 1,
+  "target": "Heartbeat",
+  "arguments": [
+    {
+      "timestamp": "2025-07-10T05:42:13.0164122Z"
+    }
+  ]
+}
+2025-07-10 11:12:13 - *** HEARTBEAT: 2025-07-10T05:42:13.0164122Z ***
+2025-07-10 11:12:13 - === END MESSAGE #1 ===
+
+2025-07-10 11:12:13 - === MESSAGE #2 ===
+2025-07-10 11:12:13 - Raw message: {"type":1,"target":"UnreadCount","arguments":[6]}
+2025-07-10 11:12:13 - Parsed JSON: {
+  "type": 1,
+  "target": "UnreadCount",
+  "arguments": [
+    6
+  ]
+}
+2025-07-10 11:12:13 - *** UNREAD COUNT UPDATE: 6 ***
+2025-07-10 11:12:13 - === END MESSAGE #2 ===
+
+2025-07-10 11:12:21 - === MESSAGE #6 ===
+2025-07-10 11:12:21 - Raw message: {"type":6}
+2025-07-10 11:12:21 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:12:21 - === END MESSAGE #6 ===
+
+2025-07-10 11:12:23 - === MESSAGE #3 ===
+2025-07-10 11:12:23 - Raw message: {"type":6}
+2025-07-10 11:12:23 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:12:23 - === END MESSAGE #3 ===
+
+2025-07-10 11:12:32 - === MESSAGE #7 ===
+2025-07-10 11:12:32 - Raw message: {"type":6}
+2025-07-10 11:12:32 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:12:32 - === END MESSAGE #7 ===
+
+2025-07-10 11:12:34 - === MESSAGE #4 ===
+2025-07-10 11:12:34 - Raw message: {"type":6}
+2025-07-10 11:12:34 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:12:34 - === END MESSAGE #4 ===
+
+2025-07-10 11:12:42 - === MESSAGE #8 ===
+2025-07-10 11:12:42 - Raw message: {"type":6}
+2025-07-10 11:12:42 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:12:42 - === END MESSAGE #8 ===
+
+2025-07-10 11:12:45 - === MESSAGE #5 ===
+2025-07-10 11:12:45 - Raw message: {"type":6}
+2025-07-10 11:12:45 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:12:45 - === END MESSAGE #5 ===
+
+2025-07-10 11:25:09 - Starting persistent WebSocket listener for SignalR notifications
+2025-07-10 11:25:09 - Press Ctrl+C to exit
+2025-07-10 11:25:09 - Logging to: D:\MyWorks\RetailExecutionAuditSystem\AuditSystem\websocket_messages.log
+2025-07-10 11:25:09 - Attempting connection to SignalR hub: ws://localhost:8080/hubs/notifications?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyYzhlZjE0Yi04MDM4LTQ4NDEtOGE0MS0xMzEyMzZjNTUwODIiLCJ1bmlxdWVfbmFtZSI6ImpvaG5kb2UiLCJnaXZlbl9uYW1lIjoiSm9obiIsImZhbWlseV9uYW1lIjoiRG9lIiwicm9sZSI6ImF1ZGl0b3IiLCJlbWFpbCI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJvcmdhbmlzYXRpb25faWQiOiI4NWU3NDMzNi04M2MwLTQ3MWEtYWM5ZC1lOWQwOWQ3MjU2ZTQiLCJuYmYiOjE3NTIxMjI1ODUsImV4cCI6MTc1MjE1MTM4NSwiaWF0IjoxNzUyMTIyNTg1LCJpc3MiOiJBdWRpdFN5c3RlbSIsImF1ZCI6IkF1ZGl0U3lzdGVtQ2xpZW50cyJ9.klCluTBp9r8p9G_k7kJ0jYkEPeIHwdjLcVB1JBVnGzs
+2025-07-10 11:25:09 - WebSocket connection established
+2025-07-10 11:25:09 - Sending handshake frame: '{"protocol":"json","version":1}\x1e'
+2025-07-10 11:25:09 - Handshake sent
+2025-07-10 11:25:09 - Handshake response: {}
+2025-07-10 11:25:09 - Sending subscribe message: {"type": 1, "target": "SubscribeToUser", "arguments": ["2c8ef14b-8038-4841-8a41-131236c55082"]}
+2025-07-10 11:25:09 - Subscribe message sent
+2025-07-10 11:25:09 - === MESSAGE #1 ===
+2025-07-10 11:25:09 - Raw message: {"type":1,"target":"Heartbeat","arguments":[{"timestamp":"2025-07-10T05:55:09.7376407Z"}]}
+2025-07-10 11:25:09 - Parsed JSON: {
+  "type": 1,
+  "target": "Heartbeat",
+  "arguments": [
+    {
+      "timestamp": "2025-07-10T05:55:09.7376407Z"
+    }
+  ]
+}
+2025-07-10 11:25:09 - *** HEARTBEAT: 2025-07-10T05:55:09.7376407Z ***
+2025-07-10 11:25:09 - === END MESSAGE #1 ===
+
+2025-07-10 11:25:09 - === MESSAGE #2 ===
+2025-07-10 11:25:09 - Raw message: {"type":1,"target":"UnreadCount","arguments":[7]}
+2025-07-10 11:25:09 - Parsed JSON: {
+  "type": 1,
+  "target": "UnreadCount",
+  "arguments": [
+    7
+  ]
+}
+2025-07-10 11:25:09 - *** UNREAD COUNT UPDATE: 7 ***
+2025-07-10 11:25:09 - === END MESSAGE #2 ===
+
+2025-07-10 11:25:13 - === MESSAGE #3 ===
+2025-07-10 11:25:13 - Raw message: {"type":1,"target":"ReceiveNotification","arguments":[{"notificationId":"7f10051c-cb62-46c3-a710-90b6377b7613","type":"assignment","title":"Enhanced Notification Test","message":"This notification tests the new delivery acknowledgment system","priority":"high","timestamp":"2025-07-10T05:55:08.592714Z","userId":"2c8ef14b-8038-4841-8a41-131236c55082","organisationId":"85e74336-83c0-471a-ac9d-e9d09d7256e4"}]}
+2025-07-10 11:25:13 - Parsed JSON: {
+  "type": 1,
+  "target": "ReceiveNotification",
+  "arguments": [
+    {
+      "notificationId": "7f10051c-cb62-46c3-a710-90b6377b7613",
+      "type": "assignment",
+      "title": "Enhanced Notification Test",
+      "message": "This notification tests the new delivery acknowledgment system",
+      "priority": "high",
+      "timestamp": "2025-07-10T05:55:08.592714Z",
+      "userId": "2c8ef14b-8038-4841-8a41-131236c55082",
+      "organisationId": "85e74336-83c0-471a-ac9d-e9d09d7256e4"
+    }
+  ]
+}
+2025-07-10 11:25:13 - *** NOTIFICATION RECEIVED ***
+2025-07-10 11:25:13 - Notification ID: 7f10051c-cb62-46c3-a710-90b6377b7613
+2025-07-10 11:25:13 - Title: Enhanced Notification Test
+2025-07-10 11:25:13 - Message: This notification tests the new delivery acknowledgment system
+2025-07-10 11:25:13 - Type: assignment
+2025-07-10 11:25:13 - Priority: high
+2025-07-10 11:25:13 - Sent delivery acknowledgment for notification: 7f10051c-cb62-46c3-a710-90b6377b7613
+2025-07-10 11:25:13 - *** DELIVERY ACKNOWLEDGED FOR: 7f10051c-cb62-46c3-a710-90b6377b7613 ***
+2025-07-10 11:25:13 - === END MESSAGE #3 ===
+
+2025-07-10 11:25:13 - === MESSAGE #4 ===
+2025-07-10 11:25:13 - Raw message: {"type":1,"target":"DeliveryAcknowledged","arguments":[{"notificationId":"7f10051c-cb62-46c3-a710-90b6377b7613","acknowledgedAt":"2025-07-10T05:55:13.4258077Z"}]}
+2025-07-10 11:25:13 - Parsed JSON: {
+  "type": 1,
+  "target": "DeliveryAcknowledged",
+  "arguments": [
+    {
+      "notificationId": "7f10051c-cb62-46c3-a710-90b6377b7613",
+      "acknowledgedAt": "2025-07-10T05:55:13.4258077Z"
+    }
+  ]
+}
+2025-07-10 11:25:13 - *** DELIVERY ACKNOWLEDGMENT CONFIRMED: 7f10051c-cb62-46c3-a710-90b6377b7613 ***
+2025-07-10 11:25:13 - === END MESSAGE #4 ===
+
+2025-07-10 11:25:13 - === MESSAGE #5 ===
+2025-07-10 11:25:13 - Raw message: {"type":3,"invocationId":"7bd0f580-793b-41f2-a919-fe0a01e75a61","result":null}
+2025-07-10 11:25:13 - Parsed JSON: {
+  "type": 3,
+  "invocationId": "7bd0f580-793b-41f2-a919-fe0a01e75a61",
+  "result": null
+}
+2025-07-10 11:25:13 - === END MESSAGE #5 ===
+
+2025-07-10 11:25:19 - === MESSAGE #6 ===
+2025-07-10 11:25:19 - Raw message: {"type":6}
+2025-07-10 11:25:19 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:25:19 - === END MESSAGE #6 ===
+
+2025-07-10 11:25:30 - === MESSAGE #7 ===
+2025-07-10 11:25:30 - Raw message: {"type":6}
+2025-07-10 11:25:30 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:25:30 - === END MESSAGE #7 ===
+
+2025-07-10 11:25:41 - === MESSAGE #8 ===
+2025-07-10 11:25:41 - Raw message: {"type":6}
+2025-07-10 11:25:41 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:25:41 - === END MESSAGE #8 ===
+
+2025-07-10 11:25:52 - === MESSAGE #9 ===
+2025-07-10 11:25:52 - Raw message: {"type":6}
+2025-07-10 11:25:52 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:25:52 - === END MESSAGE #9 ===
+
+2025-07-10 11:26:03 - === MESSAGE #10 ===
+2025-07-10 11:26:03 - Raw message: {"type":6}
+2025-07-10 11:26:03 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:26:03 - === END MESSAGE #10 ===
+
+2025-07-10 11:26:13 - === MESSAGE #11 ===
+2025-07-10 11:26:13 - Raw message: {"type":6}
+2025-07-10 11:26:13 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:26:13 - === END MESSAGE #11 ===
+
+2025-07-10 11:26:24 - === MESSAGE #12 ===
+2025-07-10 11:26:24 - Raw message: {"type":6}
+2025-07-10 11:26:24 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:26:24 - === END MESSAGE #12 ===
+
+2025-07-10 11:26:35 - === MESSAGE #13 ===
+2025-07-10 11:26:35 - Raw message: {"type":6}
+2025-07-10 11:26:35 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:26:35 - === END MESSAGE #13 ===
+
+2025-07-10 11:26:45 - === MESSAGE #14 ===
+2025-07-10 11:26:45 - Raw message: {"type":6}
+2025-07-10 11:26:45 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:26:45 - === END MESSAGE #14 ===
+
+2025-07-10 11:26:55 - === MESSAGE #15 ===
+2025-07-10 11:26:55 - Raw message: {"type":6}
+2025-07-10 11:26:55 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:26:55 - === END MESSAGE #15 ===
+
+2025-07-10 11:27:05 - === MESSAGE #16 ===
+2025-07-10 11:27:05 - Raw message: {"type":6}
+2025-07-10 11:27:05 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:27:05 - === END MESSAGE #16 ===
+
+2025-07-10 11:27:15 - === MESSAGE #17 ===
+2025-07-10 11:27:15 - Raw message: {"type":6}
+2025-07-10 11:27:15 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:27:15 - === END MESSAGE #17 ===
+
+2025-07-10 11:27:26 - === MESSAGE #18 ===
+2025-07-10 11:27:26 - Raw message: {"type":6}
+2025-07-10 11:27:26 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:27:26 - === END MESSAGE #18 ===
+
+2025-07-10 11:27:36 - === MESSAGE #19 ===
+2025-07-10 11:27:36 - Raw message: {"type":6}
+2025-07-10 11:27:36 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:27:36 - === END MESSAGE #19 ===
+
+2025-07-10 11:27:46 - === MESSAGE #20 ===
+2025-07-10 11:27:46 - Raw message: {"type":6}
+2025-07-10 11:27:46 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:27:46 - === END MESSAGE #20 ===
+
+2025-07-10 11:27:57 - === MESSAGE #21 ===
+2025-07-10 11:27:57 - Raw message: {"type":6}
+2025-07-10 11:27:57 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:27:57 - === END MESSAGE #21 ===
+
+2025-07-10 11:28:07 - === MESSAGE #22 ===
+2025-07-10 11:28:07 - Raw message: {"type":6}
+2025-07-10 11:28:07 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:28:07 - === END MESSAGE #22 ===
+
+2025-07-10 11:28:18 - === MESSAGE #23 ===
+2025-07-10 11:28:18 - Raw message: {"type":6}
+2025-07-10 11:28:18 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:28:18 - === END MESSAGE #23 ===
+
+2025-07-10 11:28:29 - === MESSAGE #24 ===
+2025-07-10 11:28:29 - Raw message: {"type":6}
+2025-07-10 11:28:29 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:28:29 - === END MESSAGE #24 ===
+
+2025-07-10 11:28:39 - === MESSAGE #25 ===
+2025-07-10 11:28:39 - Raw message: {"type":6}
+2025-07-10 11:28:39 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:28:39 - === END MESSAGE #25 ===
+
+2025-07-10 11:28:50 - === MESSAGE #26 ===
+2025-07-10 11:28:50 - Raw message: {"type":6}
+2025-07-10 11:28:50 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:28:50 - === END MESSAGE #26 ===
+
+2025-07-10 11:29:00 - === MESSAGE #27 ===
+2025-07-10 11:29:00 - Raw message: {"type":6}
+2025-07-10 11:29:00 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:29:00 - === END MESSAGE #27 ===
+
+2025-07-10 11:29:10 - === MESSAGE #28 ===
+2025-07-10 11:29:10 - Raw message: {"type":6}
+2025-07-10 11:29:10 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:29:10 - === END MESSAGE #28 ===
+
+2025-07-10 11:29:21 - === MESSAGE #29 ===
+2025-07-10 11:29:21 - Raw message: {"type":6}
+2025-07-10 11:29:21 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:29:22 - === END MESSAGE #29 ===
+
+2025-07-10 11:29:32 - === MESSAGE #30 ===
+2025-07-10 11:29:32 - Raw message: {"type":6}
+2025-07-10 11:29:32 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:29:32 - === END MESSAGE #30 ===
+
+2025-07-10 11:29:42 - === MESSAGE #31 ===
+2025-07-10 11:29:42 - Raw message: {"type":6}
+2025-07-10 11:29:42 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:29:42 - === END MESSAGE #31 ===
+
+2025-07-10 11:29:53 - === MESSAGE #32 ===
+2025-07-10 11:29:53 - Raw message: {"type":6}
+2025-07-10 11:29:53 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:29:53 - === END MESSAGE #32 ===
+
+2025-07-10 11:30:04 - === MESSAGE #33 ===
+2025-07-10 11:30:04 - Raw message: {"type":6}
+2025-07-10 11:30:04 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:30:04 - === END MESSAGE #33 ===
+
+2025-07-10 11:30:14 - === MESSAGE #34 ===
+2025-07-10 11:30:14 - Raw message: {"type":6}
+2025-07-10 11:30:14 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:30:14 - === END MESSAGE #34 ===
+
+2025-07-10 11:30:25 - === MESSAGE #35 ===
+2025-07-10 11:30:25 - Raw message: {"type":6}
+2025-07-10 11:30:25 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:30:25 - === END MESSAGE #35 ===
+
+2025-07-10 11:30:36 - === MESSAGE #36 ===
+2025-07-10 11:30:36 - Raw message: {"type":6}
+2025-07-10 11:30:36 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:30:36 - === END MESSAGE #36 ===
+
+2025-07-10 11:30:47 - === MESSAGE #37 ===
+2025-07-10 11:30:47 - Raw message: {"type":6}
+2025-07-10 11:30:47 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:30:47 - === END MESSAGE #37 ===
+
+2025-07-10 11:30:57 - === MESSAGE #38 ===
+2025-07-10 11:30:57 - Raw message: {"type":6}
+2025-07-10 11:30:57 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:30:57 - === END MESSAGE #38 ===
+
+2025-07-10 11:31:08 - === MESSAGE #39 ===
+2025-07-10 11:31:08 - Raw message: {"type":6}
+2025-07-10 11:31:08 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:31:08 - === END MESSAGE #39 ===
+
+2025-07-10 11:31:18 - === MESSAGE #40 ===
+2025-07-10 11:31:18 - Raw message: {"type":6}
+2025-07-10 11:31:18 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:31:18 - === END MESSAGE #40 ===
+
+2025-07-10 11:31:29 - === MESSAGE #41 ===
+2025-07-10 11:31:29 - Raw message: {"type":6}
+2025-07-10 11:31:29 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:31:29 - === END MESSAGE #41 ===
+
+2025-07-10 11:31:40 - === MESSAGE #42 ===
+2025-07-10 11:31:40 - Raw message: {"type":6}
+2025-07-10 11:31:40 - Parsed JSON: {
+  "type": 6
+}
+2025-07-10 11:31:40 - === END MESSAGE #42 ===
+

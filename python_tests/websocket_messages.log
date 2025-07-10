@@ -1,0 +1,528 @@
+2025-07-10 10:46:14 - Starting persistent WebSocket listener for SignalR notifications
+2025-07-10 10:46:14 - Press Ctrl+C to exit
+2025-07-10 10:46:14 - Logging to: D:\MyWorks\RetailExecutionAuditSystem\AuditSystem\python_tests\websocket_messages.log
+2025-07-10 10:46:14 - Attempting connection to SignalR hub: ws://localhost:8080/hubs/notifications?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyYzhlZjE0Yi04MDM4LTQ4NDEtOGE0MS0xMzEyMzZjNTUwODIiLCJ1bmlxdWVfbmFtZSI6ImpvaG5kb2UiLCJnaXZlbl9uYW1lIjoiSm9obiIsImZhbWlseV9uYW1lIjoiRG9lIiwicm9sZSI6ImF1ZGl0b3IiLCJlbWFpbCI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJvcmdhbmlzYXRpb25faWQiOiI4NWU3NDMzNi04M2MwLTQ3MWEtYWM5ZC1lOWQwOWQ3MjU2ZTQiLCJuYmYiOjE3NTIxMjI1ODUsImV4cCI6MTc1MjE1MTM4NSwiaWF0IjoxNzUyMTIyNTg1LCJpc3MiOiJBdWRpdFN5c3RlbSIsImF1ZCI6IkF1ZGl0U3lzdGVtQ2xpZW50cyJ9.klCluTBp9r8p9G_k7kJ0jYkEPeIHwdjLcVB1JBVnGzs
+2025-07-10 10:46:14 - WebSocket connection established
+2025-07-10 10:46:14 - Sending handshake frame: '{"protocol":"json","version":1}\x1e'
+2025-07-10 10:46:14 - Handshake sent
+2025-07-10 10:46:14 - Handshake response: {}
+2025-07-10 10:46:14 - Sending subscribe message: {"type": 1, "target": "SubscribeToUser", "arguments": ["2c8ef14b-8038-4841-8a41-131236c55082"]}
+2025-07-10 10:46:14 - Subscribe message sent
+2025-07-10 10:46:14 - === MESSAGE #1 ===
+2025-07-10 10:46:14 - Raw message: {"type":1,"target":"Heartbeat","arguments":[{"timestamp":"2025-07-10T05:16:14.6731963Z"}]}
+2025-07-10 10:46:14 - === END MESSAGE #1 ===
+
+2025-07-10 10:46:14 - === MESSAGE #2 ===
+2025-07-10 10:46:14 - Raw message: {"type":1,"target":"UnreadCount","arguments":[2]}
+2025-07-10 10:46:14 - === END MESSAGE #2 ===
+
+2025-07-10 10:46:25 - === MESSAGE #3 ===
+2025-07-10 10:46:25 - Raw message: {"type":6}
+2025-07-10 10:46:25 - === END MESSAGE #3 ===
+
+2025-07-10 10:46:36 - === MESSAGE #4 ===
+2025-07-10 10:46:36 - Raw message: {"type":6}
+2025-07-10 10:46:36 - === END MESSAGE #4 ===
+
+2025-07-10 10:46:47 - === MESSAGE #5 ===
+2025-07-10 10:46:47 - Raw message: {"type":6}
+2025-07-10 10:46:47 - === END MESSAGE #5 ===
+
+2025-07-10 10:46:57 - === MESSAGE #6 ===
+2025-07-10 10:46:57 - Raw message: {"type":6}
+2025-07-10 10:46:57 - === END MESSAGE #6 ===
+
+2025-07-10 10:47:08 - === MESSAGE #7 ===
+2025-07-10 10:47:08 - Raw message: {"type":6}
+2025-07-10 10:47:08 - === END MESSAGE #7 ===
+
+2025-07-10 10:47:19 - === MESSAGE #8 ===
+2025-07-10 10:47:19 - Raw message: {"type":6}
+2025-07-10 10:47:19 - === END MESSAGE #8 ===
+
+2025-07-10 10:47:30 - === MESSAGE #9 ===
+2025-07-10 10:47:30 - Raw message: {"type":6}
+2025-07-10 10:47:30 - === END MESSAGE #9 ===
+
+2025-07-10 10:47:41 - === MESSAGE #10 ===
+2025-07-10 10:47:41 - Raw message: {"type":6}
+2025-07-10 10:47:41 - === END MESSAGE #10 ===
+
+2025-07-10 10:47:51 - === MESSAGE #11 ===
+2025-07-10 10:47:51 - Raw message: {"type":6}
+2025-07-10 10:47:51 - === END MESSAGE #11 ===
+
+2025-07-10 10:48:02 - === MESSAGE #12 ===
+2025-07-10 10:48:02 - Raw message: {"type":6}
+2025-07-10 10:48:02 - === END MESSAGE #12 ===
+
+2025-07-10 10:48:12 - === MESSAGE #13 ===
+2025-07-10 10:48:12 - Raw message: {"type":6}
+2025-07-10 10:48:12 - === END MESSAGE #13 ===
+
+2025-07-10 10:48:23 - === MESSAGE #14 ===
+2025-07-10 10:48:23 - Raw message: {"type":6}
+2025-07-10 10:48:23 - === END MESSAGE #14 ===
+
+2025-07-10 10:48:33 - === MESSAGE #15 ===
+2025-07-10 10:48:33 - Raw message: {"type":6}
+2025-07-10 10:48:33 - === END MESSAGE #15 ===
+
+2025-07-10 10:48:44 - === MESSAGE #16 ===
+2025-07-10 10:48:44 - Raw message: {"type":6}
+2025-07-10 10:48:44 - === END MESSAGE #16 ===
+
+2025-07-10 10:48:55 - === MESSAGE #17 ===
+2025-07-10 10:48:55 - Raw message: {"type":6}
+2025-07-10 10:48:55 - === END MESSAGE #17 ===
+
+2025-07-10 10:49:05 - === MESSAGE #18 ===
+2025-07-10 10:49:05 - Raw message: {"type":6}
+2025-07-10 10:49:05 - === END MESSAGE #18 ===
+
+2025-07-10 10:49:16 - === MESSAGE #19 ===
+2025-07-10 10:49:16 - Raw message: {"type":6}
+2025-07-10 10:49:16 - === END MESSAGE #19 ===
+
+2025-07-10 10:49:27 - === MESSAGE #20 ===
+2025-07-10 10:49:27 - Raw message: {"type":6}
+2025-07-10 10:49:27 - === END MESSAGE #20 ===
+
+2025-07-10 10:49:38 - === MESSAGE #21 ===
+2025-07-10 10:49:38 - Raw message: {"type":6}
+2025-07-10 10:49:38 - === END MESSAGE #21 ===
+
+2025-07-10 10:49:48 - === MESSAGE #22 ===
+2025-07-10 10:49:48 - Raw message: {"type":6}
+2025-07-10 10:49:48 - === END MESSAGE #22 ===
+
+2025-07-10 10:49:58 - === MESSAGE #23 ===
+2025-07-10 10:49:58 - Raw message: {"type":6}
+2025-07-10 10:49:58 - === END MESSAGE #23 ===
+
+2025-07-10 10:50:09 - === MESSAGE #24 ===
+2025-07-10 10:50:09 - Raw message: {"type":6}
+2025-07-10 10:50:09 - === END MESSAGE #24 ===
+
+2025-07-10 10:50:20 - === MESSAGE #25 ===
+2025-07-10 10:50:20 - Raw message: {"type":6}
+2025-07-10 10:50:20 - === END MESSAGE #25 ===
+
+2025-07-10 10:50:31 - === MESSAGE #26 ===
+2025-07-10 10:50:31 - Raw message: {"type":6}
+2025-07-10 10:50:31 - === END MESSAGE #26 ===
+
+2025-07-10 10:50:41 - === MESSAGE #27 ===
+2025-07-10 10:50:41 - Raw message: {"type":6}
+2025-07-10 10:50:41 - === END MESSAGE #27 ===
+
+2025-07-10 10:50:52 - === MESSAGE #28 ===
+2025-07-10 10:50:52 - Raw message: {"type":6}
+2025-07-10 10:50:52 - === END MESSAGE #28 ===
+
+2025-07-10 10:51:02 - === MESSAGE #29 ===
+2025-07-10 10:51:02 - Raw message: {"type":6}
+2025-07-10 10:51:02 - === END MESSAGE #29 ===
+
+2025-07-10 10:51:13 - === MESSAGE #30 ===
+2025-07-10 10:51:13 - Raw message: {"type":6}
+2025-07-10 10:51:13 - === END MESSAGE #30 ===
+
+2025-07-10 10:51:20 - Connection closed by server
+2025-07-10 10:51:20 - Reconnecting in 2 seconds...
+2025-07-10 10:51:22 - Attempting connection to SignalR hub: ws://localhost:8080/hubs/notifications?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyYzhlZjE0Yi04MDM4LTQ4NDEtOGE0MS0xMzEyMzZjNTUwODIiLCJ1bmlxdWVfbmFtZSI6ImpvaG5kb2UiLCJnaXZlbl9uYW1lIjoiSm9obiIsImZhbWlseV9uYW1lIjoiRG9lIiwicm9sZSI6ImF1ZGl0b3IiLCJlbWFpbCI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJvcmdhbmlzYXRpb25faWQiOiI4NWU3NDMzNi04M2MwLTQ3MWEtYWM5ZC1lOWQwOWQ3MjU2ZTQiLCJuYmYiOjE3NTIxMjI1ODUsImV4cCI6MTc1MjE1MTM4NSwiaWF0IjoxNzUyMTIyNTg1LCJpc3MiOiJBdWRpdFN5c3RlbSIsImF1ZCI6IkF1ZGl0U3lzdGVtQ2xpZW50cyJ9.klCluTBp9r8p9G_k7kJ0jYkEPeIHwdjLcVB1JBVnGzs
+2025-07-10 10:51:26 - Connection error: [WinError 1225] The remote computer refused the network connection
+2025-07-10 10:51:26 - Reconnecting in 3.0 seconds...
+2025-07-10 10:51:29 - Attempting connection to SignalR hub: ws://localhost:8080/hubs/notifications?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyYzhlZjE0Yi04MDM4LTQ4NDEtOGE0MS0xMzEyMzZjNTUwODIiLCJ1bmlxdWVfbmFtZSI6ImpvaG5kb2UiLCJnaXZlbl9uYW1lIjoiSm9obiIsImZhbWlseV9uYW1lIjoiRG9lIiwicm9sZSI6ImF1ZGl0b3IiLCJlbWFpbCI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJvcmdhbmlzYXRpb25faWQiOiI4NWU3NDMzNi04M2MwLTQ3MWEtYWM5ZC1lOWQwOWQ3MjU2ZTQiLCJuYmYiOjE3NTIxMjI1ODUsImV4cCI6MTc1MjE1MTM4NSwiaWF0IjoxNzUyMTIyNTg1LCJpc3MiOiJBdWRpdFN5c3RlbSIsImF1ZCI6IkF1ZGl0U3lzdGVtQ2xpZW50cyJ9.klCluTBp9r8p9G_k7kJ0jYkEPeIHwdjLcVB1JBVnGzs
+2025-07-10 10:51:33 - Connection error: [WinError 1225] The remote computer refused the network connection
+2025-07-10 10:51:33 - Reconnecting in 4.5 seconds...
+2025-07-10 10:51:37 - Attempting connection to SignalR hub: ws://localhost:8080/hubs/notifications?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyYzhlZjE0Yi04MDM4LTQ4NDEtOGE0MS0xMzEyMzZjNTUwODIiLCJ1bmlxdWVfbmFtZSI6ImpvaG5kb2UiLCJnaXZlbl9uYW1lIjoiSm9obiIsImZhbWlseV9uYW1lIjoiRG9lIiwicm9sZSI6ImF1ZGl0b3IiLCJlbWFpbCI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJvcmdhbmlzYXRpb25faWQiOiI4NWU3NDMzNi04M2MwLTQ3MWEtYWM5ZC1lOWQwOWQ3MjU2ZTQiLCJuYmYiOjE3NTIxMjI1ODUsImV4cCI6MTc1MjE1MTM4NSwiaWF0IjoxNzUyMTIyNTg1LCJpc3MiOiJBdWRpdFN5c3RlbSIsImF1ZCI6IkF1ZGl0U3lzdGVtQ2xpZW50cyJ9.klCluTBp9r8p9G_k7kJ0jYkEPeIHwdjLcVB1JBVnGzs
+2025-07-10 10:51:41 - Connection error: [WinError 1225] The remote computer refused the network connection
+2025-07-10 10:51:41 - Reconnecting in 6.75 seconds...
+2025-07-10 10:51:48 - Attempting connection to SignalR hub: ws://localhost:8080/hubs/notifications?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyYzhlZjE0Yi04MDM4LTQ4NDEtOGE0MS0xMzEyMzZjNTUwODIiLCJ1bmlxdWVfbmFtZSI6ImpvaG5kb2UiLCJnaXZlbl9uYW1lIjoiSm9obiIsImZhbWlseV9uYW1lIjoiRG9lIiwicm9sZSI6ImF1ZGl0b3IiLCJlbWFpbCI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJvcmdhbmlzYXRpb25faWQiOiI4NWU3NDMzNi04M2MwLTQ3MWEtYWM5ZC1lOWQwOWQ3MjU2ZTQiLCJuYmYiOjE3NTIxMjI1ODUsImV4cCI6MTc1MjE1MTM4NSwiaWF0IjoxNzUyMTIyNTg1LCJpc3MiOiJBdWRpdFN5c3RlbSIsImF1ZCI6IkF1ZGl0U3lzdGVtQ2xpZW50cyJ9.klCluTBp9r8p9G_k7kJ0jYkEPeIHwdjLcVB1JBVnGzs
+2025-07-10 10:51:52 - Connection error: [WinError 1225] The remote computer refused the network connection
+2025-07-10 10:51:52 - Reconnecting in 10.125 seconds...
+2025-07-10 10:52:02 - Attempting connection to SignalR hub: ws://localhost:8080/hubs/notifications?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyYzhlZjE0Yi04MDM4LTQ4NDEtOGE0MS0xMzEyMzZjNTUwODIiLCJ1bmlxdWVfbmFtZSI6ImpvaG5kb2UiLCJnaXZlbl9uYW1lIjoiSm9obiIsImZhbWlseV9uYW1lIjoiRG9lIiwicm9sZSI6ImF1ZGl0b3IiLCJlbWFpbCI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJvcmdhbmlzYXRpb25faWQiOiI4NWU3NDMzNi04M2MwLTQ3MWEtYWM5ZC1lOWQwOWQ3MjU2ZTQiLCJuYmYiOjE3NTIxMjI1ODUsImV4cCI6MTc1MjE1MTM4NSwiaWF0IjoxNzUyMTIyNTg1LCJpc3MiOiJBdWRpdFN5c3RlbSIsImF1ZCI6IkF1ZGl0U3lzdGVtQ2xpZW50cyJ9.klCluTBp9r8p9G_k7kJ0jYkEPeIHwdjLcVB1JBVnGzs
+2025-07-10 10:52:06 - Connection error: [WinError 1225] The remote computer refused the network connection
+2025-07-10 10:52:06 - Reconnecting in 15.1875 seconds...
+2025-07-10 10:52:21 - Attempting connection to SignalR hub: ws://localhost:8080/hubs/notifications?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyYzhlZjE0Yi04MDM4LTQ4NDEtOGE0MS0xMzEyMzZjNTUwODIiLCJ1bmlxdWVfbmFtZSI6ImpvaG5kb2UiLCJnaXZlbl9uYW1lIjoiSm9obiIsImZhbWlseV9uYW1lIjoiRG9lIiwicm9sZSI6ImF1ZGl0b3IiLCJlbWFpbCI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJvcmdhbmlzYXRpb25faWQiOiI4NWU3NDMzNi04M2MwLTQ3MWEtYWM5ZC1lOWQwOWQ3MjU2ZTQiLCJuYmYiOjE3NTIxMjI1ODUsImV4cCI6MTc1MjE1MTM4NSwiaWF0IjoxNzUyMTIyNTg1LCJpc3MiOiJBdWRpdFN5c3RlbSIsImF1ZCI6IkF1ZGl0U3lzdGVtQ2xpZW50cyJ9.klCluTBp9r8p9G_k7kJ0jYkEPeIHwdjLcVB1JBVnGzs
+2025-07-10 10:52:25 - Connection error: [WinError 1225] The remote computer refused the network connection
+2025-07-10 10:52:25 - Reconnecting in 22.78125 seconds...
+2025-07-10 10:52:48 - Attempting connection to SignalR hub: ws://localhost:8080/hubs/notifications?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyYzhlZjE0Yi04MDM4LTQ4NDEtOGE0MS0xMzEyMzZjNTUwODIiLCJ1bmlxdWVfbmFtZSI6ImpvaG5kb2UiLCJnaXZlbl9uYW1lIjoiSm9obiIsImZhbWlseV9uYW1lIjoiRG9lIiwicm9sZSI6ImF1ZGl0b3IiLCJlbWFpbCI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJvcmdhbmlzYXRpb25faWQiOiI4NWU3NDMzNi04M2MwLTQ3MWEtYWM5ZC1lOWQwOWQ3MjU2ZTQiLCJuYmYiOjE3NTIxMjI1ODUsImV4cCI6MTc1MjE1MTM4NSwiaWF0IjoxNzUyMTIyNTg1LCJpc3MiOiJBdWRpdFN5c3RlbSIsImF1ZCI6IkF1ZGl0U3lzdGVtQ2xpZW50cyJ9.klCluTBp9r8p9G_k7kJ0jYkEPeIHwdjLcVB1JBVnGzs
+2025-07-10 10:52:52 - Connection error: [WinError 1225] The remote computer refused the network connection
+2025-07-10 10:52:52 - Reconnecting in 30 seconds...
+2025-07-10 10:53:22 - Attempting connection to SignalR hub: ws://localhost:8080/hubs/notifications?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyYzhlZjE0Yi04MDM4LTQ4NDEtOGE0MS0xMzEyMzZjNTUwODIiLCJ1bmlxdWVfbmFtZSI6ImpvaG5kb2UiLCJnaXZlbl9uYW1lIjoiSm9obiIsImZhbWlseV9uYW1lIjoiRG9lIiwicm9sZSI6ImF1ZGl0b3IiLCJlbWFpbCI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJvcmdhbmlzYXRpb25faWQiOiI4NWU3NDMzNi04M2MwLTQ3MWEtYWM5ZC1lOWQwOWQ3MjU2ZTQiLCJuYmYiOjE3NTIxMjI1ODUsImV4cCI6MTc1MjE1MTM4NSwiaWF0IjoxNzUyMTIyNTg1LCJpc3MiOiJBdWRpdFN5c3RlbSIsImF1ZCI6IkF1ZGl0U3lzdGVtQ2xpZW50cyJ9.klCluTBp9r8p9G_k7kJ0jYkEPeIHwdjLcVB1JBVnGzs
+2025-07-10 10:53:26 - Connection error: [WinError 1225] The remote computer refused the network connection
+2025-07-10 10:53:26 - Reconnecting in 30 seconds...
+2025-07-10 10:53:56 - Attempting connection to SignalR hub: ws://localhost:8080/hubs/notifications?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyYzhlZjE0Yi04MDM4LTQ4NDEtOGE0MS0xMzEyMzZjNTUwODIiLCJ1bmlxdWVfbmFtZSI6ImpvaG5kb2UiLCJnaXZlbl9uYW1lIjoiSm9obiIsImZhbWlseV9uYW1lIjoiRG9lIiwicm9sZSI6ImF1ZGl0b3IiLCJlbWFpbCI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJvcmdhbmlzYXRpb25faWQiOiI4NWU3NDMzNi04M2MwLTQ3MWEtYWM5ZC1lOWQwOWQ3MjU2ZTQiLCJuYmYiOjE3NTIxMjI1ODUsImV4cCI6MTc1MjE1MTM4NSwiaWF0IjoxNzUyMTIyNTg1LCJpc3MiOiJBdWRpdFN5c3RlbSIsImF1ZCI6IkF1ZGl0U3lzdGVtQ2xpZW50cyJ9.klCluTBp9r8p9G_k7kJ0jYkEPeIHwdjLcVB1JBVnGzs
+2025-07-10 10:54:00 - Connection error: [WinError 1225] The remote computer refused the network connection
+2025-07-10 10:54:00 - Reconnecting in 30 seconds...
+2025-07-10 10:54:30 - Attempting connection to SignalR hub: ws://localhost:8080/hubs/notifications?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyYzhlZjE0Yi04MDM4LTQ4NDEtOGE0MS0xMzEyMzZjNTUwODIiLCJ1bmlxdWVfbmFtZSI6ImpvaG5kb2UiLCJnaXZlbl9uYW1lIjoiSm9obiIsImZhbWlseV9uYW1lIjoiRG9lIiwicm9sZSI6ImF1ZGl0b3IiLCJlbWFpbCI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJvcmdhbmlzYXRpb25faWQiOiI4NWU3NDMzNi04M2MwLTQ3MWEtYWM5ZC1lOWQwOWQ3MjU2ZTQiLCJuYmYiOjE3NTIxMjI1ODUsImV4cCI6MTc1MjE1MTM4NSwiaWF0IjoxNzUyMTIyNTg1LCJpc3MiOiJBdWRpdFN5c3RlbSIsImF1ZCI6IkF1ZGl0U3lzdGVtQ2xpZW50cyJ9.klCluTBp9r8p9G_k7kJ0jYkEPeIHwdjLcVB1JBVnGzs
+2025-07-10 10:54:34 - Connection error: [WinError 1225] The remote computer refused the network connection
+2025-07-10 10:54:34 - Reconnecting in 30 seconds...
+2025-07-10 10:55:04 - Attempting connection to SignalR hub: ws://localhost:8080/hubs/notifications?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyYzhlZjE0Yi04MDM4LTQ4NDEtOGE0MS0xMzEyMzZjNTUwODIiLCJ1bmlxdWVfbmFtZSI6ImpvaG5kb2UiLCJnaXZlbl9uYW1lIjoiSm9obiIsImZhbWlseV9uYW1lIjoiRG9lIiwicm9sZSI6ImF1ZGl0b3IiLCJlbWFpbCI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJvcmdhbmlzYXRpb25faWQiOiI4NWU3NDMzNi04M2MwLTQ3MWEtYWM5ZC1lOWQwOWQ3MjU2ZTQiLCJuYmYiOjE3NTIxMjI1ODUsImV4cCI6MTc1MjE1MTM4NSwiaWF0IjoxNzUyMTIyNTg1LCJpc3MiOiJBdWRpdFN5c3RlbSIsImF1ZCI6IkF1ZGl0U3lzdGVtQ2xpZW50cyJ9.klCluTBp9r8p9G_k7kJ0jYkEPeIHwdjLcVB1JBVnGzs
+2025-07-10 10:55:08 - Connection error: [WinError 1225] The remote computer refused the network connection
+2025-07-10 10:55:09 - Reconnecting in 30 seconds...
+2025-07-10 10:55:39 - Attempting connection to SignalR hub: ws://localhost:8080/hubs/notifications?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyYzhlZjE0Yi04MDM4LTQ4NDEtOGE0MS0xMzEyMzZjNTUwODIiLCJ1bmlxdWVfbmFtZSI6ImpvaG5kb2UiLCJnaXZlbl9uYW1lIjoiSm9obiIsImZhbWlseV9uYW1lIjoiRG9lIiwicm9sZSI6ImF1ZGl0b3IiLCJlbWFpbCI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJvcmdhbmlzYXRpb25faWQiOiI4NWU3NDMzNi04M2MwLTQ3MWEtYWM5ZC1lOWQwOWQ3MjU2ZTQiLCJuYmYiOjE3NTIxMjI1ODUsImV4cCI6MTc1MjE1MTM4NSwiaWF0IjoxNzUyMTIyNTg1LCJpc3MiOiJBdWRpdFN5c3RlbSIsImF1ZCI6IkF1ZGl0U3lzdGVtQ2xpZW50cyJ9.klCluTBp9r8p9G_k7kJ0jYkEPeIHwdjLcVB1JBVnGzs
+2025-07-10 10:55:39 - Connection error: did not receive a valid HTTP response
+2025-07-10 10:55:39 - Reconnecting in 30 seconds...
+2025-07-10 10:56:09 - Attempting connection to SignalR hub: ws://localhost:8080/hubs/notifications?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyYzhlZjE0Yi04MDM4LTQ4NDEtOGE0MS0xMzEyMzZjNTUwODIiLCJ1bmlxdWVfbmFtZSI6ImpvaG5kb2UiLCJnaXZlbl9uYW1lIjoiSm9obiIsImZhbWlseV9uYW1lIjoiRG9lIiwicm9sZSI6ImF1ZGl0b3IiLCJlbWFpbCI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJvcmdhbmlzYXRpb25faWQiOiI4NWU3NDMzNi04M2MwLTQ3MWEtYWM5ZC1lOWQwOWQ3MjU2ZTQiLCJuYmYiOjE3NTIxMjI1ODUsImV4cCI6MTc1MjE1MTM4NSwiaWF0IjoxNzUyMTIyNTg1LCJpc3MiOiJBdWRpdFN5c3RlbSIsImF1ZCI6IkF1ZGl0U3lzdGVtQ2xpZW50cyJ9.klCluTBp9r8p9G_k7kJ0jYkEPeIHwdjLcVB1JBVnGzs
+2025-07-10 10:56:09 - WebSocket connection established
+2025-07-10 10:56:09 - Sending handshake frame: '{"protocol":"json","version":1}\x1e'
+2025-07-10 10:56:09 - Handshake sent
+2025-07-10 10:56:09 - Handshake response: {}
+2025-07-10 10:56:09 - Sending subscribe message: {"type": 1, "target": "SubscribeToUser", "arguments": ["2c8ef14b-8038-4841-8a41-131236c55082"]}
+2025-07-10 10:56:09 - Subscribe message sent
+2025-07-10 10:56:09 - === MESSAGE #1 ===
+2025-07-10 10:56:09 - Raw message: {"type":1,"target":"Heartbeat","arguments":[{"timestamp":"2025-07-10T05:26:09.5409207Z"}]}
+2025-07-10 10:56:09 - === END MESSAGE #1 ===
+
+2025-07-10 10:56:09 - === MESSAGE #2 ===
+2025-07-10 10:56:09 - Raw message: {"type":1,"target":"UnreadCount","arguments":[3]}
+2025-07-10 10:56:09 - === END MESSAGE #2 ===
+
+2025-07-10 10:56:19 - === MESSAGE #3 ===
+2025-07-10 10:56:19 - Raw message: {"type":6}
+2025-07-10 10:56:19 - === END MESSAGE #3 ===
+
+2025-07-10 10:56:30 - === MESSAGE #4 ===
+2025-07-10 10:56:30 - Raw message: {"type":6}
+2025-07-10 10:56:30 - === END MESSAGE #4 ===
+
+2025-07-10 10:56:41 - === MESSAGE #5 ===
+2025-07-10 10:56:41 - Raw message: {"type":6}
+2025-07-10 10:56:41 - === END MESSAGE #5 ===
+
+2025-07-10 10:56:51 - === MESSAGE #6 ===
+2025-07-10 10:56:51 - Raw message: {"type":6}
+2025-07-10 10:56:51 - === END MESSAGE #6 ===
+
+2025-07-10 10:57:02 - === MESSAGE #7 ===
+2025-07-10 10:57:02 - Raw message: {"type":6}
+2025-07-10 10:57:02 - === END MESSAGE #7 ===
+
+2025-07-10 10:57:12 - === MESSAGE #8 ===
+2025-07-10 10:57:12 - Raw message: {"type":6}
+2025-07-10 10:57:12 - === END MESSAGE #8 ===
+
+2025-07-10 10:57:23 - === MESSAGE #9 ===
+2025-07-10 10:57:23 - Raw message: {"type":6}
+2025-07-10 10:57:23 - === END MESSAGE #9 ===
+
+2025-07-10 10:57:34 - === MESSAGE #10 ===
+2025-07-10 10:57:34 - Raw message: {"type":6}
+2025-07-10 10:57:34 - === END MESSAGE #10 ===
+
+2025-07-10 10:57:44 - === MESSAGE #11 ===
+2025-07-10 10:57:44 - Raw message: {"type":6}
+2025-07-10 10:57:44 - === END MESSAGE #11 ===
+
+2025-07-10 10:57:54 - === MESSAGE #12 ===
+2025-07-10 10:57:55 - Raw message: {"type":6}
+2025-07-10 10:57:55 - === END MESSAGE #12 ===
+
+2025-07-10 10:58:05 - === MESSAGE #13 ===
+2025-07-10 10:58:05 - Raw message: {"type":6}
+2025-07-10 10:58:05 - === END MESSAGE #13 ===
+
+2025-07-10 10:58:15 - === MESSAGE #14 ===
+2025-07-10 10:58:15 - Raw message: {"type":6}
+2025-07-10 10:58:15 - === END MESSAGE #14 ===
+
+2025-07-10 10:58:26 - === MESSAGE #15 ===
+2025-07-10 10:58:26 - Raw message: {"type":6}
+2025-07-10 10:58:26 - === END MESSAGE #15 ===
+
+2025-07-10 10:58:36 - === MESSAGE #16 ===
+2025-07-10 10:58:36 - Raw message: {"type":6}
+2025-07-10 10:58:36 - === END MESSAGE #16 ===
+
+2025-07-10 10:58:47 - === MESSAGE #17 ===
+2025-07-10 10:58:47 - Raw message: {"type":6}
+2025-07-10 10:58:47 - === END MESSAGE #17 ===
+
+2025-07-10 10:58:57 - === MESSAGE #18 ===
+2025-07-10 10:58:57 - Raw message: {"type":6}
+2025-07-10 10:58:57 - === END MESSAGE #18 ===
+
+2025-07-10 10:59:07 - === MESSAGE #19 ===
+2025-07-10 10:59:07 - Raw message: {"type":6}
+2025-07-10 10:59:07 - === END MESSAGE #19 ===
+
+2025-07-10 10:59:18 - === MESSAGE #20 ===
+2025-07-10 10:59:18 - Raw message: {"type":6}
+2025-07-10 10:59:18 - === END MESSAGE #20 ===
+
+2025-07-10 10:59:29 - === MESSAGE #21 ===
+2025-07-10 10:59:29 - Raw message: {"type":6}
+2025-07-10 10:59:29 - === END MESSAGE #21 ===
+
+2025-07-10 10:59:40 - === MESSAGE #22 ===
+2025-07-10 10:59:40 - Raw message: {"type":6}
+2025-07-10 10:59:40 - === END MESSAGE #22 ===
+
+2025-07-10 10:59:50 - === MESSAGE #23 ===
+2025-07-10 10:59:50 - Raw message: {"type":6}
+2025-07-10 10:59:50 - === END MESSAGE #23 ===
+
+2025-07-10 11:00:00 - === MESSAGE #24 ===
+2025-07-10 11:00:00 - Raw message: {"type":6}
+2025-07-10 11:00:00 - === END MESSAGE #24 ===
+
+2025-07-10 11:00:10 - === MESSAGE #25 ===
+2025-07-10 11:00:10 - Raw message: {"type":6}
+2025-07-10 11:00:10 - === END MESSAGE #25 ===
+
+2025-07-10 11:00:20 - === MESSAGE #26 ===
+2025-07-10 11:00:20 - Raw message: {"type":6}
+2025-07-10 11:00:20 - === END MESSAGE #26 ===
+
+2025-07-10 11:00:31 - === MESSAGE #27 ===
+2025-07-10 11:00:31 - Raw message: {"type":6}
+2025-07-10 11:00:31 - === END MESSAGE #27 ===
+
+2025-07-10 11:00:42 - === MESSAGE #28 ===
+2025-07-10 11:00:42 - Raw message: {"type":6}
+2025-07-10 11:00:42 - === END MESSAGE #28 ===
+
+2025-07-10 11:00:52 - === MESSAGE #29 ===
+2025-07-10 11:00:52 - Raw message: {"type":6}
+2025-07-10 11:00:52 - === END MESSAGE #29 ===
+
+2025-07-10 11:01:02 - === MESSAGE #30 ===
+2025-07-10 11:01:02 - Raw message: {"type":6}
+2025-07-10 11:01:02 - === END MESSAGE #30 ===
+
+2025-07-10 11:01:13 - === MESSAGE #31 ===
+2025-07-10 11:01:13 - Raw message: {"type":6}
+2025-07-10 11:01:13 - === END MESSAGE #31 ===
+
+2025-07-10 11:01:24 - === MESSAGE #32 ===
+2025-07-10 11:01:24 - Raw message: {"type":6}
+2025-07-10 11:01:24 - === END MESSAGE #32 ===
+
+2025-07-10 11:01:35 - === MESSAGE #33 ===
+2025-07-10 11:01:35 - Raw message: {"type":6}
+2025-07-10 11:01:35 - === END MESSAGE #33 ===
+
+2025-07-10 11:01:45 - === MESSAGE #34 ===
+2025-07-10 11:01:46 - Raw message: {"type":6}
+2025-07-10 11:01:46 - === END MESSAGE #34 ===
+
+2025-07-10 11:01:55 - === MESSAGE #35 ===
+2025-07-10 11:01:56 - Raw message: {"type":6}
+2025-07-10 11:01:56 - === END MESSAGE #35 ===
+
+2025-07-10 11:02:06 - === MESSAGE #36 ===
+2025-07-10 11:02:06 - Raw message: {"type":6}
+2025-07-10 11:02:06 - === END MESSAGE #36 ===
+
+2025-07-10 11:02:17 - === MESSAGE #37 ===
+2025-07-10 11:02:17 - Raw message: {"type":6}
+2025-07-10 11:02:17 - === END MESSAGE #37 ===
+
+2025-07-10 11:02:28 - === MESSAGE #38 ===
+2025-07-10 11:02:28 - Raw message: {"type":6}
+2025-07-10 11:02:28 - === END MESSAGE #38 ===
+
+2025-07-10 11:02:39 - === MESSAGE #39 ===
+2025-07-10 11:02:39 - Raw message: {"type":6}
+2025-07-10 11:02:39 - === END MESSAGE #39 ===
+
+2025-07-10 11:02:49 - === MESSAGE #40 ===
+2025-07-10 11:02:49 - Raw message: {"type":6}
+2025-07-10 11:02:49 - === END MESSAGE #40 ===
+
+2025-07-10 11:02:59 - === MESSAGE #41 ===
+2025-07-10 11:02:59 - Raw message: {"type":6}
+2025-07-10 11:02:59 - === END MESSAGE #41 ===
+
+2025-07-10 11:03:09 - === MESSAGE #42 ===
+2025-07-10 11:03:10 - Raw message: {"type":6}
+2025-07-10 11:03:10 - === END MESSAGE #42 ===
+
+2025-07-10 11:03:20 - === MESSAGE #43 ===
+2025-07-10 11:03:20 - Raw message: {"type":6}
+2025-07-10 11:03:20 - === END MESSAGE #43 ===
+
+2025-07-10 11:03:30 - === MESSAGE #44 ===
+2025-07-10 11:03:31 - Raw message: {"type":6}
+2025-07-10 11:03:31 - === END MESSAGE #44 ===
+
+2025-07-10 11:03:41 - === MESSAGE #45 ===
+2025-07-10 11:03:41 - Raw message: {"type":6}
+2025-07-10 11:03:41 - === END MESSAGE #45 ===
+
+2025-07-10 11:03:51 - === MESSAGE #46 ===
+2025-07-10 11:03:51 - Raw message: {"type":6}
+2025-07-10 11:03:51 - === END MESSAGE #46 ===
+
+2025-07-10 11:04:01 - === MESSAGE #47 ===
+2025-07-10 11:04:01 - Raw message: {"type":6}
+2025-07-10 11:04:01 - === END MESSAGE #47 ===
+
+2025-07-10 11:04:12 - === MESSAGE #48 ===
+2025-07-10 11:04:12 - Raw message: {"type":6}
+2025-07-10 11:04:12 - === END MESSAGE #48 ===
+
+2025-07-10 11:04:23 - === MESSAGE #49 ===
+2025-07-10 11:04:23 - Raw message: {"type":6}
+2025-07-10 11:04:23 - === END MESSAGE #49 ===
+
+2025-07-10 11:04:33 - === MESSAGE #50 ===
+2025-07-10 11:04:33 - Raw message: {"type":6}
+2025-07-10 11:04:34 - === END MESSAGE #50 ===
+
+2025-07-10 11:04:44 - === MESSAGE #51 ===
+2025-07-10 11:04:44 - Raw message: {"type":6}
+2025-07-10 11:04:44 - === END MESSAGE #51 ===
+
+2025-07-10 11:04:54 - === MESSAGE #52 ===
+2025-07-10 11:04:54 - Raw message: {"type":6}
+2025-07-10 11:04:54 - === END MESSAGE #52 ===
+
+2025-07-10 11:05:05 - === MESSAGE #53 ===
+2025-07-10 11:05:05 - Raw message: {"type":6}
+2025-07-10 11:05:05 - === END MESSAGE #53 ===
+
+2025-07-10 11:05:16 - === MESSAGE #54 ===
+2025-07-10 11:05:17 - Raw message: {"type":6}
+2025-07-10 11:05:17 - === END MESSAGE #54 ===
+
+2025-07-10 11:05:26 - === MESSAGE #55 ===
+2025-07-10 11:05:27 - Raw message: {"type":6}
+2025-07-10 11:05:27 - === END MESSAGE #55 ===
+
+2025-07-10 11:05:36 - === MESSAGE #56 ===
+2025-07-10 11:05:36 - Raw message: {"type":6}
+2025-07-10 11:05:36 - === END MESSAGE #56 ===
+
+2025-07-10 11:05:47 - === MESSAGE #57 ===
+2025-07-10 11:05:47 - Raw message: {"type":6}
+2025-07-10 11:05:47 - === END MESSAGE #57 ===
+
+2025-07-10 11:05:48 - Connection closed by server
+2025-07-10 11:05:48 - Reconnecting in 30 seconds...
+2025-07-10 11:06:18 - Attempting connection to SignalR hub: ws://localhost:8080/hubs/notifications?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyYzhlZjE0Yi04MDM4LTQ4NDEtOGE0MS0xMzEyMzZjNTUwODIiLCJ1bmlxdWVfbmFtZSI6ImpvaG5kb2UiLCJnaXZlbl9uYW1lIjoiSm9obiIsImZhbWlseV9uYW1lIjoiRG9lIiwicm9sZSI6ImF1ZGl0b3IiLCJlbWFpbCI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJvcmdhbmlzYXRpb25faWQiOiI4NWU3NDMzNi04M2MwLTQ3MWEtYWM5ZC1lOWQwOWQ3MjU2ZTQiLCJuYmYiOjE3NTIxMjI1ODUsImV4cCI6MTc1MjE1MTM4NSwiaWF0IjoxNzUyMTIyNTg1LCJpc3MiOiJBdWRpdFN5c3RlbSIsImF1ZCI6IkF1ZGl0U3lzdGVtQ2xpZW50cyJ9.klCluTBp9r8p9G_k7kJ0jYkEPeIHwdjLcVB1JBVnGzs
+2025-07-10 11:06:19 - WebSocket connection established
+2025-07-10 11:06:19 - Sending handshake frame: '{"protocol":"json","version":1}\x1e'
+2025-07-10 11:06:19 - Handshake sent
+2025-07-10 11:06:19 - Handshake response: {}
+2025-07-10 11:06:19 - Sending subscribe message: {"type": 1, "target": "SubscribeToUser", "arguments": ["2c8ef14b-8038-4841-8a41-131236c55082"]}
+2025-07-10 11:06:19 - Subscribe message sent
+2025-07-10 11:06:19 - === MESSAGE #1 ===
+2025-07-10 11:06:19 - Raw message: {"type":1,"target":"Heartbeat","arguments":[{"timestamp":"2025-07-10T05:36:19.1296332Z"}]}
+2025-07-10 11:06:19 - === END MESSAGE #1 ===
+
+2025-07-10 11:06:19 - === MESSAGE #2 ===
+2025-07-10 11:06:19 - Raw message: {"type":1,"target":"UnreadCount","arguments":[3]}
+2025-07-10 11:06:19 - === END MESSAGE #2 ===
+
+2025-07-10 11:06:29 - === MESSAGE #3 ===
+2025-07-10 11:06:29 - Raw message: {"type":6}
+2025-07-10 11:06:29 - === END MESSAGE #3 ===
+
+2025-07-10 11:06:40 - === MESSAGE #4 ===
+2025-07-10 11:06:40 - Raw message: {"type":6}
+2025-07-10 11:06:40 - === END MESSAGE #4 ===
+
+2025-07-10 11:06:51 - === MESSAGE #5 ===
+2025-07-10 11:06:51 - Raw message: {"type":6}
+2025-07-10 11:06:51 - === END MESSAGE #5 ===
+
+2025-07-10 11:07:01 - === MESSAGE #6 ===
+2025-07-10 11:07:01 - Raw message: {"type":6}
+2025-07-10 11:07:01 - === END MESSAGE #6 ===
+
+2025-07-10 11:07:12 - === MESSAGE #7 ===
+2025-07-10 11:07:12 - Raw message: {"type":6}
+2025-07-10 11:07:12 - === END MESSAGE #7 ===
+
+2025-07-10 11:07:23 - === MESSAGE #8 ===
+2025-07-10 11:07:23 - Raw message: {"type":6}
+2025-07-10 11:07:23 - === END MESSAGE #8 ===
+
+2025-07-10 11:07:33 - === MESSAGE #9 ===
+2025-07-10 11:07:33 - Raw message: {"type":6}
+2025-07-10 11:07:33 - === END MESSAGE #9 ===
+
+2025-07-10 11:07:43 - === MESSAGE #10 ===
+2025-07-10 11:07:43 - Raw message: {"type":6}
+2025-07-10 11:07:43 - === END MESSAGE #10 ===
+
+2025-07-10 11:07:54 - === MESSAGE #11 ===
+2025-07-10 11:07:54 - Raw message: {"type":6}
+2025-07-10 11:07:54 - === END MESSAGE #11 ===
+
+2025-07-10 11:08:05 - === MESSAGE #12 ===
+2025-07-10 11:08:05 - Raw message: {"type":6}
+2025-07-10 11:08:05 - === END MESSAGE #12 ===
+
+2025-07-10 11:08:15 - === MESSAGE #13 ===
+2025-07-10 11:08:15 - Raw message: {"type":6}
+2025-07-10 11:08:15 - === END MESSAGE #13 ===
+
+2025-07-10 11:08:26 - === MESSAGE #14 ===
+2025-07-10 11:08:26 - Raw message: {"type":6}
+2025-07-10 11:08:26 - === END MESSAGE #14 ===
+
+2025-07-10 11:08:37 - === MESSAGE #15 ===
+2025-07-10 11:08:37 - Raw message: {"type":6}
+2025-07-10 11:08:37 - === END MESSAGE #15 ===
+
+2025-07-10 11:08:48 - === MESSAGE #16 ===
+2025-07-10 11:08:48 - Raw message: {"type":6}
+2025-07-10 11:08:48 - === END MESSAGE #16 ===
+
+2025-07-10 11:08:58 - === MESSAGE #17 ===
+2025-07-10 11:08:58 - Raw message: {"type":6}
+2025-07-10 11:08:58 - === END MESSAGE #17 ===
+
+2025-07-10 11:09:09 - === MESSAGE #18 ===
+2025-07-10 11:09:09 - Raw message: {"type":6}
+2025-07-10 11:09:09 - === END MESSAGE #18 ===
+
+2025-07-10 11:09:19 - === MESSAGE #19 ===
+2025-07-10 11:09:19 - Raw message: {"type":6}
+2025-07-10 11:09:19 - === END MESSAGE #19 ===
+
+2025-07-10 11:09:30 - === MESSAGE #20 ===
+2025-07-10 11:09:30 - Raw message: {"type":6}
+2025-07-10 11:09:30 - === END MESSAGE #20 ===
+
+2025-07-10 11:09:38 - === MESSAGE #21 ===
+2025-07-10 11:09:38 - Raw message: {"type":1,"target":"ReceiveNotification","arguments":[{"notificationId":"fc4d07cf-a27a-4e91-91d4-805021595aba","type":"assignment","title":"Test Notification","message":"This is a test notification","priority":"medium","timestamp":"2025-07-10T05:39:33.801244Z","userId":"2c8ef14b-8038-4841-8a41-131236c55082","organisationId":"85e74336-83c0-471a-ac9d-e9d09d7256e4"}]}
+2025-07-10 11:09:38 - === END MESSAGE #21 ===
+
+2025-07-10 11:09:40 - === MESSAGE #22 ===
+2025-07-10 11:09:40 - Raw message: {"type":6}
+2025-07-10 11:09:40 - === END MESSAGE #22 ===
+
+2025-07-10 11:09:51 - === MESSAGE #23 ===
+2025-07-10 11:09:51 - Raw message: {"type":6}
+2025-07-10 11:09:51 - === END MESSAGE #23 ===
+
+2025-07-10 11:10:01 - === MESSAGE #24 ===
+2025-07-10 11:10:01 - Raw message: {"type":6}
+2025-07-10 11:10:01 - === END MESSAGE #24 ===
+
+2025-07-10 11:10:12 - === MESSAGE #25 ===
+2025-07-10 11:10:12 - Raw message: {"type":6}
+2025-07-10 11:10:12 - === END MESSAGE #25 ===
+
+2025-07-10 11:10:22 - === MESSAGE #26 ===
+2025-07-10 11:10:22 - Raw message: {"type":6}
+2025-07-10 11:10:22 - === END MESSAGE #26 ===
+
+2025-07-10 11:10:23 - === MESSAGE #27 ===
+2025-07-10 11:10:23 - Raw message: {"type":1,"target":"ReceiveNotification","arguments":[{"notificationId":"27077d2b-0a99-4d1a-a1b8-5516065f5f76","type":"assignment","title":"Test Notification 2","message":"This is another test notification","priority":"high","timestamp":"2025-07-10T05:40:19.238887Z","userId":"2c8ef14b-8038-4841-8a41-131236c55082","organisationId":"85e74336-83c0-471a-ac9d-e9d09d7256e4"}]}
+2025-07-10 11:10:23 - === END MESSAGE #27 ===
+
+2025-07-10 11:10:33 - === MESSAGE #28 ===
+2025-07-10 11:10:33 - Raw message: {"type":6}
+2025-07-10 11:10:33 - === END MESSAGE #28 ===
+
+2025-07-10 11:10:43 - === MESSAGE #29 ===
+2025-07-10 11:10:43 - Raw message: {"type":6}
+2025-07-10 11:10:43 - === END MESSAGE #29 ===
+

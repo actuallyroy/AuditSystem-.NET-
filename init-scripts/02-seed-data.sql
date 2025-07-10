@@ -106,6 +106,53 @@ INSERT INTO audit (audit_id, template_id, auditor_id, organisation_id, status, s
      '{"latitude": 40.7128, "longitude": -74.0060, "accuracy": 5.0}',
      '{"store_name": "ACME Downtown Store", "address": "123 Main Street"}');
 
+-- Insert notification templates
+INSERT INTO notification_template (template_id, name, type, channel, subject, body, is_active, placeholders) VALUES 
+    ('11111111-1111-1111-1111-111111111111', 
+     'assignment_notification', 
+     'audit_assigned', 
+     'in_app', 
+     'New Audit Assignment', 
+     'Hello {user_name}, you have been assigned a new audit: {template_name}. Due date: {due_date}. Priority: {priority}. Please review and complete the assignment.', 
+     true, 
+     '["user_name", "template_name", "due_date", "priority"]'),
+    
+    ('22222222-2222-2222-2222-222222222222', 
+     'audit_completed_notification', 
+     'audit_completed', 
+     'in_app', 
+     'Audit Completed', 
+     'Hello {user_name}, the audit for {store_name} has been completed successfully. Thank you for your work!', 
+     true, 
+     '["user_name", "store_name"]'),
+    
+    ('33333333-3333-3333-3333-333333333333', 
+     'audit_approved_notification', 
+     'audit_reviewed', 
+     'in_app', 
+     'Audit Approved', 
+     'Hello {user_name}, your audit for {store_name} has been approved with a score of {score}. Critical issues found: {critical_issues}.', 
+     true, 
+     '["user_name", "store_name", "score", "critical_issues"]'),
+    
+    ('44444444-4444-4444-4444-444444444444', 
+     'audit_rejected_notification', 
+     'audit_reviewed', 
+     'in_app', 
+     'Audit Requires Revision', 
+     'Hello {user_name}, your audit for {store_name} requires revision. Reason: {reason}. Please review and resubmit.', 
+     true, 
+     '["user_name", "store_name", "reason"]'),
+    
+    ('55555555-5555-5555-5555-555555555555', 
+     'system_notification', 
+     'system_alert', 
+     'in_app', 
+     'System Alert', 
+     'System notification: {message}', 
+     true, 
+     '["message"]');
+
 -- Insert system logs for demonstration
 INSERT INTO log (log_id, entity_type, entity_id, action, user_id, metadata) VALUES 
     ('789abcde-f012-3456-7890-abcdef012345', 'Template', '123e4567-e89b-12d3-a456-426614174000', 'Created', '550e8400-e29b-41d4-a716-446655440001', '{"message": "Template created successfully"}'),

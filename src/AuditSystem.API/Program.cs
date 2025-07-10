@@ -6,11 +6,14 @@ using AuditSystem.Infrastructure.Repositories;
 using AuditSystem.Services;
 using AuditSystem.API.Authorization;
 using AuditSystem.API.SwaggerSchemaFilters;
+using AuditSystem.API.Hubs;
+using AuditSystem.API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
@@ -82,6 +85,10 @@ builder.Services.AddScoped<IAuditRepository, AuditRepository>();
 builder.Services.AddScoped<IOrganisationRepository, OrganisationRepository>();
 builder.Services.AddScoped<IRepository<AuditSystem.Domain.Entities.OrganisationInvitation>, Repository<AuditSystem.Domain.Entities.OrganisationInvitation>>();
 
+// Add notification repositories
+builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
+builder.Services.AddScoped<INotificationTemplateRepository, NotificationTemplateRepository>();
+
 // Add cache service with fallback
 builder.Services.AddScoped<ICacheService>(provider =>
 {
@@ -148,8 +155,22 @@ builder.Services.AddScoped<IOrganisationService>(provider =>
 builder.Services.AddScoped<DashboardCacheService>();
 builder.Services.AddScoped<IDashboardService, DashboardService>();
 
-// Add SignalR
-builder.Services.AddSignalR();
+// Add notification service
+builder.Services.AddScoped<INotificationService, NotificationService>();
+
+// Add RabbitMQ notification service and broadcast service
+builder.Services.AddHostedService<RabbitMQNotificationService>();
+builder.Services.AddHostedService<NotificationBroadcastService>();
+
+// Add SignalR with improved configuration
+builder.Services.AddSignalR(options =>
+{
+    options.EnableDetailedErrors = true;
+    options.ClientTimeoutInterval = TimeSpan.FromSeconds(30);
+    options.HandshakeTimeout = TimeSpan.FromSeconds(15);
+    options.KeepAliveInterval = TimeSpan.FromSeconds(10);
+    options.MaximumReceiveMessageSize = 1024 * 1024; // 1MB
+});
 
 // Add controllers with improved JSON options
 builder.Services.AddControllers()
@@ -189,7 +210,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             {
                 var accessToken = context.Request.Query["access_token"];
                 var path = context.HttpContext.Request.Path;
-                if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/notify"))
+                if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/hubs/notifications"))
                 {
                     context.Token = accessToken;
                 }
@@ -262,10 +283,16 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder =>
     {
-        builder.WithOrigins("http://localhost:19006", "http://localhost:3000", "http://localhost:4200", "http://localhost:8081")
-               .AllowAnyMethod()
-               .AllowAnyHeader()
-               .AllowCredentials();
+        builder.WithOrigins(
+                "http://localhost:19006", 
+                "http://localhost:3000", 
+                "http://localhost:4200", 
+                "http://localhost:8081",
+                "https://test.scorptech.co"
+            )
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials();
     });
 });
 
@@ -318,6 +345,9 @@ app.UseRateLimiter();
 
 // Add a route group for API versioning
 app.MapControllers().RequireAuthorization();
+
+// Add SignalR hub
+app.MapHub<NotificationHub>("/hubs/notifications");
 
 // Add health check endpoint
 app.MapGet("/health", () => "Healthy").AllowAnonymous();
