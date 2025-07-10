@@ -99,5 +99,14 @@ namespace AuditSystem.Infrastructure.Repositories
                 .OrderByDescending(a => a.CreatedAt)
                 .ToListAsync();
         }
+
+        public async Task<Audit?> GetAuditByAssignmentIdAsync(Guid assignmentId)
+        {
+            return await _context.Audits
+                .Include(a => a.Template)
+                .Include(a => a.Auditor)
+                .Include(a => a.Organisation)
+                .FirstOrDefaultAsync(a => a.AssignmentId == assignmentId);
+        }
     }
 } 

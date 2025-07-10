@@ -14,5 +14,6 @@ namespace AuditSystem.Domain.Repositories
         Task<IEnumerable<Audit>> GetAuditsPendingSyncAsync();
         Task<IEnumerable<Audit>> GetFlaggedAuditsAsync();
         Task<IEnumerable<Audit>> GetAuditsByDateRangeAsync(DateTime startDate, DateTime endDate);
+        Task<Audit?> GetAuditByAssignmentIdAsync(Guid assignmentId);
     }
 } 

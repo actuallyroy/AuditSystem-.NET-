@@ -105,6 +105,39 @@ namespace AuditSystem.API.Models
         public bool? IsFlagged { get; set; }
     }
 
+    public class UpdateAuditDto
+    {
+        /// <summary>
+        /// Audit responses as JSON object matching the template questions
+        /// </summary>
+        public JsonElement? Responses { get; set; }
+        
+        /// <summary>
+        /// Media attachments as JSON object (photos, videos, etc.)
+        /// </summary>
+        public JsonElement? Media { get; set; }
+        
+        /// <summary>
+        /// Store information as JSON object
+        /// </summary>
+        public JsonElement? StoreInfo { get; set; }
+        
+        /// <summary>
+        /// Location information as JSON object
+        /// </summary>
+        public JsonElement? Location { get; set; }
+        
+        /// <summary>
+        /// Number of critical issues identified
+        /// </summary>
+        public int? CriticalIssues { get; set; }
+        
+        /// <summary>
+        /// Audit status (draft, in_progress, submitted, completed)
+        /// </summary>
+        public string? Status { get; set; }
+    }
+
     public class AuditResponseDto
     {
         public Guid AuditId { get; set; }

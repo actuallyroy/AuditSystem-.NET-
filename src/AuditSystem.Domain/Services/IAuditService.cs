@@ -9,6 +9,7 @@ namespace AuditSystem.Domain.Services
     public interface IAuditService
     {
         Task<Audit> GetAuditByIdAsync(Guid auditId);
+        Task<Audit?> GetAuditByAssignmentAsync(Guid assignmentId);
         Task<IEnumerable<Audit>> GetAllAuditsAsync();
         Task<IEnumerable<Audit>> GetAuditsByAuditorAsync(Guid auditorId);
         Task<IEnumerable<Audit>> GetAuditsByOrganisationAsync(Guid organisationId);
@@ -22,6 +23,8 @@ namespace AuditSystem.Domain.Services
         Task<Audit> FlagAuditAsync(Guid auditId, bool isFlagged);
         Task<Audit> AddManagerNotesAsync(Guid auditId, string notes);
         Task<Audit> RecalculateAuditScoreAsync(Guid auditId);
+        Task<Audit> UpdateAuditAsync(Audit audit);
         Task<decimal> CalculateAuditScoreAsync(Audit audit);
+        Task<bool> DeleteAuditAsync(Guid auditId);
     }
 } 

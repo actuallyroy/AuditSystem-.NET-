@@ -191,6 +191,14 @@ namespace AuditSystem.API.Controllers
                 if (assignment.AssignedToId != currentUserId && !isAdmin && !isManager)
                     return Forbid();
 
+                // Check if an audit already exists for this assignment
+                var existingAudit = await _auditService.GetAuditByAssignmentAsync(createDto.AssignmentId);
+                if (existingAudit != null)
+                {
+                    // Update the existing audit instead of creating a new one
+                    return await UpdateExistingAudit(existingAudit, createDto, currentUserId, isAdmin, isManager);
+                }
+
                 // Convert assignment to audit
                 JsonDocument storeInfo = null;
                 JsonDocument location = null;
@@ -457,6 +465,249 @@ namespace AuditSystem.API.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error recalculating score for audit with ID: {AuditId}", id);
+                return StatusCode(500, new { message = "Internal server error" });
+            }
+        }
+
+        [HttpPut("{id:guid}")]
+        [Authorize(Policy = "AllRoles")]
+        public async Task<ActionResult<AuditResponseDto>> UpdateAudit(Guid id, UpdateAuditDto updateDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            try
+            {
+                var existingAudit = await _auditService.GetAuditByIdAsync(id);
+                if (existingAudit == null)
+                    return NotFound(new { message = "Audit not found" });
+
+                var currentUserId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                var currentUserRole = User.FindFirstValue(ClaimTypes.Role) ?? "";
+
+                // Check if user can update this audit
+                var isAdmin = currentUserRole.Equals("Administrator", StringComparison.OrdinalIgnoreCase);
+                var isManager = currentUserRole.Equals("Manager", StringComparison.OrdinalIgnoreCase);
+                var isOwner = existingAudit.AuditorId == currentUserId;
+
+                if (!isAdmin && !isManager && !isOwner)
+                    return Forbid();
+
+                // Update audit fields
+                if (updateDto.Responses.HasValue)
+                {
+                    existingAudit.Responses = JsonDocument.Parse(updateDto.Responses.Value.GetRawText());
+                }
+
+                if (updateDto.Media.HasValue)
+                {
+                    existingAudit.Media = JsonDocument.Parse(updateDto.Media.Value.GetRawText());
+                }
+
+                if (updateDto.StoreInfo.HasValue)
+                {
+                    existingAudit.StoreInfo = JsonDocument.Parse(updateDto.StoreInfo.Value.GetRawText());
+                }
+
+                if (updateDto.Location.HasValue)
+                {
+                    existingAudit.Location = JsonDocument.Parse(updateDto.Location.Value.GetRawText());
+                }
+
+                if (updateDto.CriticalIssues.HasValue)
+                {
+                    existingAudit.CriticalIssues = updateDto.CriticalIssues.Value;
+                }
+
+                if (!string.IsNullOrEmpty(updateDto.Status))
+                {
+                    existingAudit.Status = updateDto.Status;
+                }
+
+                // Recalculate score if responses were updated
+                if (updateDto.Responses.HasValue)
+                {
+                    existingAudit.Score = await _auditService.CalculateAuditScoreAsync(existingAudit);
+                }
+
+                // Update the audit (not submit)
+                var updatedAudit = await _auditService.UpdateAuditAsync(existingAudit);
+                return Ok(MapToAuditResponseDto(updatedAudit));
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (JsonException ex)
+            {
+                return BadRequest(new { message = $"Invalid JSON format: {ex.Message}" });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error updating audit with ID: {AuditId}", id);
+                return StatusCode(500, new { message = "Internal server error" });
+            }
+        }
+
+        [HttpDelete("{id:guid}")]
+        [Authorize(Policy = "AdminOrManager")]
+        public async Task<ActionResult> DeleteAudit(Guid id)
+        {
+            try
+            {
+                var existingAudit = await _auditService.GetAuditByIdAsync(id);
+                if (existingAudit == null)
+                    return NotFound(new { message = "Audit not found" });
+
+                var currentUserId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                var currentUserRole = User.FindFirstValue(ClaimTypes.Role) ?? "";
+
+                // Check if user can delete this audit
+                var isAdmin = currentUserRole.Equals("Administrator", StringComparison.OrdinalIgnoreCase);
+                var isManager = currentUserRole.Equals("Manager", StringComparison.OrdinalIgnoreCase);
+                var isOwner = existingAudit.AuditorId == currentUserId;
+
+                if (!isAdmin && !isManager && !isOwner)
+                    return Forbid();
+
+                // Delete the audit
+                var success = await _auditService.DeleteAuditAsync(id);
+                if (success)
+                {
+                    return NoContent();
+                }
+                else
+                {
+                    return StatusCode(500, new { message = "Failed to delete audit" });
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error deleting audit with ID: {AuditId}", id);
+                return StatusCode(500, new { message = "Internal server error" });
+            }
+        }
+
+        private async Task<ActionResult<AuditResponseDto>> UpdateExistingAudit(Audit existingAudit, CreateAuditDto createDto, Guid currentUserId, bool isAdmin, bool isManager)
+        {
+            try
+            {
+                // Check if user can update this audit
+                if (existingAudit.AuditorId != currentUserId && !isAdmin && !isManager)
+                    return Forbid();
+
+                // Update store information
+                if (!string.IsNullOrEmpty(createDto.StoreName) || !string.IsNullOrEmpty(createDto.StoreLocation))
+                {
+                    var storeInfoJson = new Dictionary<string, object>();
+                    
+                    if (!string.IsNullOrEmpty(createDto.StoreName))
+                        storeInfoJson["storeName"] = createDto.StoreName;
+                        
+                    if (!string.IsNullOrEmpty(createDto.StoreLocation))
+                        storeInfoJson["storeLocation"] = createDto.StoreLocation;
+                    
+                    // Merge with existing store info if provided
+                    if (createDto.StoreInfo.HasValue)
+                    {
+                        var existingInfo = JsonSerializer.Deserialize<Dictionary<string, object>>(
+                            createDto.StoreInfo.Value.GetRawText());
+                        foreach (var kvp in existingInfo)
+                            storeInfoJson[kvp.Key] = kvp.Value;
+                    }
+                    
+                    existingAudit.StoreInfo = JsonDocument.Parse(JsonSerializer.Serialize(storeInfoJson));
+                }
+                else if (createDto.StoreInfo.HasValue)
+                {
+                    existingAudit.StoreInfo = JsonDocument.Parse(createDto.StoreInfo.Value.GetRawText());
+                }
+
+                // Update location information
+                if (createDto.Location.HasValue)
+                {
+                    existingAudit.Location = JsonDocument.Parse(createDto.Location.Value.GetRawText());
+                }
+
+                // Update responses if provided
+                if (createDto.Responses.HasValue)
+                {
+                    existingAudit.Responses = JsonDocument.Parse(createDto.Responses.Value.GetRawText());
+                    
+                    // Set critical issues count
+                    existingAudit.CriticalIssues = createDto.CriticalIssues ?? 0;
+                    
+                    // Calculate score if not provided
+                    if (createDto.Score.HasValue)
+                    {
+                        existingAudit.Score = createDto.Score.Value;
+                    }
+                    else
+                    {
+                        // Calculate score based on responses and template scoring rules
+                        existingAudit.Score = await _auditService.CalculateAuditScoreAsync(existingAudit);
+                    }
+                }
+
+                // Update media if provided
+                if (createDto.Media.HasValue)
+                {
+                    existingAudit.Media = JsonDocument.Parse(createDto.Media.Value.GetRawText());
+                }
+
+                // Update status if provided
+                if (!string.IsNullOrEmpty(createDto.Status))
+                {
+                    existingAudit.Status = createDto.Status;
+                }
+
+                // Save the audit to persist all changes (status, store info, location, etc.)
+                // If audit has responses, submit it to save all the data
+                if (createDto.Responses.HasValue)
+                {
+                    var responsesElement = createDto.Responses.Value;
+                    bool isEmpty = false;
+                    if (responsesElement.ValueKind == JsonValueKind.Object && responsesElement.EnumerateObject().MoveNext() == false)
+                    {
+                        isEmpty = true;
+                    }
+                    if (!isEmpty)
+                    {
+                        existingAudit = await _auditService.SubmitAuditAsync(existingAudit);
+                    }
+                    else
+                    {
+                        // Even if responses are empty, we need to save other changes
+                        existingAudit = await _auditService.UpdateAuditAsync(existingAudit);
+                    }
+                }
+                else
+                {
+                    // No responses provided, but we need to save other changes (status, store info, etc.)
+                    existingAudit = await _auditService.UpdateAuditAsync(existingAudit);
+                }
+
+                return Ok(MapToAuditResponseDto(existingAudit));
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Forbid();
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (JsonException ex)
+            {
+                return BadRequest(new { message = $"Invalid JSON format: {ex.Message}" });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error updating existing audit with ID: {AuditId}", existingAudit.AuditId);
                 return StatusCode(500, new { message = "Internal server error" });
             }
         }

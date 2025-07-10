@@ -38,6 +38,11 @@ namespace AuditSystem.Services
             return await _auditRepository.GetByIdAsync(auditId);
         }
 
+        public async Task<Audit?> GetAuditByAssignmentAsync(Guid assignmentId)
+        {
+            return await _auditRepository.GetAuditByAssignmentIdAsync(assignmentId);
+        }
+
         public async Task<IEnumerable<Audit>> GetAllAuditsAsync()
         {
             return await _auditRepository.GetAllAuditsWithNavigationPropertiesAsync();
@@ -294,6 +299,37 @@ namespace AuditSystem.Services
             return audit;
         }
 
+        public async Task<Audit> UpdateAuditAsync(Audit audit)
+        {
+            if (audit == null)
+                throw new ArgumentNullException(nameof(audit));
+
+            // Validate audit exists
+            var existingAudit = await _auditRepository.GetByIdAsync(audit.AuditId);
+            if (existingAudit == null)
+                throw new ArgumentException("Audit not found");
+
+            // Update audit with provided data
+            if (audit.StoreInfo != null)
+                existingAudit.StoreInfo = audit.StoreInfo;
+            if (audit.Location != null)
+                existingAudit.Location = audit.Location;
+            if (audit.Media != null)
+                existingAudit.Media = audit.Media;
+            if (!string.IsNullOrEmpty(audit.Status))
+                existingAudit.Status = audit.Status;
+            existingAudit.CriticalIssues = audit.CriticalIssues;
+            if (audit.Score.HasValue)
+                existingAudit.Score = audit.Score.Value;
+            
+            // Ensure all DateTime values are UTC before saving
+            EnsureAuditDateTimesAreUtc(existingAudit);
+            
+            _auditRepository.Update(existingAudit);
+            await _auditRepository.SaveChangesAsync();
+            return existingAudit;
+        }
+
         public async Task<decimal> CalculateAuditScoreAsync(Audit audit)
         {
             if (audit == null || audit.Responses == null)
@@ -440,6 +476,26 @@ namespace AuditSystem.Services
             if (user == null) return;
             if (user.CreatedAt.Kind != DateTimeKind.Utc)
                 user.CreatedAt = DateTime.SpecifyKind(user.CreatedAt, DateTimeKind.Utc);
+        }
+
+        public async Task<bool> DeleteAuditAsync(Guid auditId)
+        {
+            try
+            {
+                var audit = await _auditRepository.GetByIdAsync(auditId);
+                if (audit == null)
+                    return false;
+
+                _auditRepository.Remove(audit);
+                await _auditRepository.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Log the exception for debugging
+                Console.WriteLine($"Error deleting audit: {ex.Message}");
+                return false;
+            }
         }
     }
 } 
