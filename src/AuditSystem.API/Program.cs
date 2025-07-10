@@ -158,10 +158,8 @@ builder.Services.AddScoped<IDashboardService, DashboardService>();
 // Add notification service
 builder.Services.AddScoped<INotificationService, NotificationService>();
 
-// Add notification background service
-builder.Services.AddHostedService<NotificationBackgroundService>();
-
-// Add notification broadcast service
+// Add RabbitMQ notification service and broadcast service
+builder.Services.AddHostedService<RabbitMQNotificationService>();
 builder.Services.AddHostedService<NotificationBroadcastService>();
 
 // Add SignalR with improved configuration

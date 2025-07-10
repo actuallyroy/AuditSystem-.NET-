@@ -2,11 +2,13 @@ using AuditSystem.Domain.Entities;
 using AuditSystem.Domain.Repositories;
 using AuditSystem.Domain.Services;
 using Microsoft.Extensions.Logging;
+using RabbitMQ.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace AuditSystem.Services
 {
@@ -19,6 +21,10 @@ namespace AuditSystem.Services
         private readonly IOrganisationRepository _organisationRepository;
         private readonly IAssignmentRepository _assignmentRepository;
         private readonly ILogger<NotificationService> _logger;
+        private readonly IConnection _rabbitMqConnection;
+        private readonly IModel _rabbitMqChannel;
+        private const string ExchangeName = "notification_exchange";
+        private const string RoutingKey = "notification";
 
         public NotificationService(
             INotificationRepository notificationRepository,
@@ -36,6 +42,28 @@ namespace AuditSystem.Services
             _organisationRepository = organisationRepository;
             _assignmentRepository = assignmentRepository;
             _logger = logger;
+
+            // Initialize RabbitMQ connection
+            var factory = new ConnectionFactory
+            {
+                HostName = Environment.GetEnvironmentVariable("RabbitMQ__HostName") ?? "localhost",
+                UserName = Environment.GetEnvironmentVariable("RabbitMQ__UserName") ?? "guest",
+                Password = Environment.GetEnvironmentVariable("RabbitMQ__Password") ?? "guest",
+                VirtualHost = Environment.GetEnvironmentVariable("RabbitMQ__VirtualHost") ?? "/"
+            };
+
+            try
+            {
+                _rabbitMqConnection = factory.CreateConnection();
+                _rabbitMqChannel = _rabbitMqConnection.CreateModel();
+                _rabbitMqChannel.ExchangeDeclare(ExchangeName, ExchangeType.Direct, durable: true);
+                _logger.LogInformation("RabbitMQ connection established for notification service");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to establish RabbitMQ connection");
+                // Continue without RabbitMQ - notifications will be created directly in database
+            }
         }
 
         public async Task<Notification> CreateNotificationAsync(Notification notification)
@@ -79,6 +107,25 @@ namespace AuditSystem.Services
                 {
                     title = title.Replace($"{{{placeholder.Key}}}", placeholder.Value?.ToString() ?? "");
                     message = message.Replace($"{{{placeholder.Key}}}", placeholder.Value?.ToString() ?? "");
+                }
+
+                // If in_app, strip HTML
+                if (template.Channel == "in_app")
+                {
+                    title = StripHtmlTags(title);
+                    message = StripHtmlTags(message);
+                }
+
+                // Remove any unresolved placeholders and log a warning if found
+                if (Regex.IsMatch(title, "{[^}]+}"))
+                {
+                    _logger.LogWarning($"Unresolved placeholders found in notification title: {title}");
+                    title = RemoveUnresolvedPlaceholders(title);
+                }
+                if (Regex.IsMatch(message, "{[^}]+}"))
+                {
+                    _logger.LogWarning($"Unresolved placeholders found in notification message: {message}");
+                    message = RemoveUnresolvedPlaceholders(message);
                 }
 
                 var notification = new Notification
@@ -189,7 +236,7 @@ namespace AuditSystem.Services
                     { "due_date", audit.Assignment?.DueDate?.ToString("MMM dd, yyyy") ?? "TBD" }
                 };
 
-                await CreateNotificationFromTemplateAsync("assignment_notification", placeholders, userId, organisationId);
+                await SendNotificationViaRabbitMQ("assignment_notification", placeholders, userId, organisationId);
                 return true;
             }
             catch (Exception ex)
@@ -220,7 +267,7 @@ namespace AuditSystem.Services
                     { "priority", assignment.Priority ?? "medium" }
                 };
 
-                await CreateNotificationFromTemplateAsync("assignment_notification", placeholders, userId, organisationId);
+                await SendNotificationViaRabbitMQ("assignment_notification", placeholders, userId, organisationId);
                 return true;
             }
             catch (Exception ex)
@@ -249,7 +296,7 @@ namespace AuditSystem.Services
                     { "store_name", audit.StoreInfo?.RootElement.GetProperty("name").GetString() ?? "Unknown Store" }
                 };
 
-                await CreateNotificationFromTemplateAsync("audit_completed_notification", placeholders, userId, organisationId);
+                await SendNotificationViaRabbitMQ("audit_completed_notification", placeholders, userId, organisationId);
                 return true;
             }
             catch (Exception ex)
@@ -289,7 +336,7 @@ namespace AuditSystem.Services
                     placeholders.Add("reason", audit.ManagerNotes ?? "No specific reason provided");
                 }
 
-                await CreateNotificationFromTemplateAsync(templateName, placeholders, userId, organisationId);
+                await SendNotificationViaRabbitMQ(templateName, placeholders, userId, organisationId);
                 return true;
             }
             catch (Exception ex)
@@ -308,7 +355,7 @@ namespace AuditSystem.Services
                     { "message", message }
                 };
 
-                await CreateNotificationFromTemplateAsync("system_notification", placeholders, null, organisationId);
+                await SendNotificationViaRabbitMQ("system_notification", placeholders, null, organisationId);
                 return true;
             }
             catch (Exception ex)
@@ -443,6 +490,53 @@ namespace AuditSystem.Services
             }
         }
 
+        public async Task<bool> MarkNotificationAsBroadcastedAsync(Guid notificationId)
+        {
+            try
+            {
+                var notification = await _notificationRepository.GetByIdAsync(notificationId);
+                if (notification != null)
+                {
+                    notification.Status = "broadcasted";
+                    _notificationRepository.Update(notification);
+                    await _notificationRepository.SaveChangesAsync();
+                    
+                    _logger.LogInformation("Marked notification {NotificationId} as broadcasted", notificationId);
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to mark notification {NotificationId} as broadcasted", notificationId);
+                return false;
+            }
+        }
+
+        public async Task<bool> MarkNotificationAsDeliveredAsync(Guid notificationId)
+        {
+            try
+            {
+                var notification = await _notificationRepository.GetByIdAsync(notificationId);
+                if (notification != null)
+                {
+                    notification.Status = "delivered";
+                    notification.DeliveredAt = DateTime.UtcNow;
+                    _notificationRepository.Update(notification);
+                    await _notificationRepository.SaveChangesAsync();
+                    
+                    _logger.LogInformation("Marked notification {NotificationId} as delivered", notificationId);
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to mark notification {NotificationId} as delivered", notificationId);
+                return false;
+            }
+        }
+
         public async Task<bool> MarkNotificationAsFailedAsync(Guid notificationId, string errorMessage)
         {
             try
@@ -467,5 +561,109 @@ namespace AuditSystem.Services
                 return false;
             }
         }
+
+        private async Task SendNotificationViaRabbitMQ(string templateName, Dictionary<string, object> placeholders, Guid? userId = null, Guid? organisationId = null)
+        {
+            try
+            {
+                if (_rabbitMqChannel == null || _rabbitMqChannel.IsClosed)
+                {
+                    // Fallback to direct database creation if RabbitMQ is not available
+                    await CreateNotificationFromTemplateAsync(templateName, placeholders, userId, organisationId);
+                    return;
+                }
+
+                var template = await _templateRepository.GetByNameAsync(templateName);
+                if (template == null)
+                {
+                    throw new ArgumentException($"Template '{templateName}' not found");
+                }
+
+                var title = template.Subject;
+                var message = template.Body;
+
+                // Replace placeholders in title and message
+                foreach (var placeholder in placeholders)
+                {
+                    title = title.Replace($"{{{placeholder.Key}}}", placeholder.Value?.ToString() ?? "");
+                    message = message.Replace($"{{{placeholder.Key}}}", placeholder.Value?.ToString() ?? "");
+                }
+
+                // If in_app, strip HTML
+                if (template.Channel == "in_app")
+                {
+                    title = StripHtmlTags(title);
+                    message = StripHtmlTags(message);
+                }
+
+                // Remove any unresolved placeholders and log a warning if found
+                if (Regex.IsMatch(title, "{[^}]+}"))
+                {
+                    _logger.LogWarning($"Unresolved placeholders found in notification title: {title}");
+                    title = RemoveUnresolvedPlaceholders(title);
+                }
+                if (Regex.IsMatch(message, "{[^}]+}"))
+                {
+                    _logger.LogWarning($"Unresolved placeholders found in notification message: {message}");
+                    message = RemoveUnresolvedPlaceholders(message);
+                }
+
+                var notificationMessage = new NotificationMessage
+                {
+                    UserId = userId,
+                    OrganisationId = organisationId,
+                    Type = template.Type,
+                    Title = title,
+                    Message = message,
+                    Priority = "medium"
+                };
+
+                var messageJson = JsonSerializer.Serialize(notificationMessage);
+                var body = System.Text.Encoding.UTF8.GetBytes(messageJson);
+                
+                _rabbitMqChannel.BasicPublish(
+                    exchange: ExchangeName,
+                    routingKey: RoutingKey,
+                    basicProperties: null,
+                    body: body);
+
+                _logger.LogInformation("Published notification message to RabbitMQ for user {UserId}", userId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to send notification via RabbitMQ, falling back to direct creation");
+                // Fallback to direct database creation
+                await CreateNotificationFromTemplateAsync(templateName, placeholders, userId, organisationId);
+            }
+        }
+
+        private string StripHtmlTags(string input)
+        {
+            if (string.IsNullOrEmpty(input)) return input;
+            return Regex.Replace(input, "<.*?>", string.Empty);
+        }
+
+        private string RemoveUnresolvedPlaceholders(string input)
+        {
+            if (string.IsNullOrEmpty(input)) return input;
+            // Remove any {placeholder} patterns
+            return Regex.Replace(input, "{[^}]+}", string.Empty);
+        }
+
+        public void Dispose()
+        {
+            _rabbitMqChannel?.Close();
+            _rabbitMqConnection?.Close();
+        }
+    }
+
+    public class NotificationMessage
+    {
+        public Guid? UserId { get; set; }
+        public Guid? OrganisationId { get; set; }
+        public string Type { get; set; } = string.Empty;
+        public string Title { get; set; } = string.Empty;
+        public string Message { get; set; } = string.Empty;
+        public string Priority { get; set; } = "medium";
     }
 } 

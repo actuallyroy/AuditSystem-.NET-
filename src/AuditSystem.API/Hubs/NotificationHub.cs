@@ -49,10 +49,10 @@ namespace AuditSystem.API.Hubs
                     _logger.LogInformation("User {UserId} connected to SignalR hub with connection {ConnectionId}", 
                         userId, Context.ConnectionId);
 
-                    // Send heartbeat to confirm connection
+                    // Send heartbeat to confirm connection (without unread count)
                     await Clients.Caller.SendAsync("Heartbeat", new { timestamp = DateTime.UtcNow });
 
-                    // Send unread notification count
+                    // Send initial unread notification count only once on connection
                     var unreadCount = await _notificationService.GetUnreadCountAsync(userId.Value);
                     await Clients.Caller.SendAsync("UnreadCount", unreadCount);
                 }
@@ -190,6 +190,12 @@ namespace AuditSystem.API.Hubs
                     // Update unread count for the user
                     var unreadCount = await _notificationService.GetUnreadCountAsync(currentUserId.Value);
                     await Clients.Caller.SendAsync("UnreadCount", unreadCount);
+                    
+                    // Send confirmation
+                    await Clients.Caller.SendAsync("NotificationMarkedAsRead", new { 
+                        notificationId = notificationId,
+                        unreadCount = unreadCount
+                    });
                 }
             }
             catch (Exception ex)
@@ -213,11 +219,54 @@ namespace AuditSystem.API.Hubs
                 if (success)
                 {
                     await Clients.Caller.SendAsync("UnreadCount", 0);
+                    
+                    // Send confirmation
+                    await Clients.Caller.SendAsync("AllNotificationsMarkedAsRead", new { 
+                        unreadCount = 0
+                    });
                 }
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error marking all notifications as read for user {UserId}", currentUserId);
+            }
+        }
+
+        public async Task AcknowledgeDelivery(string notificationId)
+        {
+            try
+            {
+                var currentUserId = GetCurrentUserId();
+                if (!currentUserId.HasValue || !Guid.TryParse(notificationId, out var notificationGuid))
+                {
+                    _logger.LogWarning("Invalid acknowledgment request from user {UserId} for notification {NotificationId}", 
+                        currentUserId, notificationId);
+                    return;
+                }
+
+                // Mark notification as delivered in the database
+                var success = await _notificationService.MarkNotificationAsDeliveredAsync(notificationGuid);
+                if (success)
+                {
+                    // Send acknowledgment confirmation to the client
+                    await Clients.Caller.SendAsync("DeliveryAcknowledged", new { 
+                        notificationId = notificationId,
+                        acknowledgedAt = DateTime.UtcNow
+                    });
+
+                    _logger.LogInformation("Delivery acknowledged for notification {NotificationId} by user {UserId}", 
+                        notificationId, currentUserId);
+                }
+                else
+                {
+                    _logger.LogWarning("Failed to mark notification {NotificationId} as delivered for user {UserId}", 
+                        notificationId, currentUserId);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error acknowledging delivery for notification {NotificationId} by user {UserId}", 
+                    notificationId, GetCurrentUserId());
             }
         }
 

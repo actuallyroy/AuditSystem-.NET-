@@ -15,7 +15,7 @@ namespace AuditSystem.API.Services
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly ILogger<NotificationBroadcastService> _logger;
-        private readonly TimeSpan _checkInterval = TimeSpan.FromSeconds(10); // Check every 10 seconds
+        private readonly TimeSpan _checkInterval = TimeSpan.FromSeconds(5); // Check every 5 seconds
 
         public NotificationBroadcastService(
             IServiceProvider serviceProvider,
@@ -54,7 +54,8 @@ namespace AuditSystem.API.Services
 
             try
             {
-                // Get notifications that are ready to be sent
+                // Get notifications that are ready to be sent (status = "sent")
+                // These will be broadcasted and then marked as "broadcasted" until client acknowledges
                 var readyNotifications = await notificationService.GetReadyToSendNotificationsAsync();
 
                 foreach (var notification in readyNotifications)
@@ -78,18 +79,18 @@ namespace AuditSystem.API.Services
                         if (notification.UserId.HasValue)
                         {
                             await NotificationHub.SendNotificationToUser(hubContext, notification.UserId.Value, notificationData);
-                            _logger.LogInformation("Broadcasted notification {NotificationId} to user {UserId} via SignalR", 
+                            _logger.LogInformation("Broadcasted notification {NotificationId} to user {UserId} via SignalR, waiting for acknowledgment", 
                                 notification.NotificationId, notification.UserId);
                         }
                         else if (notification.OrganisationId.HasValue)
                         {
                             await NotificationHub.SendNotificationToOrganisation(hubContext, notification.OrganisationId.Value, notificationData);
-                            _logger.LogInformation("Broadcasted notification {NotificationId} to organisation {OrganisationId} via SignalR", 
+                            _logger.LogInformation("Broadcasted notification {NotificationId} to organisation {OrganisationId} via SignalR, waiting for acknowledgment", 
                                 notification.NotificationId, notification.OrganisationId);
                         }
 
-                        // Mark notification as sent
-                        await notificationService.MarkNotificationAsSentAsync(notification.NotificationId);
+                        // Mark notification as broadcasted (not delivered yet - waiting for client acknowledgment)
+                        await notificationService.MarkNotificationAsBroadcastedAsync(notification.NotificationId);
                     }
                     catch (Exception ex)
                     {

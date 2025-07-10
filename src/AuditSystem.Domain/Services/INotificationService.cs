@@ -28,6 +28,8 @@ namespace AuditSystem.Domain.Services
         // New methods for notification broadcasting
         Task<IEnumerable<Notification>> GetReadyToSendNotificationsAsync();
         Task<bool> MarkNotificationAsSentAsync(Guid notificationId);
+        Task<bool> MarkNotificationAsBroadcastedAsync(Guid notificationId);
+        Task<bool> MarkNotificationAsDeliveredAsync(Guid notificationId);
         Task<bool> MarkNotificationAsFailedAsync(Guid notificationId, string errorMessage);
     }
 } 
