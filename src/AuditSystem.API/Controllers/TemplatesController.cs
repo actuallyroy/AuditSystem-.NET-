@@ -1,5 +1,6 @@
 using AuditSystem.Domain.Entities;
 using AuditSystem.Domain.Services;
+using AuditSystem.Domain.Repositories;
 using AuditSystem.API.Models;
 using AuditSystem.API.Attributes;
 using Microsoft.AspNetCore.Authorization;
@@ -18,10 +19,12 @@ namespace AuditSystem.API.Controllers
     public class TemplatesController : BaseApiController
     {
         private readonly ITemplateService _templateService;
+        private readonly IAssignmentRepository _assignmentRepository;
         
-        public TemplatesController(ITemplateService templateService)
+        public TemplatesController(ITemplateService templateService, IAssignmentRepository assignmentRepository)
         {
             _templateService = templateService;
+            _assignmentRepository = assignmentRepository;
         }
         
         [HttpGet]
@@ -88,8 +91,8 @@ namespace AuditSystem.API.Controllers
                 // Auditor can only access templates assigned to them
                 if (currentUserRole.Equals("Auditor", StringComparison.OrdinalIgnoreCase))
                 {
-                    var assignedTemplates = await _templateService.GetAssignedTemplatesAsync(currentUserId);
-                    if (assignedTemplates.Any(t => t.TemplateId == id))
+                    // Direct check if assignment exists - much more efficient than fetching all templates
+                    if (await _assignmentRepository.ExistsAsync(id, currentUserId))
                     {
                         return Ok(ConvertToResponseDto(template));
                     }
